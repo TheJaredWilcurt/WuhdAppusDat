@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Completely generic application not connected to any existing intellectual property</title>
+    <style>
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        border: 0px;
+        margin: 0px;
+        padding: 0px;
+        overflow: hidden;
+        transition: 0.5s ease all;
+      }
+      body:hover {
+        box-shadow: 0px 0px 31px inset rgba(0, 0, 0, 0.29), -1px 0px 4px 2px inset #FFF;
+      }
+      .app-name {
+        font-family: georgia;
+        color: #FFEB3B;
+        text-shadow: 1px 1px 11px #000, 1px 1px 18px #000;
+      }
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        overflow: hidden;
+      }
+      .drag-on {
+        -webkit-app-region: drag;
+      }
+      .drag-off {
+        -webkit-app-region: no-drag;
+      }
+      nav {
+        position: absolute;
+        top: 0px;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: 1s ease opacity;
+      }
+      body:hover nav {
+        opacity: 1;
+      }
+      .grabber {
+        width: 80%;
+        height: 20px;
+        background: rgba(127, 127, 127, 0.3);
+        border: 1px solid rgba(180, 180, 180, 0.35);
+        border-radius: 6px;
+      }
+      .close {
+        background: transparent;
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+        font-size: 32px;
+        color: #AAA;
+        -webkit-text-stroke: 1px #666;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="drag-on">
+      <div class="grabber"></div>
+      <div class="drag-off pull-right">
+        <button id="window-control-close" class="close" title="Close">&times;</button>
+      </div>
+    </nav>
+
+    <div id="background" class="container">
+      <h1 id="app-name" class="app-name"></h1>
+    </div>
+
+    <script>
+      let button = document.getElementById('window-control-close');
+      button.addEventListener('click', function (evt) {
+        nw.Window.get().close();
+      });
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>

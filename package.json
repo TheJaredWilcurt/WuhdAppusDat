@@ -1,0 +1,40 @@
+{
+  "name": "bitey-focus",
+  "version": "1.0.0",
+  "description": "Shows currently focused program",
+  "main": "index.html",
+  "scripts": {
+    "start": "nw .",
+    "postinstall": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.45.3 --arch=x64",
+    "post-install": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.45.3 --arch=x64"
+  },
+  "window": {
+    "frame": false,
+    "width": 700,
+    "height": 200,
+    "position": "center",
+    "transparent": true
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheJaredWilcurt/bitey-focus.git"
+  },
+  "author": "TheJaredWilcurt",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TheJaredWilcurt/bitey-focus/issues"
+  },
+  "homepage": "https://github.com/TheJaredWilcurt/bitey-focus#readme",
+  "ManifestComments": [
+    "Node.js 13 was the last version to officially support Windows 7",
+    "NW.js 0.45.3 was the last version to support Node (uses v13.13.0)",
+    "windows-active-process does a native build based on OS/Arch/Node version",
+    "Global Node version must be v13.13.0"
+  ],
+  "devDependencies": {
+    "nw": "0.45.3-sdk"
+  },
+  "dependencies": {
+    "windows-active-process": "^1.1.1"
+  }
+}
