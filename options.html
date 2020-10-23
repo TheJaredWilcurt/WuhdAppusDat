@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WuhdAppusDat Options</title>
+    <style>
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0px;
+      overflow: hidden;
+    }
+    body,
+    input,
+    select,
+    option {
+      font-family: Georgia, sans-serif;
+    }
+    h1 {
+      margin: 0px;
+      padding: 20px;
+      color: salmon;
+    }
+
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: salmon;
+      height: 35px;
+      padding: 0px 0px 0px 7px;
+      color: #111;
+      font-family: 'Trebuchet MS', 'Century Gothic', sans-serif;
+      -webkit-app-region: drag;
+    }
+
+    .window-controls {
+      height: 100%;
+      font-size: 0px;
+      -webkit-app-region: no-drag;
+      --window-control-bg: #DDD;
+    }
+    [class^="window-control-"] {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--window-control-bg);
+      width: 35px;
+      height: 100%;
+      border: 0px;
+      margin: 0px;
+      padding: 0px;
+      font-size: 15px;
+      font-style: normal;
+      cursor: default;
+      vertical-align: top;
+    }
+
+    .window-control-restore:hover:before,
+    .window-control-restore:hover:after,
+    .window-control-maximize:hover:after,
+    .window-controls i:hover {
+      background: #CCC;
+    }
+    .window-control-restore:active:before,
+    .window-control-restore:active:after,
+    .window-control-maximize:active:after,
+    .window-controls i:active {
+      background: #BBB;
+    }
+
+    .window-control-minimize:before,
+    .window-control-restore:before,
+    .window-control-restore:after,
+    .window-control-maximize:after,
+    .window-control-close:before,
+    .window-control-close:after {
+      content: '';
+      display: block;
+      width: 12px;
+      height: 12px;
+      border-width: 0px;
+      border-style: solid;
+      border-color: #000;
+    }
+
+    .window-control-minimize:before {
+      border-bottom-width: 1px;
+    }
+
+    .window-control-restore:before,
+    .window-control-restore:after,
+    .window-control-maximize:after {
+      background: var(--window-control-bg);
+      border-width: 1px;
+      z-index: 2;
+    }
+    .window-control-restore:before {
+      position: absolute;
+      top: 8px;
+      margin-left: 4px;
+    }
+
+    .window-control-close {
+      position: relative;
+    }
+    .window-control-close:before,
+    .window-control-close:after {
+      position: absolute;
+      top: 12px;
+      left: 17px;
+      width: 1px;
+      border-left-width: 1px;
+    }
+    .window-control-close:before {
+      transform: rotate(45deg);
+    }
+    .window-control-close:after {
+      transform: rotate(-45deg);
+    }
+
+
+
+
+
+
+    .wrapper {
+      height: 100%;
+      background: #FFFAF1;
+      border-radius: 0px 0px 17px 17px;
+      padding: 0px;
+      overflow: auto;
+    }
+    .pill-form-container {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0px 0px 0px 16px;
+    }
+    .pill-form {
+      display: inline-flex;
+      flex-grow: 1;
+      max-width: calc(100% - 22px);
+      height: 40px;
+      align-items: stretch;
+      justify-content: space-between;
+      margin: 0px 22px 24px 0px;
+      cursor: pointer;
+      box-shadow: 2px 2px 10px rgba(136, 119, 91, 0.53);
+      border-radius: 40px;
+    }
+    .pill-form > * {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+    }
+    .pill-form:hover .pill-label {
+      background: #FFF8FC;
+      color: #754D4D;
+    }
+    .pill-label {
+      background: #CCC;
+      border-radius: 100px 0px 0px 100px;
+      padding: 0px 10px 0px 20px;
+      cursor: pointer;
+      background: #FFF6FA;
+      color: #9E6A6A;
+    }
+    .pill-content {
+      flex-grow: 1;
+      background: #FFF;
+      border: 0px;
+      color: #333;
+      font-style: italic;
+      box-shadow: 0px 0px 57px inset rgba(255, 223, 167, 0.71);
+      overflow: hidden;
+    }
+    .pill-form:hover .pill-content {
+      box-shadow: 0px 0px 57px inset rgba(255, 162, 0, 0.39);
+    }
+    .last-pill-section {
+      border-radius: 0px 100px 100px 0px;
+    }
+    .pill-end {
+      background: #F27D7D;
+      border: 0px;
+      font-size: 36px;
+      line-height: 0.6;
+      cursor: pointer;
+    }
+    .pill-end:hover {
+      background: #C95454;
+    }
+
+
+    .truncate {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .border-radius-0 {
+      border-radius: 0px;
+    }
+    .hidden {
+      display: none;
+    }
+    </style>
+  </head>
+  <body>
+    <nav id="menu-bar">
+      <strong id="app-title"></strong>
+
+      <div class="window-controls">
+        <i class="window-control-minimize"></i>
+        <i class="window-control-restore hidden"></i>
+        <i class="window-control-maximize"></i>
+        <i class="window-control-close"></i>
+      </div>
+    </nav>
+
+    <div id="main-content" class="wrapper">
+      <h1>Options</h1>
+
+      <div class="pill-form-container">
+        <div class="pill-form">
+          <label class="pill-label" for="background-image-input">
+            Background&nbsp;image:
+          </label>
+          <span class="pill-content" id="faux-background-input">
+            <span id="current-background-image" class="truncate"></span>
+            <input type="file" id="background-image-input" class="hidden">
+          </span>
+          <button id="clear-background" class="pill-end last-pill-section" title="Reset to default">&times;</button>
+        </div>
+
+        <div class="pill-form">
+          <label class="pill-label" for="text-color-input">
+            Text&nbsp;color:
+          </label>
+          <span class="pill-content" id="faux-text-color">
+            <input type="color" id="text-color-input" class="hidden">
+          </span>
+          <button id="clear-text-color" class="pill-end last-pill-section" title="Reset to default">&times;</button>
+        </div>
+
+        <div class="pill-form">
+          <label class="pill-label" for="text-shadow-input">
+            Text&nbsp;shadow:
+          </label>
+          <select class="pill-content last-pill-section" id="text-shadow-input">
+            <option value="none">None</option>
+            <option value="black">Black</option>
+            <option value="white">White</option>
+          </select>
+        </div>
+
+        <div class="pill-form">
+          <label class="pill-label" for="font-input">
+            Font:
+          </label>
+          <input class="pill-content" type="text" id="font-input">
+          <button id="clear-font" class="pill-end last-pill-section" title="Reset to default">&times;</button>
+        </div>
+
+        <div class="pill-form">
+          <label class="pill-label" for="update-interval-input">
+            Update&nbsp;Interval:
+          </label>
+          <span class="pill-content">
+            <input type="range" id="update-interval-input" min="1" max="15">
+          </span>
+          <span id="faux-update-interval">
+            15
+          </span>
+          <button id="clear-font" class="pill-end last-pill-section" title="Reset to default">&times;</button>
+        </div>
+        <p>The "Update Interval" controls how often (in seconds) we check to see what application currently has focus. Faster speeds may not work as well on very low end devices, most people won't notice though.</p>
+      </div>
+      <button onclick="nw.Window.get().reload()">refresh</button>
+      <h1>About</h1>
+      <p>Created by TheJaredWilcurt &copy;2020</p>
+    </div>
+
+    <script src="settings.js"></script>
+    <script>
+      document.querySelector('title').innerText = APP_TITLE + ' Options';
+      document.getElementById('app-title').innerText = APP_TITLE;
+      const settings = loadSettings();
+
+      global.childWindow = {
+        close: function () {
+          if (global.optionsVisible) {
+            global.optionsVisible = false;
+            global.parentWindow.log(
+              'global.childWindow.close',
+              global.optionsVisible,
+              function () {
+                let win = nw?.Window?.get();
+                win?.close && win.close();
+              }
+            );
+          }
+        }
+      }
+
+      function initializeWindowControls () {
+        function addClass (el, className) {
+          document.querySelector(el).classList.add(className);
+        }
+        function removeClass (el, className) {
+          document.querySelector(el).classList.remove(className);
+        }
+        function hide (el) {
+          addClass(el, 'hidden');
+        }
+        function show (el) {
+          removeClass(el, 'hidden');
+        }
+
+        let controls = [
+          'minimize',
+          'restore',
+          'maximize',
+          'close'
+        ];
+
+        controls.forEach(function (control) {
+          let button = document.getElementsByClassName('window-control-' + control)[0];
+          button.addEventListener('click', function (evt) {
+            nw.Window.get()[control]();
+          });
+        });
+
+        nw.Window.get().on('maximize', function () {
+          hide('.window-control-maximize');
+          show('.window-control-restore');
+          addClass('#main-content', 'border-radius-0');
+        });
+
+        nw.Window.get().on('restore', function () {
+          hide('.window-control-restore');
+          show('.window-control-maximize');
+          removeClass('#main-content', 'border-radius-0');
+        });
+      }
+
+      function updateDOM () {
+        const currentBackgroundImage = document.getElementById('current-background-image');
+        const fauxBackgroundInput = document.getElementById('faux-background-input');
+        const fauxTextColor = document.getElementById('faux-text-color');
+        const textColorInput = document.getElementById('text-color-input');
+        const textShadowInput = document.getElementById('text-shadow-input');
+
+        currentBackgroundImage.innerText = settings.background || 'Default';
+        fauxBackgroundInput.setAttribute('title', (settings.background || ''));
+        fauxTextColor.style.background = settings.textColor || DEFAULT_TEXT_COLOR;
+        textColorInput.value = settings.textColor || DEFAULT_TEXT_COLOR;
+        textShadowInput.value = settings.textShadow || DEFAULT_TEXT_SHADOW;
+      }
+
+      function saveAndUpdateDOM () {
+        saveSettings(settings);
+        updateDOM();
+      }
+
+      function eventBindings () {
+        const clearBackground = document.getElementById('clear-background');
+        const currentBackgroundImage = document.getElementById('current-background-image');
+        const backgroundImageInput = document.getElementById('background-image-input');
+        const clearTextColor = document.getElementById('clear-text-color');
+        const textColorInput = document.getElementById('text-color-input');
+        const fauxBackgroundInput = document.getElementById('faux-background-input');
+        const fauxTextColor = document.getElementById('faux-text-color');
+        const textShadowInput = document.getElementById('text-shadow-input');
+
+        clearBackground.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          backgroundImageInput.value = '';
+          settings.background = undefined;
+          saveAndUpdateDOM();
+        });
+        backgroundImageInput.addEventListener('input', function (evt) {
+          let file = evt?.currentTarget?.files[0]?.path;
+          settings.background = file;
+          saveAndUpdateDOM();
+        });
+        textColorInput.addEventListener('input', function (evt) {
+          let color = evt?.currentTarget?.value;
+          settings.textColor = color;
+          saveAndUpdateDOM();
+        });
+        clearTextColor.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          settings.textColor = undefined;
+          saveAndUpdateDOM();
+        });
+        fauxBackgroundInput.addEventListener('click', function () {
+          backgroundImageInput.click();
+        });
+        fauxTextColor.addEventListener('click', function () {
+          textColorInput.click();
+        });
+        textShadowInput.addEventListener('input', function (evt) {
+          const value = evt.currentTarget.value;
+          settings.textShadow = value;
+          saveAndUpdateDOM();
+        });
+      }
+
+      initializeWindowControls();
+      eventBindings();
+      updateDOM();
+    </script>
+  </body>
+</html>

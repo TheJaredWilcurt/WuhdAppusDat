@@ -1,5 +1,5 @@
 {
-  "name": "bitey-focus",
+  "name": "wuhdappusdat",
   "version": "1.0.0",
   "description": "Shows currently focused program",
   "main": "index.html",
@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TheJaredWilcurt/bitey-focus.git"
+    "url": "git+https://github.com/TheJaredWilcurt/wuhdappusdat.git"
   },
   "author": "TheJaredWilcurt",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/TheJaredWilcurt/bitey-focus/issues"
+    "url": "https://github.com/TheJaredWilcurt/wuhdappusdat/issues"
   },
-  "homepage": "https://github.com/TheJaredWilcurt/bitey-focus#readme",
+  "homepage": "https://github.com/TheJaredWilcurt/wuhdappusdat#readme",
   "ManifestComments": [
     "Node.js 13 was the last version to officially support Windows 7",
     "NW.js 0.45.3 was the last version to support Node (uses v13.13.0)",
