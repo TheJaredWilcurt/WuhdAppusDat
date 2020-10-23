@@ -292,22 +292,6 @@
       document.getElementById('app-title').innerText = APP_TITLE;
       const settings = loadSettings();
 
-      global.childWindow = {
-        close: function () {
-          if (global.optionsVisible) {
-            global.optionsVisible = false;
-            global.parentWindow.log(
-              'global.childWindow.close',
-              global.optionsVisible,
-              function () {
-                let win = nw?.Window?.get();
-                win?.close && win.close();
-              }
-            );
-          }
-        }
-      }
-
       function initializeWindowControls () {
         function addClass (el, className) {
           document.querySelector(el).classList.add(className);
@@ -323,16 +307,16 @@
         }
 
         let controls = [
-          'minimize',
-          'restore',
-          'maximize',
-          'close'
+          { button: 'minimize', action: 'minimize' },
+          { button: 'restore', action: 'restore' },
+          { button: 'maximize', action: 'maximize' },
+          { button: 'close', action: 'hide' }
         ];
 
         controls.forEach(function (control) {
-          let button = document.getElementsByClassName('window-control-' + control)[0];
+          let button = document.getElementsByClassName('window-control-' + control.button)[0];
           button.addEventListener('click', function (evt) {
-            nw.Window.get()[control]();
+            nw.Window.get()[control.action]();
           });
         });
 

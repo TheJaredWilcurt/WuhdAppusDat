@@ -1,6 +1,22 @@
 document.querySelector('title').innerText = APP_TITLE;
 const getActiveProcessName = require('windows-active-process').getActiveProcessName;
 const appName = document.getElementById('app-name');
+let childWindow;
+
+function lauchHiddenOptions () {
+  const windowOptions = {
+    id: 'focus-options',
+    frame: false,
+    transparent: true,
+    min_width: 595,
+    min_height: 200,
+    show: false
+  };
+
+  nw.Window.open('options.html', windowOptions, function (win) {
+    childWindow = win;
+  });
+}
 
 function applySettings () {
   const settings = loadSettings();
@@ -26,38 +42,16 @@ function applySettings () {
   }
 }
 
-function closeChild () {
-  if (global.optionsVisible) {
-    console.log('closeChild');
-    global.childWindow?.close();
-    delete global.childWindow;
-  }
-}
-
 function eventBindings () {
   let closeIcon = document.getElementById('window-control-close');
   closeIcon.addEventListener('click', function () {
-    closeChild();
-    nw.Window.get().close();
+    childWindow?.close(true);
+    nw.Window.get().close(true);
   });
 
   let optionsIcon = document.getElementById('window-control-options');
   optionsIcon.addEventListener('click', function () {
-    closeChild();
-    const windowOptions = {
-      id: 'focus-options',
-      frame: false,
-      transparent: true,
-      min_width: 595,
-      min_height: 200
-    };
-
-    console.log('0');
-    nw.Window.open('options.html', windowOptions, function () {
-      global.optionsVisible = true;
-      console.log('1', global.optionsVisible);
-    });
-    console.log('2');
+    childWindow?.show();
   });
 }
 
@@ -98,15 +92,10 @@ function initialize () {
   global.parentWindow = {
     refresh: function () {
       nw?.Window?.get()?.reload();
-    },
-    log: function (a, b, cb) {
-      console.log(a, b);
-      if (cb) {
-        cb();
-      }
     }
   }
 
+  lauchHiddenOptions();
   applySettings();
   eventBindings();
   setAppName();

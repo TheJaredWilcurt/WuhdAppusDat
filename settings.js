@@ -29,4 +29,3 @@ function saveSettings (settings) {
   }
   global.parentWindow.refresh();
 }
-
