@@ -4,6 +4,7 @@ const settingsLocation = path.join(nw.App.dataPath, 'settings.json');
 
 const APP_TITLE = 'WuhdAppusDat';
 const DEFAULT_BACKGROUND = 'leaves.png';
+const DEFAULT_ALWAYS_ON_TOP = false;
 const DEFAULT_TEXT_COLOR = '#FFEB3B';
 const DEFAULT_TEXT_SHADOW = 'black';
 const DEFAULT_FONT = 'Georgia';

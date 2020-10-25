@@ -320,6 +320,15 @@
         <button id="background-bubbles" title="Pink Bubbles Background" class="pill-form pill-button pill-button-bubbles"></button>
 
         <div class="pill-form">
+          <label class="pill-label" for="always-on-top-input">
+            Always&nbsp;on&nbsp;top:
+          </label>
+          <span id="faux-always-on-top" class="pill-content last-pill-section">
+            <input type="checkbox" id="always-on-top-input">
+          </select>
+        </div>
+
+        <div class="pill-form">
           <label class="pill-label" for="text-color-input">
             Text&nbsp;color:
           </label>
@@ -410,6 +419,8 @@
       const backgroundImageInput = document.getElementById('background-image-input');
       const backgroundLeaves = document.getElementById('background-leaves');
       const backgroundBubbles = document.getElementById('background-bubbles');
+      const alwaysOnTopInput = document.getElementById('always-on-top-input');
+      const fauxAlwaysOnTop = document.getElementById('faux-always-on-top');
       const clearTextColor = document.getElementById('clear-text-color');
       const textColorInput = document.getElementById('text-color-input');
       const fauxBackgroundInput = document.getElementById('faux-background-input');
@@ -450,6 +461,7 @@
       function updateDOM () {
         currentBackgroundImage.innerText = settings.background || DEFAULT_BACKGROUND;
         fauxBackgroundInput.setAttribute('title', (settings.background || DEFAULT_BACKGROUND));
+        alwaysOnTopInput.checked = settings.alwaysOnTop || DEFAULT_ALWAYS_ON_TOP;
         fauxTextColor.style.background = settings.textColor || DEFAULT_TEXT_COLOR;
         textColorInput.value = settings.textColor || DEFAULT_TEXT_COLOR;
         textShadowInput.value = settings.textShadow || DEFAULT_TEXT_SHADOW;
@@ -498,6 +510,16 @@
         backgroundBubbles.addEventListener('click', function (evt) {
           settings.background = 'bubbles.png';
           saveAndUpdateDOM();
+        });
+        alwaysOnTopInput.addEventListener('click', function (evt) {
+          evt.stopPropagation();
+          const value = evt.currentTarget.checked;
+          settings.alwaysOnTop = value;
+          saveAndUpdateDOM();
+        });
+        fauxAlwaysOnTop.addEventListener('click', function (evt) {
+          evt.stopPropagation();
+          alwaysOnTopInput.click();
         });
         textColorInput.addEventListener('input', function (evt) {
           let color = evt?.currentTarget?.value;

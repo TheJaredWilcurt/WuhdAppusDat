@@ -12,6 +12,10 @@ function applySettings () {
   }
   interval = setInterval(setAppName, (settings.interval || DEFAULT_INTERVAL));
 
+  let alwaysOnTopValidated = typeof(settings.alwaysOnTop) === 'boolean' && settings.alwaysOnTop;
+  let alwaysOnTopDefault = typeof(settings.alwaysOnTop) !== 'boolean' && DEFAULT_ALWAYS_ON_TOP;
+  nw.Window.get().setAlwaysOnTop(alwaysOnTopValidated || alwaysOnTopDefault);
+
   // Background image
   let backgroundImage = settings?.background || DEFAULT_BACKGROUND;
   if (
