@@ -3,8 +3,6 @@
   <head>
     <title>WuhdAppusDat</title>
     <script>
-      nw.Window.get().showDevTools();
-
       const optionsWindowOptions = {
         id: 'WuhdAppusDat-options',
         frame: false,
@@ -51,6 +49,13 @@
           });
         });
       });
+
+      setInterval(function () {
+        if (!global.appWindow) {
+          // I don't like this hack, but it works for now
+          nw.Window.get().close();
+        }
+      }, 3000);
     </script>
   </head>
   <body>

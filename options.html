@@ -21,6 +21,10 @@
     option {
       font-family: Georgia, sans-serif;
     }
+    .icon {
+      margin: 0px 2px;
+      vertical-align: -2px;
+    }
     .tab {
       display: inline-block;
       margin: 20px 10px 20px 20px;
@@ -275,7 +279,10 @@
   </head>
   <body>
     <nav id="menu-bar">
-      <strong id="app-title"></strong>
+      <span>
+        <img class="icon" src="icon/WuhdAppusDat16.png" alt="app icon">
+        <strong id="app-title"></strong>
+      </span>
 
       <div class="window-controls">
         <i aria-label="window control minimize" class="window-control-minimize"></i>
@@ -288,7 +295,6 @@
     <div id="main-content" class="wrapper">
       <a id="options-tab" class="tab active" href="#">Options</a></h1>
       <a id="about-tab" class="tab" href="#">About</a></h1>
-      <button onclick="nw.Window.get().reload()">refresh</button>
 
       <div id="options-container" class="pill-form-container">
         <div class="pill-form">
@@ -363,6 +369,7 @@
       </div>
 
       <div id="about-container" class="about-container hidden">
+        <h2>WuhdAppusDat v<span id="app-version">1.0.0</span></h2>
         <p>Created by TheJaredWilcurt &copy;2020</p>
 
         <strong>Technology Colophon</strong>
@@ -380,6 +387,7 @@
     <script>
       document.querySelector('title').innerText = APP_TITLE + ' Options';
       document.getElementById('app-title').innerText = APP_TITLE;
+      document.getElementById('app-version').innerText = nw.App.manifest.version;
       const settings = loadSettings();
 
       const optionsTab = document.getElementById('options-tab');
