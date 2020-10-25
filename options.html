@@ -226,9 +226,10 @@
       border: none;
       border-radius: 100px;
     }
-    .pill-button-grass {
-      background-image: url('grass.png');
-      background-size: 287px;
+    .pill-button-leaves {
+      background-image: url('leaves.png');
+      background-size: 455px;
+      background-position: -39px -10px;
     }
     .pill-button-bubbles {
       background-image: url('bubbles.png');
@@ -262,6 +263,13 @@
 
     .about-container {
       padding: 20px;
+      color: #531;
+    }
+    a.external {
+      color: #C24F42
+    }
+    a.external:hover {
+      color: salmon;
     }
 
     .truncate {
@@ -308,7 +316,7 @@
           <button id="clear-background" class="pill-end last-pill-section" title="Set to none">&times;</button>
         </div>
 
-        <button id="background-grass" title="Grass Background" class="pill-form pill-button pill-button-grass"></button>
+        <button id="background-leaves" title="Leaves Background" class="pill-form pill-button pill-button-leaves"></button>
         <button id="background-bubbles" title="Pink Bubbles Background" class="pill-form pill-button pill-button-bubbles"></button>
 
         <div class="pill-form">
@@ -370,9 +378,11 @@
 
       <div id="about-container" class="about-container hidden">
         <h2>WuhdAppusDat v<span id="app-version">1.0.0</span></h2>
-        <p>Created by TheJaredWilcurt &copy;2020</p>
+        <p>Created by <a href="https://TheJaredWilcurt.com" class="external">TheJaredWilcurt</a> &copy;2020</p>
 
-        <strong>Technology Colophon</strong>
+        <p>&#8220;<em>Leaves</em>&#8221; background image created by <a href="https://www.twitch.tv/chluaid" class="external">Adam Phillips</a> (chluaid)</p>
+
+        <strong>Technology Colophon:</strong>
 
         <ul>
           <li>Written in Vanilla JS, HTML, and CSS.</li>
@@ -398,7 +408,7 @@
       const clearBackground = document.getElementById('clear-background');
       const currentBackgroundImage = document.getElementById('current-background-image');
       const backgroundImageInput = document.getElementById('background-image-input');
-      const backgroundGrass = document.getElementById('background-grass');
+      const backgroundLeaves = document.getElementById('background-leaves');
       const backgroundBubbles = document.getElementById('background-bubbles');
       const clearTextColor = document.getElementById('clear-text-color');
       const textColorInput = document.getElementById('text-color-input');
@@ -481,8 +491,8 @@
           settings.background = file;
           saveAndUpdateDOM();
         });
-        backgroundGrass.addEventListener('click', function (evt) {
-          settings.background = 'grass.png';
+        backgroundLeaves.addEventListener('click', function (evt) {
+          settings.background = 'leaves.png';
           saveAndUpdateDOM();
         });
         backgroundBubbles.addEventListener('click', function (evt) {
@@ -542,6 +552,18 @@
         });
       }
 
+      function externalLinks () {
+        let links = document.getElementsByClassName('external');
+        Array.from(links).forEach(function (link) {
+          let url = link.attributes.href.value;
+          link.setAttribute('title', url.replace('https://', '').replace('www.', ''));
+          link.addEventListener('click', function (evt) {
+            evt.preventDefault();
+            nw.Shell.openExternal(url);
+          });
+        });
+      }
+
       function initializeWindowControls () {
         let controls = [
           { button: 'minimize', action: 'minimize' },
@@ -574,6 +596,7 @@
         initializeWindowControls();
         eventBindings();
         updateDOM();
+        externalLinks();
       }
 
       initialize();

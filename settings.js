@@ -3,7 +3,7 @@ const path = require('path');
 const settingsLocation = path.join(nw.App.dataPath, 'settings.json');
 
 const APP_TITLE = 'WuhdAppusDat';
-const DEFAULT_BACKGROUND = 'grass.png';
+const DEFAULT_BACKGROUND = 'leaves.png';
 const DEFAULT_TEXT_COLOR = '#FFEB3B';
 const DEFAULT_TEXT_SHADOW = 'black';
 const DEFAULT_FONT = 'Georgia';
@@ -15,7 +15,9 @@ const commonApplications = {
   'cmd': 'Command Prompt',
   'dfrgui': 'Disk Defragmenter',
   'dvdplay': 'DVD Player',
-  'Electron': 'Electrom (Using 98% of available memory)',
+  'electron': 'Electrom (Using 98% of available memory)',
+  "harmonypremium": "Harmony Premium",
+  "photo": "Affinity Photo",
   'mspaint': 'MS Paint',
   'nw': 'NW.JS',
   'perfmon': 'Windows Performance Monitor',

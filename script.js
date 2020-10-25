@@ -16,7 +16,7 @@ function applySettings () {
   let backgroundImage = settings?.background || DEFAULT_BACKGROUND;
   if (
     settings?.background &&
-    settings.background !== 'grass.png' &&
+    settings.background !== 'leaves.png' &&
     settings.background !== 'bubbles.png'
   ) {
     backgroundImage = 'file://' + backgroundImage.split('\\').join('/');
