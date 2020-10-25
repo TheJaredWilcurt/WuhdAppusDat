@@ -21,12 +21,22 @@
     option {
       font-family: Georgia, sans-serif;
     }
-    h1 {
-      margin: 0px;
-      padding: 20px;
+    .tab {
+      display: inline-block;
+      margin: 20px 10px 20px 20px;
+      padding: 0px;
       color: salmon;
+      font-size: 32px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
     }
-
+    .tab:hover {
+      color: #D17A71;
+    }
+    .tab.active {
+      text-decoration: underline;
+    }
 
     nav {
       display: flex;
@@ -39,6 +49,34 @@
       font-family: 'Trebuchet MS', 'Century Gothic', sans-serif;
       -webkit-app-region: drag;
     }
+
+    input[type=range] {
+      width: 100%;
+      -webkit-appearance: none;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 300px;
+      height: 5px;
+      background: #BBB;
+      border: none;
+      border-radius: 3px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      width: 16px;
+      height: 16px;
+      background: salmon;
+      border: none;
+      border-radius: 50%;
+      margin-top: -4px;
+      -webkit-appearance: none;
+    }
+    input[type=range]:focus {
+      outline: none;
+    }
+    input[type=range]:focus::-webkit-slider-runnable-track {
+      background: #CCC;
+    }
+
 
     .window-controls {
       height: 100%;
@@ -171,6 +209,27 @@
       background: #FFF6FA;
       color: #9E6A6A;
     }
+    .pill-button {
+      width: 40px;
+      height: 40px;
+      max-width: 40px;
+      max-height: 40px;
+      min-width: 40px;
+      min-height: 40px;
+      background-color: transparent;
+      background-position: center center;
+      background-repeat: no-repeat;
+      border: none;
+      border-radius: 100px;
+    }
+    .pill-button-grass {
+      background-image: url('grass.png');
+      background-size: 287px;
+    }
+    .pill-button-bubbles {
+      background-image: url('bubbles.png');
+      background-size: 345px;
+    }
     .pill-content {
       flex-grow: 1;
       background: #FFF;
@@ -197,6 +256,9 @@
       background: #C95454;
     }
 
+    .about-container {
+      padding: 20px;
+    }
 
     .truncate {
       text-overflow: ellipsis;
@@ -216,17 +278,19 @@
       <strong id="app-title"></strong>
 
       <div class="window-controls">
-        <i class="window-control-minimize"></i>
-        <i class="window-control-restore hidden"></i>
-        <i class="window-control-maximize"></i>
-        <i class="window-control-close"></i>
+        <i aria-label="window control minimize" class="window-control-minimize"></i>
+        <i aria-label="window control restore" class="window-control-restore hidden"></i>
+        <i aria-label="window control maximize" class="window-control-maximize"></i>
+        <i aria-label="window control close" class="window-control-close"></i>
       </div>
     </nav>
 
     <div id="main-content" class="wrapper">
-      <h1>Options</h1>
+      <a id="options-tab" class="tab active" href="#">Options</a></h1>
+      <a id="about-tab" class="tab" href="#">About</a></h1>
+      <button onclick="nw.Window.get().reload()">refresh</button>
 
-      <div class="pill-form-container">
+      <div id="options-container" class="pill-form-container">
         <div class="pill-form">
           <label class="pill-label" for="background-image-input">
             Background&nbsp;image:
@@ -235,8 +299,11 @@
             <span id="current-background-image" class="truncate"></span>
             <input type="file" id="background-image-input" class="hidden">
           </span>
-          <button id="clear-background" class="pill-end last-pill-section" title="Reset to default">&times;</button>
+          <button id="clear-background" class="pill-end last-pill-section" title="Set to none">&times;</button>
         </div>
+
+        <button id="background-grass" title="Grass Background" class="pill-form pill-button pill-button-grass"></button>
+        <button id="background-bubbles" title="Pink Bubbles Background" class="pill-form pill-button pill-button-bubbles"></button>
 
         <div class="pill-form">
           <label class="pill-label" for="text-color-input">
@@ -268,6 +335,19 @@
         </div>
 
         <div class="pill-form">
+          <label class="pill-label" for="font-size-input">
+            Font&nbsp;Size:
+          </label>
+          <span class="pill-content">
+            <input type="range" id="font-size-input" min="1" max="100">
+          </span>
+          <span id="faux-font-size">
+            15
+          </span>
+          <button id="clear-font-size" class="pill-end last-pill-section" title="Reset to default">&times;</button>
+        </div>
+
+        <div class="pill-form">
           <label class="pill-label" for="update-interval-input">
             Update&nbsp;Interval:
           </label>
@@ -277,13 +357,23 @@
           <span id="faux-update-interval">
             15
           </span>
-          <button id="clear-font" class="pill-end last-pill-section" title="Reset to default">&times;</button>
+          <button id="clear-update-interval" class="pill-end last-pill-section" title="Reset to default">&times;</button>
         </div>
         <p>The "Update Interval" controls how often (in seconds) we check to see what application currently has focus. Faster speeds may not work as well on very low end devices, most people won't notice though.</p>
       </div>
-      <button onclick="nw.Window.get().reload()">refresh</button>
-      <h1>About</h1>
-      <p>Created by TheJaredWilcurt &copy;2020</p>
+
+      <div id="about-container" class="about-container hidden">
+        <p>Created by TheJaredWilcurt &copy;2020</p>
+
+        <strong>Technology Colophon</strong>
+
+        <ul>
+          <li>Written in Vanilla JS, HTML, and CSS.</li>
+          <li>Built with NW.js and Node.js.</li>
+          <li>Relies on "windows-active-process" library.</li>
+          <li>Built on Windows 7, with SublimeText 3 and Photoshop CS6.</li>
+        </ul>
+      </div>
     </div>
 
     <script src="settings.js"></script>
@@ -292,20 +382,159 @@
       document.getElementById('app-title').innerText = APP_TITLE;
       const settings = loadSettings();
 
-      function initializeWindowControls () {
-        function addClass (el, className) {
-          document.querySelector(el).classList.add(className);
-        }
-        function removeClass (el, className) {
-          document.querySelector(el).classList.remove(className);
-        }
-        function hide (el) {
-          addClass(el, 'hidden');
-        }
-        function show (el) {
-          removeClass(el, 'hidden');
-        }
+      const optionsTab = document.getElementById('options-tab');
+      const aboutTab = document.getElementById('about-tab');
+      const optionsContainer = document.getElementById('options-container');
+      const aboutContainer = document.getElementById('about-container');
 
+      const clearBackground = document.getElementById('clear-background');
+      const currentBackgroundImage = document.getElementById('current-background-image');
+      const backgroundImageInput = document.getElementById('background-image-input');
+      const backgroundGrass = document.getElementById('background-grass');
+      const backgroundBubbles = document.getElementById('background-bubbles');
+      const clearTextColor = document.getElementById('clear-text-color');
+      const textColorInput = document.getElementById('text-color-input');
+      const fauxBackgroundInput = document.getElementById('faux-background-input');
+      const fauxTextColor = document.getElementById('faux-text-color');
+      const textShadowInput = document.getElementById('text-shadow-input');
+      const fontInput = document.getElementById('font-input');
+      const clearFont = document.getElementById('clear-font');
+      const fontSizeInput = document.getElementById('font-size-input');
+      const fauxFontSize = document.getElementById('faux-font-size');
+      const clearFontSize = document.getElementById('clear-font-size');
+      const updateIntervalInput = document.getElementById('update-interval-input');
+      const fauxUpdateInterval = document.getElementById('faux-update-interval');
+      const clearUpdateInterval = document.getElementById('clear-update-interval');
+
+      function addClass (el, className) {
+        document.querySelector(el).classList.add(className);
+      }
+      function removeClass (el, className) {
+        document.querySelector(el).classList.remove(className);
+      }
+      function hide (el) {
+        addClass(el, 'hidden');
+      }
+      function show (el) {
+        removeClass(el, 'hidden');
+      }
+
+      function saveSettings (settings) {
+        const data = JSON.stringify(settings, null, 2);
+        try {
+          fs.writeFileSync(settingsLocation, data);
+        } catch (err) {
+          console.log('Error saving settings', err);
+        }
+        global.refreshParent();
+      }
+
+      function updateDOM () {
+        currentBackgroundImage.innerText = settings.background || DEFAULT_BACKGROUND;
+        fauxBackgroundInput.setAttribute('title', (settings.background || DEFAULT_BACKGROUND));
+        fauxTextColor.style.background = settings.textColor || DEFAULT_TEXT_COLOR;
+        textColorInput.value = settings.textColor || DEFAULT_TEXT_COLOR;
+        textShadowInput.value = settings.textShadow || DEFAULT_TEXT_SHADOW;
+        fontInput.value = settings.font || DEFAULT_FONT;
+        fontSizeInput.value = settings.fontSize || DEFAULT_FONT_SIZE;
+        fauxFontSize.innerText = settings.fontSize || DEFAULT_FONT_SIZE;
+        updateIntervalInput.value = (settings.interval || DEFAULT_INTERVAL) / 1000;
+        fauxUpdateInterval.innerText = (settings.interval || DEFAULT_INTERVAL) / 1000;
+      }
+
+      function saveAndUpdateDOM () {
+        saveSettings(settings);
+        updateDOM();
+      }
+
+      function eventBindings () {
+        optionsTab.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          removeClass('#about-tab', 'active');
+          addClass('#options-tab', 'active');
+          hide('#about-container');
+          show('#options-container');
+        });
+        aboutTab.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          removeClass('#options-tab', 'active');
+          addClass('#about-tab', 'active');
+          hide('#options-container');
+          show('#about-container');
+        });
+        clearBackground.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          backgroundImageInput.value = '';
+          settings.background = 'none.png';
+          saveAndUpdateDOM();
+        });
+        backgroundImageInput.addEventListener('input', function (evt) {
+          let file = evt?.currentTarget?.files[0]?.path;
+          settings.background = file;
+          saveAndUpdateDOM();
+        });
+        backgroundGrass.addEventListener('click', function (evt) {
+          settings.background = 'grass.png';
+          saveAndUpdateDOM();
+        });
+        backgroundBubbles.addEventListener('click', function (evt) {
+          settings.background = 'bubbles.png';
+          saveAndUpdateDOM();
+        });
+        textColorInput.addEventListener('input', function (evt) {
+          let color = evt?.currentTarget?.value;
+          settings.textColor = color;
+          saveAndUpdateDOM();
+        });
+        clearTextColor.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          settings.textColor = undefined;
+          saveAndUpdateDOM();
+        });
+        fauxBackgroundInput.addEventListener('click', function () {
+          backgroundImageInput.click();
+        });
+        fauxTextColor.addEventListener('click', function () {
+          textColorInput.click();
+        });
+        textShadowInput.addEventListener('input', function (evt) {
+          const value = evt.currentTarget.value;
+          settings.textShadow = value;
+          saveAndUpdateDOM();
+        });
+        fontInput.addEventListener('input', function (evt) {
+          const value = evt.currentTarget.value;
+          settings.font = value;
+          saveAndUpdateDOM();
+        });
+        clearFont.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          settings.font = DEFAULT_FONT;
+          saveAndUpdateDOM();
+        });
+        fontSizeInput.addEventListener('input', function (evt) {
+          let value = parseInt(evt.currentTarget.value);
+          settings.fontSize = value;
+          saveAndUpdateDOM();
+        });
+        clearFontSize.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          settings.fontSize = DEFAULT_FONT_SIZE;
+          saveAndUpdateDOM();
+        });
+        updateIntervalInput.addEventListener('input', function (evt) {
+          let value = parseInt(evt.currentTarget.value);
+          settings.interval = value * 1000;
+          saveAndUpdateDOM();
+        });
+        clearUpdateInterval.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          settings.interval = DEFAULT_INTERVAL;
+          saveAndUpdateDOM();
+        });
+      }
+
+      function initializeWindowControls () {
         let controls = [
           { button: 'minimize', action: 'minimize' },
           { button: 'restore', action: 'restore' },
@@ -331,82 +560,15 @@
           show('.window-control-maximize');
           removeClass('#main-content', 'border-radius-0');
         });
-      function saveSettings (settings) {
-        const data = JSON.stringify(settings, null, 2);
-        try {
-          fs.writeFileSync(settingsLocation, data);
-        } catch (err) {
-          console.log('Error saving settings', err);
-        }
-        global.refreshParent();
       }
 
-      function updateDOM () {
-        const currentBackgroundImage = document.getElementById('current-background-image');
-        const fauxBackgroundInput = document.getElementById('faux-background-input');
-        const fauxTextColor = document.getElementById('faux-text-color');
-        const textColorInput = document.getElementById('text-color-input');
-        const textShadowInput = document.getElementById('text-shadow-input');
-
-        currentBackgroundImage.innerText = settings.background || 'Default';
-        fauxBackgroundInput.setAttribute('title', (settings.background || ''));
-        fauxTextColor.style.background = settings.textColor || DEFAULT_TEXT_COLOR;
-        textColorInput.value = settings.textColor || DEFAULT_TEXT_COLOR;
-        textShadowInput.value = settings.textShadow || DEFAULT_TEXT_SHADOW;
-      }
-
-      function saveAndUpdateDOM () {
-        saveSettings(settings);
+      function initialize () {
+        initializeWindowControls();
+        eventBindings();
         updateDOM();
       }
 
-      function eventBindings () {
-        const clearBackground = document.getElementById('clear-background');
-        const currentBackgroundImage = document.getElementById('current-background-image');
-        const backgroundImageInput = document.getElementById('background-image-input');
-        const clearTextColor = document.getElementById('clear-text-color');
-        const textColorInput = document.getElementById('text-color-input');
-        const fauxBackgroundInput = document.getElementById('faux-background-input');
-        const fauxTextColor = document.getElementById('faux-text-color');
-        const textShadowInput = document.getElementById('text-shadow-input');
-
-        clearBackground.addEventListener('click', function (evt) {
-          evt.preventDefault();
-          backgroundImageInput.value = '';
-          settings.background = undefined;
-          saveAndUpdateDOM();
-        });
-        backgroundImageInput.addEventListener('input', function (evt) {
-          let file = evt?.currentTarget?.files[0]?.path;
-          settings.background = file;
-          saveAndUpdateDOM();
-        });
-        textColorInput.addEventListener('input', function (evt) {
-          let color = evt?.currentTarget?.value;
-          settings.textColor = color;
-          saveAndUpdateDOM();
-        });
-        clearTextColor.addEventListener('click', function (evt) {
-          evt.preventDefault();
-          settings.textColor = undefined;
-          saveAndUpdateDOM();
-        });
-        fauxBackgroundInput.addEventListener('click', function () {
-          backgroundImageInput.click();
-        });
-        fauxTextColor.addEventListener('click', function () {
-          textColorInput.click();
-        });
-        textShadowInput.addEventListener('input', function (evt) {
-          const value = evt.currentTarget.value;
-          settings.textShadow = value;
-          saveAndUpdateDOM();
-        });
-      }
-
-      initializeWindowControls();
-      eventBindings();
-      updateDOM();
+      initialize();
     </script>
   </body>
 </html>

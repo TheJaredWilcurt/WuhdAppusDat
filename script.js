@@ -1,19 +1,31 @@
 document.querySelector('title').innerText = APP_TITLE;
 const getActiveProcessName = require('windows-active-process').getActiveProcessName;
 const appName = document.getElementById('app-name');
+const background = document.getElementById('background');
+let interval;
 
 function applySettings () {
   const settings = loadSettings();
-  const background = document.getElementById('background');
+
+  if (interval) {
+    clearInterval(interval);
+  }
+  interval = setInterval(setAppName, (settings.interval || DEFAULT_INTERVAL));
 
   // Background image
-  let backgroundImage = settings?.background || 'placeholder.png';
-  if (settings?.background) {
+  let backgroundImage = settings?.background || DEFAULT_BACKGROUND;
+  if (
+    settings?.background &&
+    settings.background !== 'grass.png' &&
+    settings.background !== 'bubbles.png'
+  ) {
     backgroundImage = 'file://' + backgroundImage.split('\\').join('/');
   }
   background.style.backgroundImage = 'url("' + backgroundImage + '")';
 
-  // Text color
+  // Text font/color
+  appName.style.fontFamily = settings.font || DEFAULT_FONT;
+  appName.style.fontSize = (settings.fontSize || DEFAULT_FONT_SIZE) + 'px';
   appName.style.color = settings.textColor || DEFAULT_TEXT_COLOR;
 
   // Text Shadow
@@ -29,7 +41,6 @@ function applySettings () {
 function eventBindings () {
   let closeIcon = document.getElementById('window-control-close');
   closeIcon.addEventListener('click', function () {
-    childWindow?.close(true);
     nw.Window.get().close(true);
   });
 
@@ -50,23 +61,6 @@ function setAppName () {
   }
   fileName = fileName.join('');
   fileName = fileName.split('_').join(' ');
-
-  const commonApplications = {
-    'calc': 'Calculator',
-    'cmd': 'Command Prompt',
-    'dfrgui': 'Disk Defragmenter',
-    'dvdplay': 'DVD Player',
-    'Electron': 'Electrom (Using 98% of available memory)',
-    'mspaint': 'MS Paint',
-    'nw': 'NW.JS',
-    'perfmon': 'Windows Performance Monitor',
-    'regedit': 'Windows Registry Editor',
-    'resmon': 'Windows Resource Monitor',
-    'soundrecorder': 'Sound Recorder',
-    'taskmgr': 'Windows Task Manager',
-    'wuauclt': 'Windows Updates'
-  }
-
   fileName = commonApplications[fileName.toLowerCase()] || fileName;
 
   appName.innerText = fileName;
@@ -80,7 +74,6 @@ function initialize () {
   applySettings();
   eventBindings();
   setAppName();
-  setInterval(setAppName, 3000);
 }
 
 initialize();
