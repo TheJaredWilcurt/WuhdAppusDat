@@ -1,22 +1,6 @@
 document.querySelector('title').innerText = APP_TITLE;
 const getActiveProcessName = require('windows-active-process').getActiveProcessName;
 const appName = document.getElementById('app-name');
-let childWindow;
-
-function lauchHiddenOptions () {
-  const windowOptions = {
-    id: 'focus-options',
-    frame: false,
-    transparent: true,
-    min_width: 595,
-    min_height: 200,
-    show: false
-  };
-
-  nw.Window.open('options.html', windowOptions, function (win) {
-    childWindow = win;
-  });
-}
 
 function applySettings () {
   const settings = loadSettings();
@@ -51,7 +35,7 @@ function eventBindings () {
 
   let optionsIcon = document.getElementById('window-control-options');
   optionsIcon.addEventListener('click', function () {
-    childWindow?.show();
+    global.optionsWindow.show();
   });
 }
 
@@ -89,13 +73,10 @@ function setAppName () {
 }
 
 function initialize () {
-  global.parentWindow = {
-    refresh: function () {
-      nw?.Window?.get()?.reload();
-    }
-  }
+  global.refreshParent = function () {
+    applySettings();
+  };
 
-  lauchHiddenOptions();
   applySettings();
   eventBindings();
   setAppName();

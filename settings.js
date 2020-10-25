@@ -19,13 +19,3 @@ function loadSettings () {
     return settings;
   }
 }
-
-function saveSettings (settings) {
-  const data = JSON.stringify(settings, null, 2);
-  try {
-    fs.writeFileSync(settingsLocation, data);
-  } catch (err) {
-    console.log('Error saving settings', err);
-  }
-  global.parentWindow.refresh();
-}

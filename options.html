@@ -331,6 +331,14 @@
           show('.window-control-maximize');
           removeClass('#main-content', 'border-radius-0');
         });
+      function saveSettings (settings) {
+        const data = JSON.stringify(settings, null, 2);
+        try {
+          fs.writeFileSync(settingsLocation, data);
+        } catch (err) {
+          console.log('Error saving settings', err);
+        }
+        global.refreshParent();
       }
 
       function updateDOM () {

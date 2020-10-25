@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WuhdAppusDat</title>
+    <script>
+      nw.Window.get().showDevTools();
+
+      const optionsWindowOptions = {
+        id: 'WuhdAppusDat-options',
+        frame: false,
+        transparent: true,
+        width: 640,
+        height: 457,
+        min_width: 595,
+        min_height: 200,
+        show: false
+      };
+      const appWindowOptions = {
+        id: 'WuhdAppusDat',
+        frame: false,
+        width: 700,
+        height: 200,
+        position: 'center',
+        transparent: true
+      };
+
+      nw.Window.open('options.html', optionsWindowOptions, function (optionsWin) {
+        global.optionsWindow = optionsWin;
+
+        optionsWin.on('closed', function () {
+          optionsWin = null;
+        });
+
+        nw.Window.open('index.html', appWindowOptions, function (appWin) {
+          global.appWindow = appWin;
+
+          appWin.on('closed', function () {
+            this.hide();
+            appWin = null;
+            global.appWindow = null;
+
+            if (optionsWin !== null) {
+              optionsWin.close(true);
+            }
+
+
+            global.optionsWindow.close(true);
+
+            // After closing the new window, close the main window.
+            this.close(true);
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

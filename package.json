@@ -2,18 +2,14 @@
   "name": "wuhdappusdat",
   "version": "1.0.0",
   "description": "Shows currently focused program",
-  "main": "index.html",
+  "main": "window-manager.html",
   "scripts": {
     "start": "nw .",
     "postinstall": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.45.3 --arch=x64",
     "post-install": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.45.3 --arch=x64"
   },
   "window": {
-    "frame": false,
-    "width": 700,
-    "height": 200,
-    "position": "center",
-    "transparent": true
+    "show": false
   },
   "repository": {
     "type": "git",
