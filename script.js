@@ -56,6 +56,9 @@ function eventBindings () {
 
 function setAppName () {
   let filePath = getActiveProcessName();
+  if (!filePath || typeof(filePath) !== 'string') {
+    filePath = '';
+  }
   let splitPath = filePath.split(path.sep);
   let fileName = splitPath[splitPath.length - 1];
   fileName = fileName.split('.')

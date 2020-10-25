@@ -11,24 +11,12 @@ const DEFAULT_FONT = 'Georgia';
 const DEFAULT_FONT_SIZE = 32;
 const DEFAULT_INTERVAL = 3000;
 
-const commonApplications = {
-  'calc': 'Calculator',
-  'cmd': 'Command Prompt',
-  'dfrgui': 'Disk Defragmenter',
-  'dvdplay': 'DVD Player',
-  'electron': 'Electrom (Using 98% of available memory)',
-  "harmonypremium": "Harmony Premium",
-  "photo": "Affinity Photo",
-  'mspaint': 'MS Paint',
-  'nw': 'NW.JS',
-  'perfmon': 'Windows Performance Monitor',
-  'regedit': 'Windows Registry Editor',
-  'resmon': 'Windows Resource Monitor',
-  'soundrecorder': 'Sound Recorder',
-  'taskmgr': 'Windows Task Manager',
-  'vlc': 'VLC Media Player',
-  'wuauclt': 'Windows Updates'
-};
+const appMap = JSON.parse(fs.readFileSync('./app-map.json'));
+const commonApplications = {};
+Object.keys(appMap).forEach(function (key) {
+  commonApplications[key.toLowerCase()] = appMap[key];
+});
+commonApplications.electron = 'Electrom (Using 98% of available memory)';
 
 function loadSettings () {
   const settings = {}
