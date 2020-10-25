@@ -1,11 +1,13 @@
 # WuhdAppusDat
 
-Desktop app for streamers that lets you know what program is currently in focus
+Desktop app for streamers that lets you know what program is currently in focus.
+
+You can modify the `app-map.json` file to change how program names are displayed.
 
 
 ## Running locally
 
-The dependency `windows-active-process` requires a native module be built
+The dependency `windows-active-process` requires a native module be built.
 
 1. Install [Node.js](https://nodejs.org) & npm
 1. `npm install -g windows-build-tools`
