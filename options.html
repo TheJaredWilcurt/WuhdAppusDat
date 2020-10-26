@@ -231,6 +231,11 @@
       background-size: 455px;
       background-position: -39px -10px;
     }
+    .pill-button-spikes {
+      background-image: url('spikes.png');
+      background-size: 455px;
+      background-position: -39px -10px;
+    }
     .pill-button-bubbles {
       background-image: url('bubbles.png');
       background-size: 345px;
@@ -317,6 +322,7 @@
         </div>
 
         <button id="background-leaves" title="Leaves Background" class="pill-form pill-button pill-button-leaves"></button>
+        <button id="background-spikes" title="Spike Background" class="pill-form pill-button pill-button-spikes"></button>
         <button id="background-bubbles" title="Pink Bubbles Background" class="pill-form pill-button pill-button-bubbles"></button>
 
         <div class="pill-form">
@@ -470,6 +476,7 @@
       const currentBackgroundImage = document.getElementById('current-background-image');
       const backgroundImageInput = document.getElementById('background-image-input');
       const backgroundLeaves = document.getElementById('background-leaves');
+      const backgroundSpikes = document.getElementById('background-spikes');
       const backgroundBubbles = document.getElementById('background-bubbles');
       const backgroundHueInput = document.getElementById('background-hue-input');
       const fauxBackgroundHue = document.getElementById('faux-background-hue');
@@ -597,6 +604,10 @@
         });
         backgroundLeaves.addEventListener('click', function (evt) {
           settings.background = 'leaves.png';
+          saveAndUpdateDOM();
+        });
+        backgroundSpikes.addEventListener('click', function (evt) {
+          settings.background = 'spikes.png';
           saveAndUpdateDOM();
         });
         backgroundBubbles.addEventListener('click', function (evt) {

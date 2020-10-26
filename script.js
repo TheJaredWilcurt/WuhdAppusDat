@@ -21,6 +21,7 @@ function applySettings () {
   if (
     settings?.background &&
     settings.background !== 'leaves.png' &&
+    settings.background !== 'spikes.png' &&
     settings.background !== 'bubbles.png'
   ) {
     backgroundImage = 'file://' + backgroundImage.split('\\').join('/');
