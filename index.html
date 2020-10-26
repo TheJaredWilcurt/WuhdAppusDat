@@ -22,6 +22,9 @@
         text-transform: capitalize;
       }
       .container {
+        position: absolute;
+        top: 0px;
+        left: 0px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -47,6 +50,7 @@
         align-items: center;
         opacity: 0;
         transition: 1s ease opacity;
+        z-index: 9;
       }
       body:hover nav {
         opacity: 1;
@@ -86,7 +90,8 @@
       </div>
     </nav>
 
-    <div id="background" class="container">
+    <div id="background" class="container"></div>
+    <div class="container">
       <h1 id="app-name" class="app-name"></h1>
     </div>
 

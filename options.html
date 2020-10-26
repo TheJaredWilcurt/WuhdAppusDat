@@ -320,6 +320,58 @@
         <button id="background-bubbles" title="Pink Bubbles Background" class="pill-form pill-button pill-button-bubbles"></button>
 
         <div class="pill-form">
+          <label class="pill-label" for="background-hue-input">
+            Background&nbsp;Hue:
+          </label>
+          <span class="pill-content">
+            <input type="range" id="background-hue-input" min="0" max="360">
+          </span>
+          <span id="faux-background-hue">
+            0
+          </span>
+          <button id="clear-background-hue" class="pill-end last-pill-section" title="Reset to default">&times;</button>
+        </div>
+
+        <div class="pill-form">
+          <label class="pill-label" for="background-brightness-input">
+            Background&nbsp;Brightness:
+          </label>
+          <span class="pill-content">
+            <input type="range" id="background-brightness-input" min="0" max="100">
+          </span>
+          <span id="faux-background-brightness">
+            1
+          </span>
+          <button id="clear-background-brightness" class="pill-end last-pill-section" title="Reset to default">&times;</button>
+        </div>
+
+        <div class="pill-form">
+          <label class="pill-label" for="background-contrast-input">
+            Background&nbsp;Contrast:
+          </label>
+          <span class="pill-content">
+            <input type="range" id="background-contrast-input" min="0" max="100">
+          </span>
+          <span id="faux-background-contrast">
+            1
+          </span>
+          <button id="clear-background-contrast" class="pill-end last-pill-section" title="Reset to default">&times;</button>
+        </div>
+
+        <div class="pill-form">
+          <label class="pill-label" for="background-saturation-input">
+            Background&nbsp;Saturation:
+          </label>
+          <span class="pill-content">
+            <input type="range" id="background-saturation-input" min="0" max="100">
+          </span>
+          <span id="faux-background-saturation">
+            1
+          </span>
+          <button id="clear-background-saturation" class="pill-end last-pill-section" title="Reset to default">&times;</button>
+        </div>
+
+        <div class="pill-form">
           <label class="pill-label" for="always-on-top-input">
             Always&nbsp;on&nbsp;top:
           </label>
@@ -419,6 +471,18 @@
       const backgroundImageInput = document.getElementById('background-image-input');
       const backgroundLeaves = document.getElementById('background-leaves');
       const backgroundBubbles = document.getElementById('background-bubbles');
+      const backgroundHueInput = document.getElementById('background-hue-input');
+      const fauxBackgroundHue = document.getElementById('faux-background-hue');
+      const clearBackgroundHue = document.getElementById('clear-background-hue');
+      const backgroundBrightnessInput = document.getElementById('background-brightness-input');
+      const fauxBackgroundBrightness = document.getElementById('faux-background-brightness');
+      const clearBackgroundBrightness = document.getElementById('clear-background-brightness');
+      const backgroundContrastInput = document.getElementById('background-contrast-input');
+      const fauxBackgroundContrast = document.getElementById('faux-background-contrast');
+      const clearBackgroundContrast = document.getElementById('clear-background-contrast');
+      const backgroundSaturationInput = document.getElementById('background-saturation-input');
+      const fauxBackgroundSaturation = document.getElementById('faux-background-saturation');
+      const clearBackgroundSaturation = document.getElementById('clear-background-saturation');
       const alwaysOnTopInput = document.getElementById('always-on-top-input');
       const fauxAlwaysOnTop = document.getElementById('faux-always-on-top');
       const clearTextColor = document.getElementById('clear-text-color');
@@ -458,9 +522,29 @@
         global.refreshParent();
       }
 
+      function calculateSliderValue (DEFAULT_VALUE, setting, MAX) {
+        let value = DEFAULT_VALUE;
+        if (typeof(setting) === 'number') {
+          value = setting;
+        }
+        value = Math.round(value / MAX * 100);
+        return value;
+      }
+
       function updateDOM () {
         currentBackgroundImage.innerText = settings.background || DEFAULT_BACKGROUND;
         fauxBackgroundInput.setAttribute('title', (settings.background || DEFAULT_BACKGROUND));
+        backgroundHueInput.value = settings.backgroundHueRotate || DEFAULT_BACKGROUND_HUE_ROTATE;
+        fauxBackgroundHue.innerText = settings.backgroundHueRotate || DEFAULT_BACKGROUND_HUE_ROTATE;
+        let brightness = calculateSliderValue(DEFAULT_BACKGROUND_BRIGHTNESS, settings.backgroundBrightness, MAX_BRIGHTNESS);
+        backgroundBrightnessInput.value = brightness;
+        fauxBackgroundBrightness.innerText = brightness;
+        let contrast = calculateSliderValue(DEFAULT_BACKGROUND_CONTRAST, settings.backgroundContrast, MAX_CONTRAST);
+        backgroundContrastInput.value = contrast;
+        fauxBackgroundContrast.innerText = contrast;
+        let saturation = calculateSliderValue(DEFAULT_BACKGROUND_SATURATION, settings.backgroundSaturation, MAX_SATURATION);
+        backgroundSaturationInput.value = saturation;
+        fauxBackgroundSaturation.innerText = saturation;
         alwaysOnTopInput.checked = settings.alwaysOnTop || DEFAULT_ALWAYS_ON_TOP;
         fauxTextColor.style.background = settings.textColor || DEFAULT_TEXT_COLOR;
         textColorInput.value = settings.textColor || DEFAULT_TEXT_COLOR;
@@ -475,6 +559,14 @@
       function saveAndUpdateDOM () {
         saveSettings(settings);
         updateDOM();
+      }
+
+      function convertSettingToPercent (value, MAX) {
+        value = parseInt(value);
+        if (value !== 0) {
+          value = Math.round(MAX * value) / 100;
+        }
+        return value;
       }
 
       function eventBindings () {
@@ -509,6 +601,43 @@
         });
         backgroundBubbles.addEventListener('click', function (evt) {
           settings.background = 'bubbles.png';
+          saveAndUpdateDOM();
+        });
+        backgroundHueInput.addEventListener('input', function (evt) {
+          let value = parseInt(evt.currentTarget.value);
+          settings.backgroundHueRotate = value;
+          saveAndUpdateDOM();
+        });
+        clearBackgroundHue.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          settings.backgroundHueRotate = DEFAULT_BACKGROUND_HUE_ROTATE;
+          saveAndUpdateDOM();
+        });
+        backgroundBrightnessInput.addEventListener('input', function (evt) {
+          settings.backgroundBrightness = convertSettingToPercent(evt.currentTarget.value, MAX_BRIGHTNESS);
+          saveAndUpdateDOM();
+        });
+        clearBackgroundBrightness.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          settings.backgroundBrightness = DEFAULT_BACKGROUND_BRIGHTNESS;
+          saveAndUpdateDOM();
+        });
+        backgroundContrastInput.addEventListener('input', function (evt) {
+          settings.backgroundContrast = convertSettingToPercent(evt.currentTarget.value, MAX_CONTRAST);
+          saveAndUpdateDOM();
+        });
+        clearBackgroundContrast.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          settings.backgroundContrast = DEFAULT_BACKGROUND_CONTRAST;
+          saveAndUpdateDOM();
+        });
+        backgroundSaturationInput.addEventListener('input', function (evt) {
+          settings.backgroundSaturation = convertSettingToPercent(evt.currentTarget.value, MAX_SATURATION);
+          saveAndUpdateDOM();
+        });
+        clearBackgroundSaturation.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          settings.backgroundSaturation = DEFAULT_BACKGROUND_SATURATION;
           saveAndUpdateDOM();
         });
         alwaysOnTopInput.addEventListener('click', function (evt) {
