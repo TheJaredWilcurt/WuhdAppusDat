@@ -1,3 +1,6 @@
+<p align="center"><img src="icon/WuhdAppusDat-Icon.png" alt="WuhdAppusDat icon" width="256"></p>
+
+
 # WuhdAppusDat
 
 Free, open source, desktop app for streamers that lets their audience know what program is currently in focus.
@@ -8,17 +11,19 @@ Free, open source, desktop app for streamers that lets their audience know what 
 * * *
 
 
-# ⮞⮞⮞⮞ DOWNLOADS AVAILABLE ⮜⮜⮜⮜
+<h1 align="center">⮞⮞⮞⮞ DOWNLOADS AVAILABLE ⮜⮜⮜⮜</h1>
 
 Downloads are available under the [GitHub Releases](https://github.com/TheJaredWilcurt/WuhdAppusDat/releases) tab.
 
 **Supported Systems:** Windows 7, 8, 10 (64-Bit only)
 
+NO INSTALLATION REQUIRED! This is a portable app.
+
 1. Download zip
 1. Unzip file
 1. Double-click on `WuhdAppusDat.exe`
 
-You can right-click + drag to create a shortcut to `WuhdAppusDat.exe`
+You can `right-click + drag` to create a shortcut to `WuhdAppusDat.exe`. Put the shortcut in your start menu or on the desktop.
 
 You can modify the `app-map.json` file to change how program names are displayed.
 
@@ -39,7 +44,13 @@ You can modify the `app-map.json` file to change how program names are displayed
 ## Features
 
 * Transparent, resizable window that states the name of the currently focused executable
-* Ships with some background images, or can use your own.
+* Ships with the following background images, or can use your own.
+
+<img src="leaves.png">
+<img src="spikes.png">
+<img src="bubbles.png">
+
+
 * Backgrounds stretch to fit inside the transparent window without being cropped
 * Background image Hue, Saturation, Brightness, and Contrast can be adujsted
 * Retains your settings, window size/positioning between uses (settings are stored per-user account on the PC)
@@ -47,6 +58,7 @@ You can modify the `app-map.json` file to change how program names are displayed
 * Allows for any installed system font, including custom ones you've downloaded or created
 * Can be pinned to "Always on Top"
 * App can be targeted by OBS, StreamLabs and similar software to be added as an overlay in a scene.
+
 
 
 * * *
