@@ -201,9 +201,12 @@
       align-items: center;
       padding: 10px;
     }
-    .pill-form:hover .pill-label {
+ pill-form-checkbox    .pill-form:hover .pill-label {
       background: #FFF8FC;
       color: #754D4D;
+    }
+    .pill-form-checkbox {
+      flex-grow: 0;
     }
     .pill-label {
       background: #CCC;
@@ -377,7 +380,7 @@
           <button id="clear-background-saturation" class="pill-end last-pill-section" title="Reset to default">&times;</button>
         </div>
 
-        <div class="pill-form">
+        <div class="pill-form pill-form-checkbox">
           <label class="pill-label" for="always-on-top-input">
             Always&nbsp;on&nbsp;top:
           </label>
@@ -426,6 +429,28 @@
             15
           </span>
           <button id="clear-font-size" class="pill-end last-pill-section" title="Reset to default">&times;</button>
+        </div>
+
+        <div class="pill-form pill-form-checkbox">
+          <label class="pill-label" for="font-style-input">
+            Italics:
+          </label>
+          <span id="faux-font-style" class="pill-content last-pill-section">
+            <input type="checkbox" id="font-style-input">
+          </select>
+        </div>
+
+        <div class="pill-form">
+          <label class="pill-label" for="font-weight-input">
+            Font&nbsp;Weight:
+          </label>
+          <span class="pill-content">
+            <input type="range" id="font-weight-input" min="1" max="9">
+          </span>
+          <span id="faux-font-weight">
+            4
+          </span>
+          <button id="clear-font-weight" class="pill-end last-pill-section" title="Reset to default">&times;</button>
         </div>
 
         <div class="pill-form">
@@ -502,6 +527,11 @@
       const fontSizeInput = document.getElementById('font-size-input');
       const fauxFontSize = document.getElementById('faux-font-size');
       const clearFontSize = document.getElementById('clear-font-size');
+      const fauxFontStyle = document.getElementById('faux-font-style');
+      const fontStyleInput = document.getElementById('font-style-input');
+      const fontWeightInput = document.getElementById('font-weight-input');
+      const fauxFontWeight = document.getElementById('faux-font-weight');
+      const clearFontWeight = document.getElementById('clear-font-weight');
       const updateIntervalInput = document.getElementById('update-interval-input');
       const fauxUpdateInterval = document.getElementById('faux-update-interval');
       const clearUpdateInterval = document.getElementById('clear-update-interval');
@@ -556,9 +586,16 @@
         fauxTextColor.style.background = settings.textColor || DEFAULT_TEXT_COLOR;
         textColorInput.value = settings.textColor || DEFAULT_TEXT_COLOR;
         textShadowInput.value = settings.textShadow || DEFAULT_TEXT_SHADOW;
-        fontInput.value = settings.font || DEFAULT_FONT;
+        let font = DEFAULT_FONT;
+        if (typeof(settings.font) === 'string') {
+          font = settings.font;
+        }
+        fontInput.value = font;
         fontSizeInput.value = settings.fontSize || DEFAULT_FONT_SIZE;
         fauxFontSize.innerText = settings.fontSize || DEFAULT_FONT_SIZE;
+        fontStyleInput.checked = settings.fontStyle || DEFAULT_FONT_STYLE;
+        fontWeightInput.value = (settings.fontWeight || DEFAULT_FONT_WEIGHT) / 100;
+        fauxFontWeight.innerText = (settings.fontWeight || DEFAULT_FONT_WEIGHT) / 100;
         updateIntervalInput.value = (settings.interval || DEFAULT_INTERVAL) / 1000;
         fauxUpdateInterval.innerText = (settings.interval || DEFAULT_INTERVAL) / 1000;
       }
@@ -700,6 +737,26 @@
         clearFontSize.addEventListener('click', function (evt) {
           evt.preventDefault();
           settings.fontSize = DEFAULT_FONT_SIZE;
+          saveAndUpdateDOM();
+        });
+        fontStyleInput.addEventListener('click', function (evt) {
+          evt.stopPropagation();
+          const value = evt.currentTarget.checked;
+          settings.fontStyle = value;
+          saveAndUpdateDOM();
+        });
+        fauxFontStyle.addEventListener('click', function (evt) {
+          evt.stopPropagation();
+          fontStyleInput.click();
+        });
+        fontWeightInput.addEventListener('input', function (evt) {
+          let value = parseInt(evt.currentTarget.value);
+          settings.fontWeight = value * 100;
+          saveAndUpdateDOM();
+        });
+        clearFontWeight.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          settings.fontWeight = DEFAULT_FONT_WEIGHT;
           saveAndUpdateDOM();
         });
         updateIntervalInput.addEventListener('input', function (evt) {

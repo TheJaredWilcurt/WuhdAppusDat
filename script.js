@@ -53,9 +53,19 @@ function applySettings () {
   background.style.filter = filters || 'none';
 
   // Text font/color
+  appName.style.color = settings.textColor || DEFAULT_TEXT_COLOR;
   appName.style.fontFamily = settings.font || DEFAULT_FONT;
   appName.style.fontSize = (settings.fontSize || DEFAULT_FONT_SIZE) + 'px';
-  appName.style.color = settings.textColor || DEFAULT_TEXT_COLOR;
+  appName.style.fontWeight = settings.fontWeight || DEFAULT_FONT_WEIGHT;
+  let fontStyle = 'normal';
+  if (
+    (typeof(settings.fontStyle) === 'boolean' && settings.fontStyle) ||
+    (typeof(settings.fontStyle) !== 'boolean' && DEFAULT_FONT_STYLE)
+  ) {
+    fontStyle = 'italic'
+  }
+  appName.style.fontStyle = fontStyle;
+
 
   // Text Shadow
   if (settings.textShadow === 'none') {
