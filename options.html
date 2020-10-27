@@ -21,16 +21,24 @@
     option {
       font-family: Georgia, sans-serif;
     }
+    h2 {
+      margin-top: 0px;
+    }
     .icon {
       margin: 0px 2px;
       vertical-align: -2px;
     }
+    .tabs {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin: 20px 0px 28px 0px;
+    }
     .tab {
       display: inline-block;
-      margin: 20px 10px 20px 20px;
       padding: 0px;
       color: salmon;
-      font-size: 32px;
+      font-size: 28px;
       font-weight: bold;
       text-decoration: none;
       cursor: pointer;
@@ -42,7 +50,7 @@
       text-decoration: underline;
     }
 
-    nav {
+    .window-title-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -201,7 +209,7 @@
       align-items: center;
       padding: 10px;
     }
- pill-form-checkbox    .pill-form:hover .pill-label {
+    .pill-form:hover .pill-label {
       background: #FFF8FC;
       color: #754D4D;
     }
@@ -270,7 +278,7 @@
     }
 
     .about-container {
-      padding: 20px;
+      padding: 0px 18px;
       color: #531;
     }
     a.external {
@@ -294,7 +302,7 @@
     </style>
   </head>
   <body>
-    <nav id="menu-bar">
+    <nav id="menu-bar" class="window-title-bar">
       <span>
         <img class="icon" src="icon/WuhdAppusDat16.png" alt="app icon">
         <strong id="app-title"></strong>
@@ -309,10 +317,14 @@
     </nav>
 
     <div id="main-content" class="wrapper">
-      <a id="options-tab" class="tab active" href="#">Options</a></h1>
-      <a id="about-tab" class="tab" href="#">About</a></h1>
+      <nav class="tabs">
+        <a id="options-tab" class="tab active" href="#">Options</a>
+        <a id="text-tab" class="tab" href="#">Text</a>
+        <a id="background-tab" class="tab" href="#">Background</a>
+        <a id="about-tab" class="tab" href="#">About</a>
+      </nav>
 
-      <div id="options-container" class="pill-form-container">
+      <div id="background-container" class="pill-form-container">
         <div class="pill-form">
           <label class="pill-label" for="background-image-input">
             Background&nbsp;image:
@@ -379,16 +391,10 @@
           </span>
           <button id="clear-background-saturation" class="pill-end last-pill-section" title="Reset to default">&times;</button>
         </div>
+      </div>
 
-        <div class="pill-form pill-form-checkbox">
-          <label class="pill-label" for="always-on-top-input">
-            Always&nbsp;on&nbsp;top:
-          </label>
-          <span id="faux-always-on-top" class="pill-content last-pill-section">
-            <input type="checkbox" id="always-on-top-input">
-          </select>
-        </div>
 
+      <div id="text-container" class="pill-form-container">
         <div class="pill-form">
           <label class="pill-label" for="text-color-input">
             Text&nbsp;color:
@@ -452,6 +458,18 @@
           </span>
           <button id="clear-font-weight" class="pill-end last-pill-section" title="Reset to default">&times;</button>
         </div>
+      </div>
+
+
+      <div id="options-container" class="pill-form-container">
+        <div class="pill-form pill-form-checkbox">
+          <label class="pill-label" for="always-on-top-input">
+            Always&nbsp;on&nbsp;top:
+          </label>
+          <span id="faux-always-on-top" class="pill-content last-pill-section">
+            <input type="checkbox" id="always-on-top-input">
+          </select>
+        </div>
 
         <div class="pill-form">
           <label class="pill-label" for="update-interval-input">
@@ -467,6 +485,7 @@
         </div>
         <p>The "Update Interval" controls how often (in seconds) we check to see what application currently has focus. Faster speeds may not work as well on very low end devices, most people won't notice though.</p>
       </div>
+
 
       <div id="about-container" class="about-container hidden">
         <h2>WuhdAppusDat v<span id="app-version">1.0.0</span></h2>
@@ -493,9 +512,9 @@
       const settings = loadSettings();
 
       const optionsTab = document.getElementById('options-tab');
+      const textTab = document.getElementById('text-tab');
+      const backgroundTab = document.getElementById('background-tab');
       const aboutTab = document.getElementById('about-tab');
-      const optionsContainer = document.getElementById('options-container');
-      const aboutContainer = document.getElementById('about-container');
 
       const clearBackground = document.getElementById('clear-background');
       const currentBackgroundImage = document.getElementById('current-background-image');
@@ -569,6 +588,7 @@
       }
 
       function updateDOM () {
+        toggleSection();
         currentBackgroundImage.innerText = settings.background || DEFAULT_BACKGROUND;
         fauxBackgroundInput.setAttribute('title', (settings.background || DEFAULT_BACKGROUND));
         backgroundHueInput.value = settings.backgroundHueRotate || DEFAULT_BACKGROUND_HUE_ROTATE;
@@ -613,20 +633,40 @@
         return value;
       }
 
+
+      function toggleSection () {
+        let current = settings.lastViewedSection || 'options';
+        removeClass('#options-tab', 'active');
+        removeClass('#text-tab', 'active');
+        removeClass('#background-tab', 'active');
+        removeClass('#about-tab', 'active');
+        hide('#options-container');
+        hide('#text-container');
+        hide('#background-container');
+        hide('#about-container');
+        addClass('#' + current + '-tab', 'active');
+        show('#' + current + '-container');
+      }
       function eventBindings () {
         optionsTab.addEventListener('click', function (evt) {
           evt.preventDefault();
-          removeClass('#about-tab', 'active');
-          addClass('#options-tab', 'active');
-          hide('#about-container');
-          show('#options-container');
+          settings.lastViewedSection = 'options';
+          saveAndUpdateDOM();
+        });
+        textTab.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          settings.lastViewedSection = 'text';
+          saveAndUpdateDOM();
+        });
+        backgroundTab.addEventListener('click', function (evt) {
+          evt.preventDefault();
+          settings.lastViewedSection = 'background';
+          saveAndUpdateDOM();
         });
         aboutTab.addEventListener('click', function (evt) {
           evt.preventDefault();
-          removeClass('#options-tab', 'active');
-          addClass('#about-tab', 'active');
-          hide('#options-container');
-          show('#about-container');
+          settings.lastViewedSection = 'about';
+          saveAndUpdateDOM();
         });
         clearBackground.addEventListener('click', function (evt) {
           evt.preventDefault();
