@@ -746,7 +746,7 @@
         });
         textColorInput.addEventListener('input', function (evt) {
           let color = evt?.currentTarget?.value;
-          settings.textColor = color;
+          settings.textColor = color.toUpperCase();
           saveAndUpdateDOM();
         });
         clearTextColor.addEventListener('click', function (evt) {
