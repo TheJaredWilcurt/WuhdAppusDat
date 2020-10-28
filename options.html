@@ -248,6 +248,10 @@
       background: #FFF6FA;
       color: #9E6A6A;
     }
+    input.pill-label {
+      border: 0px;
+      cursor: text;
+    }
     .pill-button {
       width: 40px;
       height: 40px;
@@ -316,6 +320,11 @@
     }
     a.external:hover {
       color: salmon;
+    }
+
+    .app-map-container {
+      width: 100%;
+      text-align: center;
     }
 
     .truncate {
@@ -514,6 +523,32 @@
           <button id="clear-update-interval" class="pill-end last-pill-section" title="Reset to default">&times;</button>
         </div>
         <p>The "Update Interval" controls how often (in seconds) we check to see what application currently has focus. Faster speeds may not work as well on very low end devices, most people won't notice though.</p>
+
+        <div id="app-map-container" class="app-map-container">
+          <p>
+            <a href="#" @click.prevent="appMapVisible = !appMapVisible">
+              <template v-if="appMapVisible">
+                Hide app name alias form
+              </template>
+              <template v-else>
+                Show app name alias form
+              </template>
+            </a>
+          </p>
+          <template v-if="appMapVisible">
+            <p>There are <strong>{{ appMaps.length - 1 }}</strong> custom app name aliases.</p>
+            <div v-for="(app, appIndex) in appMaps" class="pill-form">
+              <input v-model="app.file" class="pill-label">
+              <input v-model="app.alias" class="pill-content">
+              <button
+                class="pill-end last-pill-section"
+                title="Remove"
+                @click="removeAppMap(appIndex)"
+              >&times;</button>
+            </div>
+            {{ appMapToBeSaved }}
+          </template>
+        </div>
       </div>
 
 
@@ -535,6 +570,7 @@
       </div>
     </div>
 
+    <script src="scripts/vue.min.js"></script>
     <script src="settings.js"></script>
     <script>
       document.querySelector('title').innerText = APP_TITLE + ' Options';
@@ -663,6 +699,53 @@
         }
         return value;
       }
+
+      const vue = Vue
+        .createApp({
+          data: function () {
+            return {
+              appMapVisible: false,
+              appMaps: []
+            };
+          },
+          methods: {
+            prepareAppMap: function () {
+              let appMap = settings.appMap;
+              if (!appMap) {
+                appMap = JSON.parse(fs.readFileSync('./app-map.json'));
+              }
+              let apps = [];
+              Object.keys(appMap).forEach(function (app) {
+                apps.push({
+                  file: app,
+                  alias: appMap[app]
+                });
+              });
+              apps.push({
+                file: '',
+                alias: ''
+              });
+
+              this.appMaps = apps;
+            },
+            removeAppMap: function (index) {
+              this.appMaps.splice(index, 1);
+            }
+          },
+          computed: {
+            appMapToBeSaved: function () {
+              let appMap = {};
+              this.appMaps.forEach(function (app) {
+                appMap[app.file] = app.alias;
+              });
+              return appMap;
+            }
+          },
+          created: function () {
+            this.prepareAppMap();
+          }
+        })
+        .mount('#app-map-container');
 
 
       function toggleSection () {

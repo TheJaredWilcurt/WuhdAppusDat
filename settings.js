@@ -20,13 +20,6 @@ const MAX_CONTRAST = 3;
 const MAX_BRIGHTNESS = 15;
 const MAX_SATURATION = 25;
 
-const appMap = JSON.parse(fs.readFileSync('./app-map.json'));
-const commonApplications = {};
-Object.keys(appMap).forEach(function (key) {
-  commonApplications[key.toLowerCase()] = appMap[key];
-});
-commonApplications[atob('ZWxlY3Ryb24=')] = atob('RWxlY3Ryb20gKFVzaW5nIDk4JSBvZiBhdmFpbGFibGUgbWVtb3J5KQ==');
-
 function loadSettings () {
   const settings = {}
   if (!fs.existsSync(settingsLocation)) {
