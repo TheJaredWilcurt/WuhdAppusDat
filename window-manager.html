@@ -25,6 +25,7 @@
       };
 
       nw.Window.open('options.html', optionsWindowOptions, function (optionsWin) {
+        optionsWin.setShadow(false);
         global.optionsWindow = optionsWin;
 
         optionsWin.on('closed', function () {
@@ -32,6 +33,7 @@
         });
 
         nw.Window.open('index.html', appWindowOptions, function (appWin) {
+          appWin.setShadow(false);
           global.appWindow = appWin;
 
           appWin.on('closed', function () {

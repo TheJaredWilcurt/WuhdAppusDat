@@ -1,5 +1,6 @@
 document.querySelector('title').innerText = APP_TITLE;
 const getActiveProcessName = require('windows-active-process').getActiveProcessName;
+const activeWin = require('active-win');
 const appName = document.getElementById('app-name');
 const background = document.getElementById('background');
 let interval;
@@ -89,7 +90,23 @@ function eventBindings () {
   });
 }
 
-function setAppName () {
+
+function appNameCleanUp (fileName) {
+  fileName = fileName.split('_').join(' ');
+  fileName = commonApplications[fileName.toLowerCase()] || fileName;
+  return fileName || '';
+}
+
+async function setLinuxOrOSXAppName () {
+  let win = await activeWin();
+  let fileName = win?.owner?.name;
+  if (!fileName || typeof(fileName) !== 'string') {
+    fileName = '';
+  }
+  appName.innerText = appNameCleanUp(fileName);
+}
+
+function setWindowsAppName () {
   let filePath = getActiveProcessName();
   if (!filePath || typeof(filePath) !== 'string') {
     filePath = '';
@@ -102,10 +119,15 @@ function setAppName () {
     fileName.pop();
   }
   fileName = fileName.join('');
-  fileName = fileName.split('_').join(' ');
-  fileName = commonApplications[fileName.toLowerCase()] || fileName;
+  appName.innerText = appNameCleanUp(fileName);
+}
 
-  appName.innerText = fileName;
+function setAppName () {
+  if (process.platform === 'win32') {
+    setWindowsAppName();
+  } else {
+    setLinuxOrOSXAppName();
+  }
 }
 
 function initialize () {

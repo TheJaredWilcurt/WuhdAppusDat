@@ -20,6 +20,7 @@
   "msiexec": "Software Installation",
   "mspaint": "MS Paint",
   "nw": "NW.JS",
+  "nwjs": "NW.JS",
   "perfmon": "Windows Performance Monitor",
   "powershell": "Windows PowerShell",
   "powerpnt": "Microsoft PowerPoint",
@@ -34,5 +35,6 @@
   "vmplayer": "VMWare Player",
   "vsc": "Visual Studio Code",
   "winword": "Microsoft Word",
-  "wuauclt": "Windows Updates"
+  "wuauclt": "Windows Updates",
+  "wuhdappusdat": "WuhdAppusDat"
 }

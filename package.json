@@ -31,6 +31,7 @@
     "nw": "0.45.3-sdk"
   },
   "dependencies": {
+    "active-win": "^6.2.0",
     "windows-active-process": "^1.1.1"
   }
 }
