@@ -11,7 +11,7 @@ Free, open source, desktop app for streamers that lets their audience know what 
 * * *
 
 
-<h1 align="center">⮞⮞⮞⮞ DOWNLOADS AVAILABLE ⮜⮜⮜⮜</h1>
+<h1 align="center">==== DOWNLOADS AVAILABLE ====</h1>
 
 Downloads are available under the [GitHub Releases](https://github.com/TheJaredWilcurt/WuhdAppusDat/releases) tab.
 
