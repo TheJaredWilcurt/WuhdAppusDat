@@ -25,7 +25,7 @@ const commonApplications = {};
 Object.keys(appMap).forEach(function (key) {
   commonApplications[key.toLowerCase()] = appMap[key];
 });
-commonApplications.electron = 'Electrom (Using 98% of available memory)';
+commonApplications[atob('ZWxlY3Ryb24=')] = atob('RWxlY3Ryb20gKFVzaW5nIDk4JSBvZiBhdmFpbGFibGUgbWVtb3J5KQ==');
 
 function loadSettings () {
   const settings = {}
