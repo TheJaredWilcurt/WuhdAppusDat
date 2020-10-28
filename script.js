@@ -97,7 +97,7 @@ function appNameCleanUp (fileName) {
   return fileName || '';
 }
 
-async function setLinuxAppName () {
+async function setLinuxOrOSXAppName () {
   let win = await activeWin();
   let fileName = win?.owner?.name;
   if (!fileName || typeof(fileName) !== 'string') {
@@ -126,7 +126,7 @@ function setAppName () {
   if (process.platform === 'win32') {
     setWindowsAppName();
   } else {
-    setLinuxAppName();
+    setLinuxOrOSXAppName();
   }
 }
 
