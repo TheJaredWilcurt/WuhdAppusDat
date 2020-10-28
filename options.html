@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>WuhdAppusDat Options</title>
+    <link rel="stylesheet" href="fonts/petrona.css">
     <style>
     *,
     *:before,
@@ -19,14 +20,10 @@
     input,
     select,
     option {
-      font-family: Georgia, sans-serif;
+      font-family: Petrona, georgia;
     }
     h2 {
       margin-top: 0px;
-    }
-    .icon {
-      margin: 0px 2px;
-      vertical-align: -2px;
     }
     .tabs {
       display: flex;
@@ -48,6 +45,15 @@
     }
     .tab.active {
       text-decoration: underline;
+    }
+
+    .icon {
+      margin: 0px 2px;
+      vertical-align: -1px;
+    }
+    .app-title {
+      font-family: Petrona;
+      font-size: 19px;
     }
 
     .window-title-bar {
@@ -305,7 +311,7 @@
     <nav id="menu-bar" class="window-title-bar">
       <span>
         <img class="icon" src="icon/WuhdAppusDat16.png" alt="app icon">
-        <strong id="app-title"></strong>
+        <strong id="app-title" class="app-title"></strong>
       </span>
 
       <div class="window-controls">
