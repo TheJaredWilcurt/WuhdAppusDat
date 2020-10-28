@@ -66,19 +66,28 @@ You can modify the `app-map.json` file to change how program names are displayed
 
 ## Running locally for development
 
-The dependency `windows-active-process` requires a native module be built.
 
-1. Install Node.js & npm (Specifically Node.js [v13.13.0](https://nodejs.org/dist/v13.13.0/) to match NW.js). I use [nvm-windows](https://github.com/coreybutler/nvm-windows/releases) to do this.
-1. `npm install -g windows-build-tools`
+### Environment setup
+
+The dependency `windows-active-process` and `active-win` require a native module be built.
+
+1. Install **SPECIFICALLY** Node.js [v13.13.0](https://nodejs.org/dist/v13.13.0/) to match NW.js). I use [nvm-windows](https://github.com/coreybutler/nvm-windows/releases) or [nvm]()https://github.com/nvm-sh/nvm to do this.
+1. On OSX 10.13 and below install [Swift runtime support libraries](https://support.apple.com/kb/DL1998)
+1. On Windows `npm install -g windows-build-tools`
 1. `npm install -g nw-gyp`
 1. Download the repo
-1. `npm install`
-1. `npm start`
+
+
+### Running loally
+
+1. Do the environment setup once
+1. `npm install && npm start`
 
 
 ## Technology Colophon
 
 * Written in Vanilla JS, HTML, and CSS.
 * Built with NW.js, Node.js.
-* Relies on "windows-active-process" library.
-* Built on Windows 7, with SublimeText 3 and Photoshop CS6.
+* Windows version relies on "windows-active-process" library.
+* Linux/OSX version relies on "active-win" library.
+* Built on Windows 7, OSX 10.11, Ubuntu 17, with SublimeText 3 and Photoshop CS6.
