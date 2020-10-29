@@ -28,6 +28,8 @@ const fauxBackgroundSaturation = document.getElementById('faux-background-satura
 const clearBackgroundSaturation = document.getElementById('clear-background-saturation');
 const alwaysOnTopInput = document.getElementById('always-on-top-input');
 const fauxAlwaysOnTop = document.getElementById('faux-always-on-top');
+const systemTrayInput = document.getElementById('system-tray-input');
+const fauxSystemTray = document.getElementById('faux-system-tray');
 const clearTextColor = document.getElementById('clear-text-color');
 const textColorInput = document.getElementById('text-color-input');
 const fauxBackgroundInput = document.getElementById('faux-background-input');
@@ -95,6 +97,7 @@ function updateDOM () {
   backgroundSaturationInput.value = saturation;
   fauxBackgroundSaturation.innerText = saturation;
   alwaysOnTopInput.checked = settings.alwaysOnTop || DEFAULT_ALWAYS_ON_TOP;
+  systemTrayInput.checked = settings.systemTray || DEFAULT_SYSTEM_TRAY;
   fauxTextColor.style.background = settings.textColor || DEFAULT_TEXT_COLOR;
   textColorInput.value = settings.textColor || DEFAULT_TEXT_COLOR;
   textShadowInput.value = settings.textShadow || DEFAULT_TEXT_SHADOW;
@@ -229,6 +232,16 @@ function eventBindings () {
   fauxAlwaysOnTop.addEventListener('click', function (evt) {
     evt.stopPropagation();
     alwaysOnTopInput.click();
+  });
+  systemTrayInput.addEventListener('click', function (evt) {
+    evt.stopPropagation();
+    const value = evt.currentTarget.checked;
+    settings.systemTray = value;
+    saveAndUpdateDOM();
+  });
+  fauxSystemTray.addEventListener('click', function (evt) {
+    evt.stopPropagation();
+    systemTrayInput.click();
   });
   textColorInput.addEventListener('input', function (evt) {
     let color = evt?.currentTarget?.value;
