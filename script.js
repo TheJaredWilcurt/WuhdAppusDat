@@ -13,9 +13,21 @@ function applySettings () {
   }
   interval = setInterval(setAppName, (settings.interval || DEFAULT_INTERVAL));
 
-  let alwaysOnTopValidated = typeof(settings.alwaysOnTop) === 'boolean' && settings.alwaysOnTop;
-  let alwaysOnTopDefault = typeof(settings.alwaysOnTop) !== 'boolean' && DEFAULT_ALWAYS_ON_TOP;
-  nw.Window.get().setAlwaysOnTop(alwaysOnTopValidated || alwaysOnTopDefault);
+  let alwaysOnTopValidated;
+  if (typeof(settings.alwaysOnTop) === 'boolean') {
+    alwaysOnTopValidated = settings.alwaysOnTop;
+  } else {
+    alwaysOnTopValidated = DEFAULT_ALWAYS_ON_TOP;
+  }
+  nw.Window.get().setAlwaysOnTop(alwaysOnTopValidated);
+
+  let visibleOnAllWorkspacesValidated;
+  if (typeof(settings.visibleOnAllWorkspaces) === 'boolean') {
+    visibleOnAllWorkspacesValidated = settings.visibleOnAllWorkspaces;
+  } else {
+    visibleOnAllWorkspacesValidated = DEFAULT_VISIBLE_ON_ALL_WORKSPACES;
+  }
+  nw.Window.get().setVisibleOnAllWorkspaces(visibleOnAllWorkspacesValidated);
 
   // Background image
   let backgroundImage = (settings && settings.background) || DEFAULT_BACKGROUND;

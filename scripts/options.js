@@ -28,6 +28,8 @@ const fauxBackgroundSaturation = document.getElementById('faux-background-satura
 const clearBackgroundSaturation = document.getElementById('clear-background-saturation');
 const alwaysOnTopInput = document.getElementById('always-on-top-input');
 const fauxAlwaysOnTop = document.getElementById('faux-always-on-top');
+const visibleOnAllWorkspacesInput = document.getElementById('visible-on-all-workspaces-input');
+const fauxVisibleOnAllWorkspaces = document.getElementById('faux-visible-on-all-workspaces');
 const systemTrayInput = document.getElementById('system-tray-input');
 const fauxSystemTray = document.getElementById('faux-system-tray');
 const clearTextColor = document.getElementById('clear-text-color');
@@ -97,6 +99,7 @@ function updateDOM () {
   backgroundSaturationInput.value = saturation;
   fauxBackgroundSaturation.innerText = saturation;
   alwaysOnTopInput.checked = settings.alwaysOnTop || DEFAULT_ALWAYS_ON_TOP;
+  visibleOnAllWorkspacesInput.checked = settings.visibleOnAllWorkspaces || DEFAULT_VISIBLE_ON_ALL_WORKSPACES;
   systemTrayInput.checked = settings.systemTray || DEFAULT_SYSTEM_TRAY;
   fauxTextColor.style.background = settings.textColor || DEFAULT_TEXT_COLOR;
   textColorInput.value = settings.textColor || DEFAULT_TEXT_COLOR;
@@ -239,6 +242,16 @@ function eventBindings () {
     evt.stopPropagation();
     alwaysOnTopInput.click();
   });
+  visibleOnAllWorkspacesInput.addEventListener('click', function (evt) {
+    evt.stopPropagation();
+    const value = evt.currentTarget.checked;
+    settings.visibleOnAllWorkspaces = value;
+    saveAndUpdateDOM();
+  });
+  fauxVisibleOnAllWorkspaces.addEventListener('click', function (evt) {
+    evt.stopPropagation();
+    visibleOnAllWorkspacesInput.click();
+  });
   systemTrayInput.addEventListener('click', function (evt) {
     evt.stopPropagation();
     const value = evt.currentTarget.checked;
@@ -365,6 +378,9 @@ function initializeWindowControls () {
 function initialize () {
   if (process.platform === 'darwin') {
     addClass('body', 'osx');
+  }
+  if (nw.Window.get().canSetVisibleOnAllWorkspaces()) {
+    show('#visible-on-all-workspaces-container');
   }
   initializeWindowControls();
   eventBindings();
