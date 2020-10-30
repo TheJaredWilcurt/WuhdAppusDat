@@ -83,6 +83,14 @@ function calculateSliderValue (DEFAULT_VALUE, setting, MAX) {
   return value;
 }
 
+function updateDOMCheckbox (el, setting, DEFAULT_VALUE) {
+  let value = DEFAULT_VALUE;
+  if (typeof(settings[setting]) === 'boolean') {
+    value = settings[setting];
+  }
+  el.checked = value;
+}
+
 function updateDOM () {
   toggleSection();
   currentBackgroundImage.innerText = settings.background || DEFAULT_BACKGROUND;
@@ -98,9 +106,9 @@ function updateDOM () {
   let saturation = calculateSliderValue(DEFAULT_BACKGROUND_SATURATION, settings.backgroundSaturation, MAX_SATURATION);
   backgroundSaturationInput.value = saturation;
   fauxBackgroundSaturation.innerText = saturation;
-  alwaysOnTopInput.checked = settings.alwaysOnTop || DEFAULT_ALWAYS_ON_TOP;
-  visibleOnAllWorkspacesInput.checked = settings.visibleOnAllWorkspaces || DEFAULT_VISIBLE_ON_ALL_WORKSPACES;
-  systemTrayInput.checked = settings.systemTray || DEFAULT_SYSTEM_TRAY;
+  updateDOMCheckbox(alwaysOnTopInput, 'alwaysOnTop', DEFAULT_ALWAYS_ON_TOP)
+  updateDOMCheckbox(visibleOnAllWorkspacesInput, 'visibleOnAllWorkspaces', DEFAULT_VISIBLE_ON_ALL_WORKSPACES);
+  updateDOMCheckbox(systemTrayInput, 'systemTray', DEFAULT_SYSTEM_TRAY);
   fauxTextColor.style.background = settings.textColor || DEFAULT_TEXT_COLOR;
   textColorInput.value = settings.textColor || DEFAULT_TEXT_COLOR;
   textShadowInput.value = settings.textShadow || DEFAULT_TEXT_SHADOW;
@@ -111,7 +119,7 @@ function updateDOM () {
   fontInput.value = font;
   fontSizeInput.value = settings.fontSize || DEFAULT_FONT_SIZE;
   fauxFontSize.innerText = settings.fontSize || DEFAULT_FONT_SIZE;
-  fontStyleInput.checked = settings.fontStyle || DEFAULT_FONT_STYLE;
+  updateDOMCheckbox(fontStyleInput, 'fontStyle', DEFAULT_FONT_STYLE);
   fontWeightInput.value = (settings.fontWeight || DEFAULT_FONT_WEIGHT) / 100;
   fauxFontWeight.innerText = (settings.fontWeight || DEFAULT_FONT_WEIGHT) / 100;
   updateIntervalInput.value = (settings.interval || DEFAULT_INTERVAL) / 1000;
@@ -146,26 +154,33 @@ function toggleSection () {
   show('#' + current + '-container');
 }
 function eventBindings () {
-  optionsTab.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.lastViewedSection = 'options';
-    saveAndUpdateDOM();
+  const tabBindings = [
+    {
+      el: optionsTab,
+      name: 'options'
+    },
+    {
+      el: textTab,
+      name: 'text'
+    },
+    {
+      el: backgroundTab,
+      name: 'background'
+    },
+    {
+      el: aboutTab,
+      name: 'about'
+    }
+  ];
+  tabBindings.forEach(function (tab) {
+    tab.el.addEventListener('click', function (evt) {
+      evt.preventDefault();
+      settings.lastViewedSection = tab.name;
+      saveAndUpdateDOM();
+    });
   });
-  textTab.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.lastViewedSection = 'text';
-    saveAndUpdateDOM();
-  });
-  backgroundTab.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.lastViewedSection = 'background';
-    saveAndUpdateDOM();
-  });
-  aboutTab.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.lastViewedSection = 'about';
-    saveAndUpdateDOM();
-  });
+
+  // type="file"
   clearBackground.addEventListener('click', function (evt) {
     evt.preventDefault();
     backgroundImageInput.value = '';
@@ -183,85 +198,117 @@ function eventBindings () {
     settings.background = file;
     saveAndUpdateDOM();
   });
-  backgroundLeaves.addEventListener('click', function (evt) {
-    settings.background = 'leaves.png';
-    saveAndUpdateDOM();
+  fauxBackgroundInput.addEventListener('click', function () {
+    backgroundImageInput.click();
   });
-  backgroundSpikes.addEventListener('click', function (evt) {
-    settings.background = 'spikes.png';
-    saveAndUpdateDOM();
+
+  // Background images
+  const backgroundImages = [
+    {
+      el: backgroundLeaves,
+      file: 'leaves.png'
+    },
+    {
+      el: backgroundSpikes,
+      file: 'spikes.png'
+    },
+    {
+      el: backgroundBubbles,
+      file: 'bubbles.png'
+    }
+  ];
+  backgroundImages.forEach(function (backgroundImage) {
+    backgroundImage.el.addEventListener('click', function (evt) {
+      evt.preventDefault();
+      settings.background = backgroundImage.file;
+      saveAndUpdateDOM();
+    });
   });
-  backgroundBubbles.addEventListener('click', function (evt) {
-    settings.background = 'bubbles.png';
-    saveAndUpdateDOM();
-  });
+
+  // Background filters
   backgroundHueInput.addEventListener('input', function (evt) {
-    let value = parseInt(evt.currentTarget.value);
-    settings.backgroundHueRotate = value;
-    saveAndUpdateDOM();
-  });
-  clearBackgroundHue.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.backgroundHueRotate = DEFAULT_BACKGROUND_HUE_ROTATE;
+    settings.backgroundHueRotate = parseInt(evt.currentTarget.value);
     saveAndUpdateDOM();
   });
   backgroundBrightnessInput.addEventListener('input', function (evt) {
     settings.backgroundBrightness = convertSettingToPercent(evt.currentTarget.value, MAX_BRIGHTNESS);
     saveAndUpdateDOM();
   });
-  clearBackgroundBrightness.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.backgroundBrightness = DEFAULT_BACKGROUND_BRIGHTNESS;
-    saveAndUpdateDOM();
-  });
   backgroundContrastInput.addEventListener('input', function (evt) {
     settings.backgroundContrast = convertSettingToPercent(evt.currentTarget.value, MAX_CONTRAST);
-    saveAndUpdateDOM();
-  });
-  clearBackgroundContrast.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.backgroundContrast = DEFAULT_BACKGROUND_CONTRAST;
     saveAndUpdateDOM();
   });
   backgroundSaturationInput.addEventListener('input', function (evt) {
     settings.backgroundSaturation = convertSettingToPercent(evt.currentTarget.value, MAX_SATURATION);
     saveAndUpdateDOM();
   });
-  clearBackgroundSaturation.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.backgroundSaturation = DEFAULT_BACKGROUND_SATURATION;
-    saveAndUpdateDOM();
+  const clearBackgroundFilters = [
+    {
+      clearEl: clearBackgroundHue,
+      setting: 'backgroundHueRotate',
+      default: DEFAULT_BACKGROUND_HUE_ROTATE
+    },
+    {
+      clearEl: clearBackgroundBrightness,
+      setting: 'backgroundBrightness',
+      default: DEFAULT_BACKGROUND_BRIGHTNESS
+    },
+    {
+      clearEl: clearBackgroundContrast,
+      setting: 'backgroundContrast',
+      default: DEFAULT_BACKGROUND_CONTRAST
+    },
+    {
+      clearEl: clearBackgroundSaturation,
+      setting: 'backgroundSaturation',
+      default: DEFAULT_BACKGROUND_SATURATION
+    }
+  ];
+  clearBackgroundFilters.forEach(function (filter) {
+    filter.clearEl.addEventListener('click', function (evt) {
+      evt.preventDefault();
+      settings[filter.setting] = filter.default;
+      saveAndUpdateDOM();
+    });
   });
-  alwaysOnTopInput.addEventListener('click', function (evt) {
-    evt.stopPropagation();
-    const value = evt.currentTarget.checked;
-    settings.alwaysOnTop = value;
-    saveAndUpdateDOM();
+
+  // type="checkbox"
+  const checkboxes = [
+    {
+      el: alwaysOnTopInput,
+      setting: 'alwaysOnTop',
+      faux: fauxAlwaysOnTop
+    },
+    {
+      el: visibleOnAllWorkspacesInput,
+      setting: 'visibleOnAllWorkspaces',
+      faux: fauxVisibleOnAllWorkspaces
+    },
+    {
+      el: systemTrayInput,
+      setting: 'systemTray',
+      faux: fauxSystemTray
+    },
+    {
+      el: fontStyleInput,
+      setting: 'fontStyle',
+      faux: fauxFontStyle
+    }
+  ];
+  checkboxes.forEach(function (checkbox) {
+    checkbox.el.addEventListener('click', function (evt) {
+      evt.stopPropagation();
+      const value = evt.currentTarget.checked;
+      settings[checkbox.setting] = value;
+      saveAndUpdateDOM();
+    });
+    checkbox.faux.addEventListener('click', function (evt) {
+      evt.stopPropagation();
+      checkbox.el.click();
+    });
   });
-  fauxAlwaysOnTop.addEventListener('click', function (evt) {
-    evt.stopPropagation();
-    alwaysOnTopInput.click();
-  });
-  visibleOnAllWorkspacesInput.addEventListener('click', function (evt) {
-    evt.stopPropagation();
-    const value = evt.currentTarget.checked;
-    settings.visibleOnAllWorkspaces = value;
-    saveAndUpdateDOM();
-  });
-  fauxVisibleOnAllWorkspaces.addEventListener('click', function (evt) {
-    evt.stopPropagation();
-    visibleOnAllWorkspacesInput.click();
-  });
-  systemTrayInput.addEventListener('click', function (evt) {
-    evt.stopPropagation();
-    const value = evt.currentTarget.checked;
-    settings.systemTray = value;
-    saveAndUpdateDOM();
-  });
-  fauxSystemTray.addEventListener('click', function (evt) {
-    evt.stopPropagation();
-    systemTrayInput.click();
-  });
+
+  // type="color"
   textColorInput.addEventListener('input', function (evt) {
     let color = evt && evt.currentTarget && evt.currentTarget.value;
     settings.textColor = color.toUpperCase();
@@ -272,17 +319,17 @@ function eventBindings () {
     settings.textColor = undefined;
     saveAndUpdateDOM();
   });
-  fauxBackgroundInput.addEventListener('click', function () {
-    backgroundImageInput.click();
-  });
   fauxTextColor.addEventListener('click', function () {
     textColorInput.click();
   });
+
+  // select option
   textShadowInput.addEventListener('input', function (evt) {
     const value = evt.currentTarget.value;
     settings.textShadow = value;
     saveAndUpdateDOM();
   });
+  // type="text"
   fontInput.addEventListener('input', function (evt) {
     const value = evt.currentTarget.value;
     settings.font = value;
@@ -293,6 +340,7 @@ function eventBindings () {
     settings.font = DEFAULT_FONT;
     saveAndUpdateDOM();
   });
+  // type="range"
   fontSizeInput.addEventListener('input', function (evt) {
     let value = parseInt(evt.currentTarget.value);
     settings.fontSize = value;
@@ -302,16 +350,6 @@ function eventBindings () {
     evt.preventDefault();
     settings.fontSize = DEFAULT_FONT_SIZE;
     saveAndUpdateDOM();
-  });
-  fontStyleInput.addEventListener('click', function (evt) {
-    evt.stopPropagation();
-    const value = evt.currentTarget.checked;
-    settings.fontStyle = value;
-    saveAndUpdateDOM();
-  });
-  fauxFontStyle.addEventListener('click', function (evt) {
-    evt.stopPropagation();
-    fontStyleInput.click();
   });
   fontWeightInput.addEventListener('input', function (evt) {
     let value = parseInt(evt.currentTarget.value);
