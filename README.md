@@ -71,7 +71,7 @@ You can modify the `app-map.json` file to change how program names are displayed
 
 The `windows-active-process` and `active-win` dependencies require a native module be built.
 
-1. Install **SPECIFICALLY** Node.js [v13.13.0](https://nodejs.org/dist/v13.13.0/) to match NW.js). I use [nvm-windows](https://github.com/coreybutler/nvm-windows/releases) or [nvm](https://github.com/nvm-sh/nvm) to do this.
+1. Install **SPECIFICALLY** Node.js [v10.11.0](https://nodejs.org/dist/v13.13.0/) to match NW.js). I use [nvm-windows](https://github.com/coreybutler/nvm-windows/releases) or [nvm](https://github.com/nvm-sh/nvm) to do this.
 1. On OSX 10.13 and below install [Swift runtime support libraries](https://support.apple.com/kb/DL1998)
 1. On Windows `npm install -g windows-build-tools`
 1. `npm install -g nw-gyp`

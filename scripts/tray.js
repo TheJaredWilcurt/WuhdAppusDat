@@ -10,8 +10,6 @@ function createTray () {
   // Give it a menu
   let menu = new nw.Menu();
 
-  let itemChecked = true;
-
   // Create an array of the items to be placed in the menu
   let menuItems = [
     {
@@ -54,6 +52,10 @@ function createTray () {
 
   // Place the menu in the tray
   tray.menu = menu;
+
+  tray.on('click', function (evt) {
+    global.appWindow.show();
+  });
 }
 
 function removeTray () {

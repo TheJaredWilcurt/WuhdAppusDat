@@ -170,7 +170,13 @@ function eventBindings () {
     saveAndUpdateDOM();
   });
   backgroundImageInput.addEventListener('input', function (evt) {
-    let file = evt?.currentTarget?.files[0]?.path;
+    let file = (
+      evt &&
+      evt.currentTarget &&
+      evt.currentTarget.files &&
+      evt.currentTarget.files[0] &&
+      evt.currentTarget.files[0].path
+    );
     settings.background = file;
     saveAndUpdateDOM();
   });
@@ -244,7 +250,7 @@ function eventBindings () {
     systemTrayInput.click();
   });
   textColorInput.addEventListener('input', function (evt) {
-    let color = evt?.currentTarget?.value;
+    let color = evt && evt.currentTarget && evt.currentTarget.value;
     settings.textColor = color.toUpperCase();
     saveAndUpdateDOM();
   });

@@ -18,9 +18,10 @@ function applySettings () {
   nw.Window.get().setAlwaysOnTop(alwaysOnTopValidated || alwaysOnTopDefault);
 
   // Background image
-  let backgroundImage = settings?.background || DEFAULT_BACKGROUND;
+  let backgroundImage = (settings && settings.background) || DEFAULT_BACKGROUND;
   if (
-    settings?.background &&
+    settings &&
+    settings.background &&
     settings.background !== 'leaves.png' &&
     settings.background !== 'spikes.png' &&
     settings.background !== 'bubbles.png'
@@ -99,7 +100,7 @@ function appNameCleanUp (fileName) {
 
 async function setLinuxOrOSXAppName () {
   let win = await activeWin();
-  let fileName = win?.owner?.name;
+  let fileName = win && win.owner && win.owner.name;
   if (!fileName || typeof(fileName) !== 'string') {
     fileName = '';
   }
