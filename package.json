@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "Shows currently focused program",
   "main": "window-manager.html",
+  "product_string": "WuhdAppusDat",
   "scripts": {
     "start": "nw .",
     "postinstall": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.33.4 --arch=x64",

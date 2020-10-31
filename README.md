@@ -15,7 +15,12 @@ Free, open source, desktop app for streamers that lets their audience know what 
 
 Downloads are available under the [GitHub Releases](https://github.com/TheJaredWilcurt/WuhdAppusDat/releases) tab.
 
-**Supported Systems:** Windows 7, 8, 10 (64-Bit only). (Ubuntu/OSX coming soon)
+**Supported Systems:** Windows 7, 8, 10 (64-Bit only). Ubuntu 17+ (64-Bit). OSX 10.11+ (64-Bit)
+
+**Note:** You can modify the `app-map.json` file to change how program names are displayed.
+
+
+## Windows/Linux
 
 NO INSTALLATION REQUIRED! This is a portable app.
 
@@ -25,7 +30,18 @@ NO INSTALLATION REQUIRED! This is a portable app.
 
 You can `right-click + drag` to create a shortcut to `WuhdAppusDat.exe`. Put the shortcut in your start menu or on the desktop.
 
-You can modify the `app-map.json` file to change how program names are displayed.
+
+## OSX
+
+NO INSTALLATION REQUIRED! This is a portable app.
+
+1. Download zip
+1. Unzip file
+1. Double-click on `WuhdAppusDat`
+
+You will need to allow running a program from the internet.
+
+You will ned to allow WuhdAppusDat to have access to "Accessibility Features" (this is how it can see the title of the currently focused window).
 
 
 * * *
