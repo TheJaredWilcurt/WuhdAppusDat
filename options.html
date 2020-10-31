@@ -41,7 +41,7 @@
         </div>
 
         <button id="background-leaves" title="Leaves Background" class="pill-form pill-button pill-button-leaves"></button>
-        <button id="background-spikes" title="Spike Background" class="pill-form pill-button pill-button-spikes"></button>
+        <button id="background-spikes" title="Spikes Background" class="pill-form pill-button pill-button-spikes"></button>
         <button id="background-bubbles" title="Pink Bubbles Background" class="pill-form pill-button pill-button-bubbles"></button>
 
         <div class="pill-form">
@@ -162,6 +162,19 @@
           </span>
           <button id="clear-font-weight" class="pill-end last-pill-section" title="Reset to default">&times;</button>
         </div>
+
+        <div class="pill-form">
+          <label class="pill-label" for="text-position-input">
+            Text&nbsp;Position:
+          </label>
+          <span class="pill-content">
+            <input type="range" id="text-position-input" min="0" max="800">
+          </span>
+          <span id="faux-text-position">
+            400
+          </span>
+          <button id="clear-text-position" class="pill-end last-pill-section" title="Reset to default">&times;</button>
+        </div>
       </div>
 
 
@@ -172,6 +185,34 @@
           </label>
           <span id="faux-always-on-top" class="pill-content last-pill-section">
             <input type="checkbox" id="always-on-top-input">
+          </select>
+        </div>
+
+        <div id="visible-on-all-workspaces-container" class="pill-form pill-form-checkbox hidden">
+          <label class="pill-label" for="visible-on-all-workspaces-input">
+            Visible&nbsp;On&nbsp;All&nbsp;Workspaces:
+          </label>
+          <span id="faux-visible-on-all-workspaces" class="pill-content last-pill-section">
+            <input type="checkbox" id="visible-on-all-workspaces-input">
+          </select>
+        </div>
+
+        <div class="pill-form pill-form-checkbox">
+          <label class="pill-label" for="system-tray-input">
+            System&nbsp;Tray:
+          </label>
+          <span id="faux-system-tray" class="pill-content last-pill-section">
+            <input type="checkbox" id="system-tray-input">
+          </select>
+        </div>
+
+        <div class="pill-form">
+          <label class="pill-label" for="closing-app-input">
+            Closing&nbsp;app:
+          </label>
+          <select class="pill-content last-pill-section" id="closing-app-input">
+            <option value="exit">exits</option>
+            <option value="tray">sends to tray</option>
           </select>
         </div>
 
@@ -187,12 +228,14 @@
           </span>
           <button id="clear-update-interval" class="pill-end last-pill-section" title="Reset to default">&times;</button>
         </div>
+
         <p>The "Update Interval" controls how often (in seconds) we check to see what application currently has focus. Faster speeds may not work as well on very low end devices, most people won't notice though.</p>
+        <p>Changes to system tray take effect on next launch.</p>
       </div>
 
 
       <div id="about-container" class="about-container hidden">
-        <h2>WuhdAppusDat v<span id="app-version">1.0.0</span></h2>
+        <h2>WuhdAppusDat v<span id="app-version">2.0.0</span></h2>
         <p>Created by <a href="https://TheJaredWilcurt.com" class="external">TheJaredWilcurt</a> &copy;2020</p>
 
         <p>&#8220;<em>Leaves</em>&#8221; and &#8220;<em>Spikes</em>&#8221; background images created by <a href="https://www.twitch.tv/chluaid" class="external">Adam Phillips</a> (chluaid)</p>

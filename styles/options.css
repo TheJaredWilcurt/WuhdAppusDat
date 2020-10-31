@@ -300,6 +300,21 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   padding: 0px 10px;
   line-height: 45px;
 }
+input[disabled],
+select[disabled],
+.disabled:hover input,
+.disabled:hover select {
+  background: #DDD;
+  color: #666;
+}
+.disabled:hover .pill-content {
+  box-shadow: 0px 0px 57px inset rgba(255, 223, 167, 0.71);
+}
+.disabled > .pill-label,
+.disabled:hover > .pill-label {
+  background: #F3E8D2;
+  color: #A08888;
+}
 
 .about-container {
   padding: 0px 18px;

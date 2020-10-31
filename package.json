@@ -1,12 +1,12 @@
 {
   "name": "wuhdappusdat",
-  "version": "1.1.0-beta",
+  "version": "2.0.0",
   "description": "Shows currently focused program",
   "main": "window-manager.html",
   "scripts": {
     "start": "nw .",
-    "postinstall": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.45.3 --arch=x64",
-    "post-install": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.45.3 --arch=x64"
+    "postinstall": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.33.4 --arch=x64",
+    "post-install": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.33.4 --arch=x64"
   },
   "window": {
     "show": false
@@ -24,11 +24,13 @@
   "ManifestComments": [
     "Node.js 13 was the last version to officially support Windows 7",
     "NW.js 0.45.3 was the last version to support Node (uses v13.13.0)",
+    "However NW.js 0.34.0+ has a tray icon bug. So we have to use NW 0.33.4",
+    "0.33.4 ships with Node 10.11.0",
     "windows-active-process does a native build based on OS/Arch/Node version",
-    "Global Node version must be v13.13.0"
+    "Global Node version must be v10.11.0"
   ],
   "devDependencies": {
-    "nw": "0.45.3-sdk"
+    "nw": "0.33.4-sdk"
   },
   "dependencies": {
     "active-win": "^6.2.0",
