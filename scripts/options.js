@@ -48,6 +48,9 @@ const fontStyleInput = document.getElementById('font-style-input');
 const fontWeightInput = document.getElementById('font-weight-input');
 const fauxFontWeight = document.getElementById('faux-font-weight');
 const clearFontWeight = document.getElementById('clear-font-weight');
+const textPositionInput = document.getElementById('text-position-input');
+const fauxTextPosition = document.getElementById('faux-text-position');
+const clearTextPosition = document.getElementById('clear-text-position');
 const updateIntervalInput = document.getElementById('update-interval-input');
 const fauxUpdateInterval = document.getElementById('faux-update-interval');
 const clearUpdateInterval = document.getElementById('clear-update-interval');
@@ -131,6 +134,8 @@ function updateDOM () {
   updateDOMCheckbox(fontStyleInput, 'fontStyle', DEFAULT_FONT_STYLE);
   fontWeightInput.value = (settings.fontWeight || DEFAULT_FONT_WEIGHT) / 100;
   fauxFontWeight.innerText = (settings.fontWeight || DEFAULT_FONT_WEIGHT) / 100;
+  textPositionInput.value = (settings.textPosition || DEFAULT_TEXT_POSITION) + 400;
+  fauxTextPosition.innerText = (settings.textPosition || DEFAULT_TEXT_POSITION) + 400;
   updateIntervalInput.value = (settings.interval || DEFAULT_INTERVAL) / 1000;
   fauxUpdateInterval.innerText = (settings.interval || DEFAULT_INTERVAL) / 1000;
 }
@@ -383,6 +388,16 @@ function eventBindings () {
   clearFontWeight.addEventListener('click', function (evt) {
     evt.preventDefault();
     settings.fontWeight = DEFAULT_FONT_WEIGHT;
+    saveAndUpdateDOM();
+  });
+  textPositionInput.addEventListener('input', function (evt) {
+    let value = parseInt(evt.currentTarget.value);
+    settings.textPosition = value - 400;
+    saveAndUpdateDOM();
+  });
+  clearTextPosition.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    settings.textPosition = DEFAULT_TEXT_POSITION;
     saveAndUpdateDOM();
   });
   updateIntervalInput.addEventListener('input', function (evt) {

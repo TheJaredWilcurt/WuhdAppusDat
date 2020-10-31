@@ -71,6 +71,7 @@ function applySettings () {
   appName.style.fontFamily = settings.font || DEFAULT_FONT;
   appName.style.fontSize = (settings.fontSize || DEFAULT_FONT_SIZE) + 'px';
   appName.style.fontWeight = settings.fontWeight || DEFAULT_FONT_WEIGHT;
+  appName.style.marginTop = (settings.textPosition || DEFAULT_TEXT_POSITION) + 'px';
   let fontStyle = 'normal';
   if (
     (typeof(settings.fontStyle) === 'boolean' && settings.fontStyle) ||
