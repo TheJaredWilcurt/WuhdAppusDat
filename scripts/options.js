@@ -32,6 +32,7 @@ const visibleOnAllWorkspacesInput = document.getElementById('visible-on-all-work
 const fauxVisibleOnAllWorkspaces = document.getElementById('faux-visible-on-all-workspaces');
 const systemTrayInput = document.getElementById('system-tray-input');
 const fauxSystemTray = document.getElementById('faux-system-tray');
+const closingAppInput = document.getElementById('closing-app-input');
 const clearTextColor = document.getElementById('clear-text-color');
 const textColorInput = document.getElementById('text-color-input');
 const fauxBackgroundInput = document.getElementById('faux-background-input');
@@ -109,6 +110,14 @@ function updateDOM () {
   updateDOMCheckbox(alwaysOnTopInput, 'alwaysOnTop', DEFAULT_ALWAYS_ON_TOP)
   updateDOMCheckbox(visibleOnAllWorkspacesInput, 'visibleOnAllWorkspaces', DEFAULT_VISIBLE_ON_ALL_WORKSPACES);
   updateDOMCheckbox(systemTrayInput, 'systemTray', DEFAULT_SYSTEM_TRAY);
+  closingAppInput.value = settings.closingApp || DEFAULT_CLOSING_APP;
+  if (settings.systemTray) {
+    closingAppInput.parentElement.classList.remove('disabled');
+    closingAppInput.removeAttribute('disabled');
+  } else {
+    closingAppInput.parentElement.classList.add('disabled');
+    closingAppInput.setAttribute('disabled', 'disabled');
+  }
   fauxTextColor.style.background = settings.textColor || DEFAULT_TEXT_COLOR;
   textColorInput.value = settings.textColor || DEFAULT_TEXT_COLOR;
   textShadowInput.value = settings.textShadow || DEFAULT_TEXT_SHADOW;
@@ -285,11 +294,6 @@ function eventBindings () {
       faux: fauxVisibleOnAllWorkspaces
     },
     {
-      el: systemTrayInput,
-      setting: 'systemTray',
-      faux: fauxSystemTray
-    },
-    {
       el: fontStyleInput,
       setting: 'fontStyle',
       faux: fauxFontStyle
@@ -308,6 +312,21 @@ function eventBindings () {
     });
   });
 
+  systemTrayInput.addEventListener('click', function (evt) {
+    evt.stopPropagation();
+    const value = evt.currentTarget.checked;
+    settings.systemTray = value;
+    if (!value) {
+      settings.closingApp = 'exit';
+    }
+    saveAndUpdateDOM();
+  });
+  fauxSystemTray.addEventListener('click', function (evt) {
+    evt.stopPropagation();
+    systemTrayInput.click();
+  });
+
+
   // type="color"
   textColorInput.addEventListener('input', function (evt) {
     let color = evt && evt.currentTarget && evt.currentTarget.value;
@@ -324,6 +343,11 @@ function eventBindings () {
   });
 
   // select option
+  closingAppInput.addEventListener('input', function (evt) {
+    const value = evt.currentTarget.value;
+    settings.closingApp = value;
+    saveAndUpdateDOM();
+  });
   textShadowInput.addEventListener('input', function (evt) {
     const value = evt.currentTarget.value;
     settings.textShadow = value;

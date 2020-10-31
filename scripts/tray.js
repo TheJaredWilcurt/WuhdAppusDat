@@ -1,7 +1,7 @@
-let tray;
-function createTray () {
+global.tray;
+global.createTray = function () {
   // Create a tray icon
-  tray = new nw.Tray({
+  global.tray = new nw.Tray({
     title: 'Tray',
     tooltip: 'WuhdAppusDat',
     icon: 'icon/WuhdAppusDat16.png'
@@ -51,14 +51,14 @@ function createTray () {
   });
 
   // Place the menu in the tray
-  tray.menu = menu;
+  global.tray.menu = menu;
 
-  tray.on('click', function (evt) {
+  global.tray.on('click', function (evt) {
     global.appWindow.show();
   });
-}
+};
 
-function removeTray () {
-  tray.remove();
-  tray = null;
-}
+global.removeTray = function () {
+  global.tray.remove();
+  global.tray = null;
+};

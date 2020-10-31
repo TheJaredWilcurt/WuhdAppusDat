@@ -94,7 +94,15 @@ function applySettings () {
 function eventBindings () {
   let closeIcon = document.getElementById('window-control-close');
   closeIcon.addEventListener('click', function () {
-    nw.Window.get().close(true);
+    const settings = loadSettings();
+    if (global.tray && settings.closingApp === 'tray' && settings.systemTray) {
+      nw.Window.get().hide();
+    } else {
+      if (global.tray) {
+        global.removeTray();
+      }
+      nw.Window.get().close(true);
+    }
   });
 
   let optionsIcon = document.getElementById('window-control-options');
