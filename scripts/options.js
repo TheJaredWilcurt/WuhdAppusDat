@@ -69,6 +69,7 @@ function show (el) {
 }
 
 function saveSettings (settings) {
+  settings.version = nw.App.manifest.version;
   const data = JSON.stringify(settings, null, 2);
   try {
     fs.writeFileSync(settingsLocation, data);
