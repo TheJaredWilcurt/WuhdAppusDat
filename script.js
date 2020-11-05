@@ -1,6 +1,5 @@
 document.querySelector('title').innerText = APP_TITLE;
-const getActiveProcessName = require('windows-active-process').getActiveProcessName;
-const activeWin = require('active-win');
+
 const appName = document.getElementById('app-name');
 const background = document.getElementById('background');
 let interval;
@@ -120,6 +119,7 @@ function appNameCleanUp (fileName) {
 }
 
 async function setLinuxOrOSXAppName () {
+  const activeWin = require('active-win');
   let win = await activeWin();
   let fileName = win && win.owner && win.owner.name;
   if (!fileName || typeof(fileName) !== 'string') {
@@ -129,6 +129,7 @@ async function setLinuxOrOSXAppName () {
 }
 
 function setWindowsAppName () {
+  const getActiveProcessName = require('windows-active-process').getActiveProcessName;
   let filePath = getActiveProcessName();
   if (!filePath || typeof(filePath) !== 'string') {
     filePath = '';
