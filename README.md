@@ -20,7 +20,7 @@ Downloads are available under the [GitHub Releases](https://github.com/TheJaredW
 **Note:** You can modify the `app-map.json` file to change how program names are displayed.
 
 
-## Windows/Linux
+## Windows
 
 NO INSTALLATION REQUIRED! This is a portable app.
 
@@ -31,17 +31,13 @@ NO INSTALLATION REQUIRED! This is a portable app.
 You can `right-click + drag` to create a shortcut to `WuhdAppusDat.exe`. Put the shortcut in your start menu or on the desktop.
 
 
-## OSX
+## Linux/OSX
 
-NO INSTALLATION REQUIRED! This is a portable app.
+Builds are not available yet. However you can follow the "Running locally for development" instructions to try it out.
 
-1. Download zip
-1. Unzip file
-1. Double-click on `WuhdAppusDat`
+OSX: You may need to allow running a program from the internet.
 
-You will need to allow running a program from the internet.
-
-You will ned to allow WuhdAppusDat to have access to "Accessibility Features" (this is how it can see the title of the currently focused window).
+OSX: You may need to allow WuhdAppusDat to have access to "Accessibility Features" (this is how it can see the title of the currently focused window).
 
 
 * * *
