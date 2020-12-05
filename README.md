@@ -83,11 +83,15 @@ OSX: You may need to allow WuhdAppusDat to have access to "Accessibility Feature
 
 The `windows-active-process` and `active-win` dependencies require a native module be built.
 
-1. Install **SPECIFICALLY** Node.js [v10.11.0](https://nodejs.org/dist/v13.13.0/) to match NW.js). I use [nvm-windows](https://github.com/coreybutler/nvm-windows/releases) or [nvm](https://github.com/nvm-sh/nvm) to do this.
+1. Set up Node Version Manager:
+  * Windows: [nvm-windows](https://github.com/coreybutler/nvm-windows/releases)
+  * Linux/OSX: [nvm](https://github.com/nvm-sh/nvm)
+1. Use `nvm` to install **SPECIFICALLY** Node.js [v10.11.0](https://nodejs.org/dist/v13.13.0/) (to match NW.js).
+  * `nvm install 10.11.0 && nvm use 10.11.0`
 1. On OSX 10.13 and below install [Swift runtime support libraries](https://support.apple.com/kb/DL1998)
 1. On Windows `npm install -g windows-build-tools`
 1. `npm install -g nw-gyp`
-1. Download the repo
+1. Download or clone the repo
 1. `npm install`
 
 
@@ -95,6 +99,8 @@ The `windows-active-process` and `active-win` dependencies require a native modu
 
 1. Do the environment setup once
 1. `npm start`
+
+* * *
 
 
 ## Technology Colophon
