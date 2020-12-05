@@ -45,7 +45,7 @@ OSX: You may need to allow WuhdAppusDat to have access to "Accessibility Feature
 
 ## LIVE DEMO
 
-* [Twitch Clip](https://clips.twitch.tv/TallSarcasticMoonOneHand) - Look at the bottom to see WuhdAppusDat reveal the currently focused application. (**Note:** the styling is completely customizable)
+* [Twitch Clip](https://www.youtube.com/watch?v=z6R2sItBGS8) - Look at the bottom to see WuhdAppusDat reveal the currently focused application. (**Note:** the styling is completely customizable)
 
 > "Fantastic, this is exactly what I needed" - Adam Phillips (chluaid), animator of "Bitey of Brackenwood", Twitch Streamer
 
