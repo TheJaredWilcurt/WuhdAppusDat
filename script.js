@@ -7,9 +7,9 @@ const settings = loadSettings();
 let interval;
 
 function applySettings () {
-  let appMap = {}''
+  let appMap = {};
   const defaultAppMap = JSON.parse(fs.readFileSync('./app-map.json'));
-  
+
   Object.keys(settings.appMap).forEach(function (key) {
     appMap[key.toLowerCase()] = settings.appMap[key];
   });
