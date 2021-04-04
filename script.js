@@ -2,10 +2,12 @@ document.querySelector('title').innerText = APP_TITLE;
 
 const appName = document.getElementById('app-name');
 const background = document.getElementById('background');
-const settings = loadSettings() || {};
+let settings = loadSettings();
 let interval;
 
 function applySettings () {
+  // TODO: This should be handled from global state, not reading from disc
+  settings = loadSettings();
   let appMap = {};
   const defaultAppMap = JSON.parse(fs.readFileSync('./app-map.json'));
 
@@ -120,7 +122,6 @@ function eventBindings () {
     global.optionsWindow.show();
   });
 }
-
 
 function appNameCleanUp (fileName) {
   fileName = fileName.split('_').join(' ');
