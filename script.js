@@ -2,10 +2,21 @@ document.querySelector('title').innerText = APP_TITLE;
 
 const appName = document.getElementById('app-name');
 const background = document.getElementById('background');
+let settings = loadSettings();
 let interval;
 
 function applySettings () {
-  const settings = loadSettings();
+  // TODO: This should be handled from global state, not reading from disc
+  settings = loadSettings();
+  let appMap = {};
+  const defaultAppMap = JSON.parse(fs.readFileSync('./app-map.json'));
+
+  if (settings.appMap) {
+    Object.keys(settings.appMap).forEach(function (key) {
+      appMap[key.toLowerCase()] = settings.appMap[key];
+    });
+  }
+  settings.appMap = appMap;
 
   if (interval) {
     clearInterval(interval);
@@ -30,6 +41,7 @@ function applySettings () {
 
   // Background image
   let backgroundImage = (settings && settings.background) || DEFAULT_BACKGROUND;
+
   if (
     settings &&
     settings.background &&
@@ -111,10 +123,13 @@ function eventBindings () {
   });
 }
 
-
 function appNameCleanUp (fileName) {
   fileName = fileName.split('_').join(' ');
-  fileName = commonApplications[fileName.toLowerCase()] || fileName;
+  if (fileName === atob('ZWxlY3Ryb24=')) {
+    fileName = atob('RWxlY3Ryb20gKFVzaW5nIDk4JSBvZiBhdmFpbGFibGUgbWVtb3J5KQ==');
+  } else {
+    fileName = settings.appMap[fileName.toLowerCase()] || fileName;
+  }
   return fileName || '';
 }
 

@@ -154,6 +154,53 @@ function convertSettingToPercent (value, MAX) {
   return value;
 }
 
+const vue = Vue
+  .createApp({
+    data: function () {
+      return {
+        appMapVisible: false,
+        appMaps: []
+      };
+    },
+    methods: {
+      prepareAppMap: function () {
+        let appMap = settings.appMap;
+        if (!appMap) {
+          appMap = JSON.parse(fs.readFileSync('./app-map.json'));
+        }
+        let apps = [];
+        Object.keys(appMap).forEach(function (app) {
+          apps.push({
+            file: app,
+            alias: appMap[app]
+          });
+        });
+        apps.push({
+          file: '',
+          alias: ''
+        });
+
+        this.appMaps = apps;
+      },
+      removeAppMap: function (index) {
+        this.appMaps.splice(index, 1);
+      }
+    },
+    computed: {
+      appMapToBeSaved: function () {
+        let appMap = {};
+        this.appMaps.forEach(function (app) {
+          appMap[app.file] = app.alias;
+        });
+        return appMap;
+      }
+    },
+    created: function () {
+      this.prepareAppMap();
+    }
+  })
+  .mount('#app-map-container');
+
 
 function toggleSection () {
   let current = settings.lastViewedSection || 'options';
@@ -210,6 +257,7 @@ function eventBindings () {
       evt.currentTarget.files[0] &&
       evt.currentTarget.files[0].path
     );
+
     settings.background = file;
     saveAndUpdateDOM();
   });
@@ -242,7 +290,8 @@ function eventBindings () {
 
   // Background filters
   backgroundHueInput.addEventListener('input', function (evt) {
-    settings.backgroundHueRotate = parseInt(evt.currentTarget.value);
+    let value = parseInt(evt.currentTarget.value);
+    settings.backgroundHueRotate = value;
     saveAndUpdateDOM();
   });
   backgroundBrightnessInput.addEventListener('input', function (evt) {
@@ -257,6 +306,7 @@ function eventBindings () {
     settings.backgroundSaturation = convertSettingToPercent(evt.currentTarget.value, MAX_SATURATION);
     saveAndUpdateDOM();
   });
+
   const clearBackgroundFilters = [
     {
       clearEl: clearBackgroundHue,
@@ -331,11 +381,18 @@ function eventBindings () {
     evt.stopPropagation();
     systemTrayInput.click();
   });
-
+  fauxAlwaysOnTop.addEventListener('click', function (evt) {
+    evt.stopPropagation();
+    alwaysOnTopInput.click();
+  });
 
   // type="color"
   textColorInput.addEventListener('input', function (evt) {
-    let color = evt && evt.currentTarget && evt.currentTarget.value;
+    let color = (
+      evt &&
+      evt.currentTarget &&
+      evt.currentTarget.value
+    ) || '';
     settings.textColor = color.toUpperCase();
     saveAndUpdateDOM();
   });
@@ -343,6 +400,9 @@ function eventBindings () {
     evt.preventDefault();
     settings.textColor = undefined;
     saveAndUpdateDOM();
+  });
+  fauxBackgroundInput.addEventListener('click', function () {
+    backgroundImageInput.click();
   });
   fauxTextColor.addEventListener('click', function () {
     textColorInput.click();

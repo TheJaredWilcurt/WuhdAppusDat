@@ -231,8 +231,33 @@
 
         <p>The "Update Interval" controls how often (in seconds) we check to see what application currently has focus. Faster speeds may not work as well on very low end devices, most people won't notice though.</p>
         <p>Changes to system tray take effect on next launch.</p>
-      </div>
 
+        <div id="app-map-container" class="app-map-container">
+          <p>
+            <a href="#" @click.prevent="appMapVisible = !appMapVisible">
+              <template v-if="appMapVisible">
+                Hide app name alias form
+              </template>
+              <template v-else>
+                Show app name alias form
+              </template>
+            </a>
+          </p>
+          <template v-if="appMapVisible">
+            <p>There are <strong>{{ appMaps.length - 1 }}</strong> custom app name aliases.</p>
+            <div v-for="(app, appIndex) in appMaps" class="pill-form">
+              <input v-model="app.file" class="pill-label">
+              <input v-model="app.alias" class="pill-content">
+              <button
+                class="pill-end last-pill-section"
+                title="Remove"
+                @click="removeAppMap(appIndex)"
+              >&times;</button>
+            </div>
+            {{ appMapToBeSaved }}
+          </template>
+        </div>
+      </div>
 
       <div id="about-container" class="about-container hidden">
         <h2>WuhdAppusDat v<span id="app-version">2.0.0</span></h2>
@@ -255,6 +280,7 @@
       </div>
     </div>
 
+    <script src="scripts/vue.min.js"></script>
     <script src="settings.js"></script>
     <script src="scripts/options.js"></script>
   </body>
