@@ -3,16 +3,18 @@ const getActiveProcessName = require('windows-active-process').getActiveProcessN
 const activeWin = require('active-win');
 const appName = document.getElementById('app-name');
 const background = document.getElementById('background');
-const settings = loadSettings();
+const settings = loadSettings() || {};
 let interval;
 
 function applySettings () {
   let appMap = {};
   const defaultAppMap = JSON.parse(fs.readFileSync('./app-map.json'));
 
-  Object.keys(settings.appMap).forEach(function (key) {
-    appMap[key.toLowerCase()] = settings.appMap[key];
-  });
+  if (settings.appMap) {
+    Object.keys(settings.appMap).forEach(function (key) {
+      appMap[key.toLowerCase()] = settings.appMap[key];
+    });
+  }
   settings.appMap = appMap;
 
   if (interval) {
@@ -25,9 +27,10 @@ function applySettings () {
   nw.Window.get().setAlwaysOnTop(alwaysOnTopValidated || alwaysOnTopDefault);
 
   // Background image
-  let backgroundImage = settings?.background || DEFAULT_BACKGROUND;
+  let backgroundImage = settings && settings.background || DEFAULT_BACKGROUND;
   if (
-    settings?.background &&
+    settings &&
+    settings.background &&
     settings.background !== 'leaves.png' &&
     settings.background !== 'spikes.png' &&
     settings.background !== 'bubbles.png'
@@ -110,7 +113,7 @@ function appNameCleanUp (fileName) {
 
 async function setLinuxOrOSXAppName () {
   let win = await activeWin();
-  let fileName = win?.owner?.name;
+  let fileName = win && win.owner && win.owner.name;
   if (!fileName || typeof(fileName) !== 'string') {
     fileName = '';
   }

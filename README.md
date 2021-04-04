@@ -77,7 +77,7 @@ The `windows-active-process` and `active-win` dependencies require a native modu
 1. `npm install -g nw-gyp`
 1. Download the repo
 1. `npm install`
-   * You may need to run `Set-ExecutionPolicy -ExecutionPolicy Undefined -Scope CurrentUser` in Powershell
+   * You may need to run `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser` in Powershell
    * You may need to install Visual Studio Community Edition
 
 
