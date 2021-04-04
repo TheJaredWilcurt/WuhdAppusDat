@@ -242,6 +242,10 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   background: #FFF6FA;
   color: #9E6A6A;
 }
+input.pill-label {
+  border: 0px;
+  cursor: text;
+}
 .pill-button {
   width: 40px;
   height: 40px;
@@ -325,6 +329,11 @@ a.external {
 }
 a.external:hover {
   color: salmon;
+}
+
+.app-map-container {
+  width: 100%;
+  text-align: center;
 }
 
 .truncate {

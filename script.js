@@ -38,11 +38,8 @@ function applySettings () {
   nw.Window.get().setVisibleOnAllWorkspaces(visibleOnAllWorkspacesValidated);
 
   // Background image
-<<<<<<< HEAD
-  let backgroundImage = settings && settings.background || DEFAULT_BACKGROUND;
-=======
   let backgroundImage = (settings && settings.background) || DEFAULT_BACKGROUND;
->>>>>>> refs/remotes/origin/main
+
   if (
     settings &&
     settings.background &&
