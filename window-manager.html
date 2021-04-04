@@ -2,14 +2,23 @@
 <html>
   <head>
     <title>WuhdAppusDat</title>
+    <script src="settings.js"></script>
+    <script src="scripts/tray.js"></script>
     <script>
+      let settings = loadSettings();
+      let systemTray = DEFAULT_SYSTEM_TRAY;
+      if (settings && typeof(settings.systemTray) === 'boolean') {
+        systemTray = settings.systemTray;
+      }
+
       const optionsWindowOptions = {
         id: 'WuhdAppusDat-options',
         icon: 'icon/WuhdAppusDat-Icon.png',
+        show_in_taskbar: !systemTray,
         frame: false,
         transparent: true,
         width: 596,
-        height: 435,
+        height: 448,
         min_width: 595,
         min_height: 200,
         show: false
@@ -17,6 +26,7 @@
       const appWindowOptions = {
         id: 'WuhdAppusDat',
         icon: 'icon/WuhdAppusDat-Icon.png',
+        show_in_taskbar: !systemTray,
         frame: false,
         width: 700,
         height: 200,
@@ -35,6 +45,10 @@
         nw.Window.open('index.html', appWindowOptions, function (appWin) {
           appWin.setShadow(false);
           global.appWindow = appWin;
+
+          if (systemTray) {
+            global.createTray();
+          }
 
           appWin.on('closed', function () {
             this.hide();

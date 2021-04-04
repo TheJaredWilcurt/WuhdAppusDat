@@ -1,6 +1,5 @@
 document.querySelector('title').innerText = APP_TITLE;
-const getActiveProcessName = require('windows-active-process').getActiveProcessName;
-const activeWin = require('active-win');
+
 const appName = document.getElementById('app-name');
 const background = document.getElementById('background');
 const settings = loadSettings() || {};
@@ -22,12 +21,28 @@ function applySettings () {
   }
   interval = setInterval(setAppName, (settings.interval || DEFAULT_INTERVAL));
 
-  let alwaysOnTopValidated = typeof(settings.alwaysOnTop) === 'boolean' && settings.alwaysOnTop;
-  let alwaysOnTopDefault = typeof(settings.alwaysOnTop) !== 'boolean' && DEFAULT_ALWAYS_ON_TOP;
-  nw.Window.get().setAlwaysOnTop(alwaysOnTopValidated || alwaysOnTopDefault);
+  let alwaysOnTopValidated;
+  if (typeof(settings.alwaysOnTop) === 'boolean') {
+    alwaysOnTopValidated = settings.alwaysOnTop;
+  } else {
+    alwaysOnTopValidated = DEFAULT_ALWAYS_ON_TOP;
+  }
+  nw.Window.get().setAlwaysOnTop(alwaysOnTopValidated);
+
+  let visibleOnAllWorkspacesValidated;
+  if (typeof(settings.visibleOnAllWorkspaces) === 'boolean') {
+    visibleOnAllWorkspacesValidated = settings.visibleOnAllWorkspaces;
+  } else {
+    visibleOnAllWorkspacesValidated = DEFAULT_VISIBLE_ON_ALL_WORKSPACES;
+  }
+  nw.Window.get().setVisibleOnAllWorkspaces(visibleOnAllWorkspacesValidated);
 
   // Background image
+<<<<<<< HEAD
   let backgroundImage = settings && settings.background || DEFAULT_BACKGROUND;
+=======
+  let backgroundImage = (settings && settings.background) || DEFAULT_BACKGROUND;
+>>>>>>> refs/remotes/origin/main
   if (
     settings &&
     settings.background &&
@@ -68,6 +83,7 @@ function applySettings () {
   appName.style.fontFamily = settings.font || DEFAULT_FONT;
   appName.style.fontSize = (settings.fontSize || DEFAULT_FONT_SIZE) + 'px';
   appName.style.fontWeight = settings.fontWeight || DEFAULT_FONT_WEIGHT;
+  appName.style.marginTop = (settings.textPosition || DEFAULT_TEXT_POSITION) + 'px';
   let fontStyle = 'normal';
   if (
     (typeof(settings.fontStyle) === 'boolean' && settings.fontStyle) ||
@@ -91,7 +107,15 @@ function applySettings () {
 function eventBindings () {
   let closeIcon = document.getElementById('window-control-close');
   closeIcon.addEventListener('click', function () {
-    nw.Window.get().close(true);
+    const settings = loadSettings();
+    if (global.tray && settings.closingApp === 'tray' && settings.systemTray) {
+      nw.Window.get().hide();
+    } else {
+      if (global.tray) {
+        global.removeTray();
+      }
+      nw.Window.get().close(true);
+    }
   });
 
   let optionsIcon = document.getElementById('window-control-options');
@@ -112,6 +136,7 @@ function appNameCleanUp (fileName) {
 }
 
 async function setLinuxOrOSXAppName () {
+  const activeWin = require('active-win');
   let win = await activeWin();
   let fileName = win && win.owner && win.owner.name;
   if (!fileName || typeof(fileName) !== 'string') {
@@ -121,6 +146,7 @@ async function setLinuxOrOSXAppName () {
 }
 
 function setWindowsAppName () {
+  const getActiveProcessName = require('windows-active-process').getActiveProcessName;
   let filePath = getActiveProcessName();
   if (!filePath || typeof(filePath) !== 'string') {
     filePath = '';

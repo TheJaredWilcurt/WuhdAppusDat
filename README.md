@@ -15,7 +15,12 @@ Free, open source, desktop app for streamers that lets their audience know what 
 
 Downloads are available under the [GitHub Releases](https://github.com/TheJaredWilcurt/WuhdAppusDat/releases) tab.
 
-**Supported Systems:** Windows 7, 8, 10 (64-Bit only). (Ubuntu/OSX coming soon)
+**Supported Systems:** Windows 7, 8, 10 (64-Bit only). Ubuntu 17+ (64-Bit). OSX 10.11+ (64-Bit)
+
+**Note:** You can modify the `app-map.json` file to change how program names are displayed.
+
+
+## Windows
 
 NO INSTALLATION REQUIRED! This is a portable app.
 
@@ -25,7 +30,14 @@ NO INSTALLATION REQUIRED! This is a portable app.
 
 You can `right-click + drag` to create a shortcut to `WuhdAppusDat.exe`. Put the shortcut in your start menu or on the desktop.
 
-You can modify the `app-map.json` file to change how program names are displayed.
+
+## Linux/OSX
+
+Builds are not available yet. However you can follow the "Running locally for development" instructions to try it out.
+
+OSX: You may need to allow running a program from the internet.
+
+OSX: You may need to allow WuhdAppusDat to have access to "Accessibility Features" (this is how it can see the title of the currently focused window).
 
 
 * * *
@@ -33,7 +45,7 @@ You can modify the `app-map.json` file to change how program names are displayed
 
 ## LIVE DEMO
 
-* [Twitch Clip](https://clips.twitch.tv/TallSarcasticMoonOneHand) - Look at the bottom to see WuhdAppusDat reveal the currently focused application. (**Note:** the styling is completely customizable)
+* [Twitch Clip](https://www.youtube.com/watch?v=z6R2sItBGS8) - Look at the bottom to see WuhdAppusDat reveal the currently focused application. (**Note:** the styling is completely customizable)
 
 > "Fantastic, this is exactly what I needed" - Adam Phillips (chluaid), animator of "Bitey of Brackenwood", Twitch Streamer
 
@@ -71,11 +83,15 @@ You can modify the `app-map.json` file to change how program names are displayed
 
 The `windows-active-process` and `active-win` dependencies require a native module be built.
 
-1. Install **SPECIFICALLY** Node.js [v13.13.0](https://nodejs.org/dist/v13.13.0/) to match NW.js). I use [nvm-windows](https://github.com/coreybutler/nvm-windows/releases) or [nvm](https://github.com/nvm-sh/nvm) to do this.
+1. Set up Node Version Manager:
+   * Windows: [nvm-windows](https://github.com/coreybutler/nvm-windows/releases)
+   * Linux/OSX: [nvm](https://github.com/nvm-sh/nvm)
+1. Use `nvm` to install **SPECIFICALLY** Node.js [v10.11.0](https://nodejs.org/dist/v13.13.0/) (to match NW.js).
+   * `nvm install 10.11.0 && nvm use 10.11.0`
 1. On OSX 10.13 and below install [Swift runtime support libraries](https://support.apple.com/kb/DL1998)
 1. On Windows `npm install -g windows-build-tools`
 1. `npm install -g nw-gyp`
-1. Download the repo
+1. Download or clone the repo
 1. `npm install`
    * You may need to run `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser` in Powershell
    * You may need to install Visual Studio Community Edition
@@ -85,6 +101,8 @@ The `windows-active-process` and `active-win` dependencies require a native modu
 
 1. Do the environment setup once
 1. `npm start`
+
+* * *
 
 
 ## Technology Colophon
