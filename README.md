@@ -3,6 +3,8 @@
 
 # WuhdAppusDat
 
+"WuhdAppusDat" answers the question "What app is that" by all your little pog champ viewers.
+
 Free, open source, desktop app for streamers that lets their audience know what program is currently in focus.
 
 > ***"Great for art, game dev, and coding streams!"***
