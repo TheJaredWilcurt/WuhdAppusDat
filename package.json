@@ -24,7 +24,8 @@
   "ManifestComments": [
     "Node.js 13 was the last version to officially support Windows 7",
     "NW.js 0.45.3 was the last version to support Node (uses v13.13.0)",
-    "However NW.js 0.34.0+ has a tray icon bug. So we have to use NW 0.33.4",
+    "However NW.js 0.34.0+ has a tray icon bug that wasn't fixed until 0.48.0",
+    "So we have to use NW 0.33.4, the last Win 7 node compatible version without the bug",
     "0.33.4 ships with Node 10.11.0",
     "windows-active-process does a native build based on OS/Arch/Node version",
     "Global Node version must be v10.11.0"
