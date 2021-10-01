@@ -13,6 +13,16 @@ Free, open source, desktop app for streamers that lets their audience know what 
 * * *
 
 
+## LIVE DEMO
+
+* [Twitch Clip](https://www.youtube.com/watch?v=z6R2sItBGS8) - Look at the bottom to see WuhdAppusDat reveal the currently focused application. (**Note:** the styling is completely customizable)
+
+> "Fantastic, this is exactly what I needed" - Adam Phillips (chluaid), animator of "Bitey of Brackenwood", Twitch Streamer
+
+
+* * *
+
+
 <h1 align="center">==== DOWNLOADS AVAILABLE ====</h1>
 
 Downloads are available under the [GitHub Releases](https://github.com/TheJaredWilcurt/WuhdAppusDat/releases) tab.
@@ -40,16 +50,6 @@ Builds are not available yet. However you can follow the "Running locally for de
 OSX: You may need to allow running a program from the internet.
 
 OSX: You may need to allow WuhdAppusDat to have access to "Accessibility Features" (this is how it can see the title of the currently focused window).
-
-
-* * *
-
-
-## LIVE DEMO
-
-* [Twitch Clip](https://www.youtube.com/watch?v=z6R2sItBGS8) - Look at the bottom to see WuhdAppusDat reveal the currently focused application. (**Note:** the styling is completely customizable)
-
-> "Fantastic, this is exactly what I needed" - Adam Phillips (chluaid), animator of "Bitey of Brackenwood", Twitch Streamer
 
 
 * * *
