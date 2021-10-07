@@ -91,12 +91,13 @@ The `windows-active-process` and `active-win` dependencies require a native modu
 1. Use `nvm` to install **SPECIFICALLY** Node.js [v10.11.0](https://nodejs.org/dist/v13.13.0/) (to match NW.js).
    * `nvm install 10.11.0 && nvm use 10.11.0`
 1. On OSX 10.13 and below install [Swift runtime support libraries](https://support.apple.com/kb/DL1998)
-1. On Windows `npm install -g windows-build-tools`
+1. On Windows:
+   * run `npm install -g windows-build-tools`
+   * You may need to run `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser` in Powershell
+   * You may need to install Visual Studio Community Edition
 1. `npm install -g nw-gyp`
 1. Download or clone the repo
 1. `npm install`
-   * You may need to run `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser` in Powershell
-   * You may need to install Visual Studio Community Edition
 
 
 ### Running loally
@@ -109,7 +110,7 @@ The `windows-active-process` and `active-win` dependencies require a native modu
 
 ## Technology Colophon
 
-* Written in Vanilla JS, HTML, and CSS.
+* Written in Vanilla JS, HTML, and CSS, and a lil Vue.js.
 * Built with NW.js and Node.js.
 * Windows version relies on "windows-active-process" library.
 * Linux/OSX version relies on "active-win" library.
