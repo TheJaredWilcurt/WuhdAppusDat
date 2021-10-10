@@ -299,15 +299,15 @@ function eventBindings () {
   const backgroundImages = [
     {
       el: backgroundLeaves,
-      file: 'leaves.png'
+      file: 'images/leaves.png'
     },
     {
       el: backgroundSpikes,
-      file: 'spikes.png'
+      file: 'images/spikes.png'
     },
     {
       el: backgroundBubbles,
-      file: 'bubbles.png'
+      file: 'images/bubbles.png'
     }
   ];
   backgroundImages.forEach(function (backgroundImage) {

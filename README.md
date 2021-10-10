@@ -60,9 +60,9 @@ OSX: You may need to allow WuhdAppusDat to have access to "Accessibility Feature
 * Transparent, resizable window that states the name of the currently focused executable
 * Ships with the following background images, or can use your own.
 
-<img src="leaves.png">
-<img src="spikes.png">
-<img src="bubbles.png">
+<img src="images/leaves.png">
+<img src="images/spikes.png">
+<img src="images/bubbles.png">
 
 
 * Backgrounds stretch to fit inside the transparent window without being cropped

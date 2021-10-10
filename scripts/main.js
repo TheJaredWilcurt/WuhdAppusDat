@@ -72,9 +72,9 @@ function applySettings () {
   if (
     settings &&
     settings.background &&
-    settings.background !== 'leaves.png' &&
-    settings.background !== 'spikes.png' &&
-    settings.background !== 'bubbles.png'
+    settings.background !== 'images/leaves.png' &&
+    settings.background !== 'images/spikes.png' &&
+    settings.background !== 'images/bubbles.png'
   ) {
     backgroundImage = 'file://' + backgroundImage.split('\\').join('/');
   }
