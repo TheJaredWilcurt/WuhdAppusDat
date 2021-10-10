@@ -1,8 +1,27 @@
+// nw.Window.get().showDevTools();
+
+const fs = require('fs');
+const path = require('path');
+
+const loadSettings = require('./scripts/settings.js').loadSettings;
+const {
+  APP_TITLE,
+  DEFAULT_BACKGROUND,
+  DEFAULT_TEXT_COLOR,
+  DEFAULT_FONT,
+  DEFAULT_FONT_SIZE,
+  DEFAULT_FONT_WEIGHT,
+  DEFAULT_FONT_STYLE,
+  DEFAULT_TEXT_POSITION,
+  DEFAULT_INTERVAL,
+  DEFAULT_VISIBLE_ON_ALL_WORKSPACES
+} = require('./scripts/global-constants.js');
+
+loadSettings();
 document.querySelector('title').innerText = APP_TITLE;
 
 const appName = document.getElementById('app-name');
 const background = document.getElementById('background');
-let settings = loadSettings();
 let interval;
 
 function applySettings () {
@@ -27,13 +46,20 @@ function applySettings () {
   if (typeof(settings.alwaysOnTop) === 'boolean') {
     alwaysOnTopValidated = settings.alwaysOnTop;
   } else {
-    alwaysOnTopValidated = DEFAULT_ALWAYS_ON_TOP;
+
   }
+
+
   nw.Window.get().setAlwaysOnTop(alwaysOnTopValidated);
 
+
+
   let visibleOnAllWorkspacesValidated;
+
+
   if (typeof(settings.visibleOnAllWorkspaces) === 'boolean') {
     visibleOnAllWorkspacesValidated = settings.visibleOnAllWorkspaces;
+
   } else {
     visibleOnAllWorkspacesValidated = DEFAULT_VISIBLE_ON_ALL_WORKSPACES;
   }

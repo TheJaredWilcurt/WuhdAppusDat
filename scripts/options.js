@@ -1,7 +1,36 @@
+// nw.Window.get().showDevTools();
+
+const fs = require('fs');
+
+const settings = require('./scripts/settings.js').loadSettings();
+const {
+  APP_TITLE,
+  DEFAULT_BACKGROUND,
+  DEFAULT_BACKGROUND_BRIGHTNESS,
+  DEFAULT_BACKGROUND_CONTRAST,
+  DEFAULT_BACKGROUND_HUE_ROTATE,
+  DEFAULT_BACKGROUND_SATURATION,
+  DEFAULT_ALWAYS_ON_TOP,
+  DEFAULT_CLOSING_APP,
+  DEFAULT_VISIBLE_ON_ALL_WORKSPACES,
+  DEFAULT_SYSTEM_TRAY,
+  DEFAULT_TEXT_COLOR,
+  DEFAULT_TEXT_SHADOW,
+  DEFAULT_FONT,
+  DEFAULT_FONT_SIZE,
+  DEFAULT_FONT_WEIGHT,
+  DEFAULT_FONT_STYLE,
+  DEFAULT_TEXT_POSITION,
+  DEFAULT_INTERVAL,
+  MAX_CONTRAST,
+  MAX_BRIGHTNESS,
+  MAX_SATURATION,
+  SETTINGS_LOCATION
+} = require('./scripts/global-constants.js');
+
 document.querySelector('title').innerText = APP_TITLE + ' Options';
 document.getElementById('app-title').innerText = APP_TITLE;
 document.getElementById('app-version').innerText = nw.App.manifest.version;
-const settings = loadSettings();
 
 const optionsTab = document.getElementById('options-tab');
 const textTab = document.getElementById('text-tab');
@@ -72,7 +101,7 @@ function saveSettings (settings) {
   settings.version = nw.App.manifest.version;
   const data = JSON.stringify(settings, null, 2);
   try {
-    fs.writeFileSync(settingsLocation, data);
+    fs.writeFileSync(SETTINGS_LOCATION, data);
   } catch (err) {
     console.log('Error saving settings', err);
   }
