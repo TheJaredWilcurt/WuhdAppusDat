@@ -2,38 +2,34 @@
   <div>
     <nav class="tabs">
       <a
-        v-for="(tab, tabKey) in tabs"
-        :key="'tab' + tabKey"
+        v-for="(tab, tabIndex) in tabs"
+        :key="'tab' + tabIndex"
         class="tab"
-        :class="{ 'active': activeTab === tabKey }"
-        @click="activeTab = tabKey"
-      >{{ tabKey }}</a>
+        :class="{ 'active': activeTab === tab }"
+        @click="activeTab = tab"
+      >{{ tab }}</a>
     </nav>
-    <keep-alive>
-      <component :is="tabs[activeTab].component"></component>
-    </keep-alive>
+    <about-app v-show="activeTab === 'About'"></about-app>
   </div>
 </template>
 
 <script>
-const AboutApp = httpVueLoader('components/about-app.vue');
 
 module.exports = {
   name: 'options-window',
+  components: {
+    'about-app': httpVueLoader('components/about-app.vue')
+  },
   data: function () {
     return {
-      activeTab: 'Options',
+      activeTab: 'About',
+      tabs: [
+        'Options',
+        'Text',
+        'Background',
+        'About'
+      ]
     };
-  },
-  computed: {
-    tabs: function () {
-      return {
-        Options: AboutApp,
-        Text: AboutApp,
-        Background: AboutApp,
-        About: AboutApp
-      };
-    }
   }
 };
 </script>
