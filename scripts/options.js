@@ -1,7 +1,5 @@
 // nw.Window.get().showDevTools();
 
-const fs = require('fs');
-
 const {
   loadSettings,
   saveSettings
@@ -175,55 +173,6 @@ function convertSettingToPercent (value, MAX) {
   }
   return value;
 }
-
-// eslint-disable-next-line no-unused-vars
-const app = Vue
-  .createApp({
-    data: function () {
-      return {
-        appMapVisible: false,
-        appMaps: []
-      };
-    },
-    methods: {
-      prepareAppMap: function () {
-        let appMap = settings.appMap;
-        if (!appMap) {
-          appMap = JSON.parse(fs.readFileSync('./app-map.json'));
-        }
-        let apps = [];
-        Object.keys(appMap).forEach(function (app) {
-          apps.push({
-            file: app,
-            alias: appMap[app]
-          });
-        });
-        apps.push({
-          file: '',
-          alias: ''
-        });
-
-        this.appMaps = apps;
-      },
-      removeAppMap: function (index) {
-        this.appMaps.splice(index, 1);
-      }
-    },
-    computed: {
-      appMapToBeSaved: function () {
-        let appMap = {};
-        this.appMaps.forEach(function (app) {
-          appMap[app.file] = app.alias;
-        });
-        return appMap;
-      }
-    },
-    created: function () {
-      this.prepareAppMap();
-    }
-  })
-  .mount('#app-map-container');
-
 
 function toggleSection () {
   let current = settings.lastViewedSection || 'options';
