@@ -20,6 +20,21 @@
       </div>
     </nav>
 
+
+
+
+
+    <div class="wrapper">
+      <div id="app"></div>
+    </div>
+
+
+
+
+
+
+
+
     <div id="main-content" class="wrapper">
       <nav class="tabs">
         <a id="options-tab" class="tab active" href="#">Options</a>
@@ -283,6 +298,15 @@
     <script src="scripts/vue.min.js"></script>
     <script src="scripts/http-vue-loader.min.js"></script>
     <script src="scripts/options.js"></script>
-    <script src="scripts/app-map.js"></script>
+    <script>
+      Vue.config.devtools = true;
+      const app = new Vue({
+        el: '#app',
+        template: '<App />',
+        components: {
+          App: httpVueLoader('components/app.vue')
+        }
+      });
+    </script>
   </body>
 </html>

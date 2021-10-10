@@ -1,5 +1,4 @@
 const fs = require('fs');
-const settings = require('./scripts/settings.js').loadSettings();
 
 // eslint-disable-next-line no-unused-vars
 const app = new Vue({

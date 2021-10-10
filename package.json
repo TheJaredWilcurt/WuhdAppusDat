@@ -10,9 +10,7 @@
     "postinstall": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.33.4 --arch=x64",
     "post-install": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.33.4 --arch=x64"
   },
-  "window": {
-    "show": false
-  },
+  "chromium-args": "--load-extension='./node_modules/nw-vue-devtools-prebuilt/extension'",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TheJaredWilcurt/wuhdappusdat.git"
@@ -40,7 +38,8 @@
     "babel-eslint": "^10.1.0",
     "eslint": "6.x.x",
     "eslint-config-tjw-base": "^1.0.0",
-    "nw": "0.33.4-sdk"
+    "nw": "0.33.4-sdk",
+    "nw-vue-devtools-prebuilt": "0.0.10"
   },
   "dependencies": {
     "active-win": "^6.2.0",

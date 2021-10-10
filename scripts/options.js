@@ -1,4 +1,4 @@
-// nw.Window.get().showDevTools();
+nw.Window.get().showDevTools();
 
 const {
   loadSettings,

@@ -320,16 +320,7 @@ select[disabled],
   color: #A08888;
 }
 
-.about-container {
-  padding: 0px 18px;
-  color: #531;
-}
-a.external {
-  color: #C24F42
-}
-a.external:hover {
-  color: salmon;
-}
+
 
 .app-map-container {
   width: 100%;
