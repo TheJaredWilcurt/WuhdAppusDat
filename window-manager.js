@@ -1,4 +1,4 @@
-const tray = require('./scripts/tray.js').createTray();
+require('./scripts/tray.js').createTray();
 const settings = require('./scripts/settings.js').loadSettings();
 const { DEFAULT_SYSTEM_TRAY } = require('./scripts/global-constants.js');
 

@@ -23,6 +23,7 @@ document.querySelector('title').innerText = APP_TITLE;
 const appName = document.getElementById('app-name');
 const background = document.getElementById('background');
 let interval;
+let settings;
 
 function applySettings () {
   // TODO: This should be handled from global state, not reading from disc
@@ -114,7 +115,7 @@ function applySettings () {
     (typeof(settings.fontStyle) === 'boolean' && settings.fontStyle) ||
     (typeof(settings.fontStyle) !== 'boolean' && DEFAULT_FONT_STYLE)
   ) {
-    fontStyle = 'italic'
+    fontStyle = 'italic';
   }
   appName.style.fontStyle = fontStyle;
 
@@ -177,7 +178,7 @@ function setWindowsAppName () {
   }
   let splitPath = filePath.split(path.sep);
   let fileName = splitPath[splitPath.length - 1];
-  fileName = fileName.split('.')
+  fileName = fileName.split('.');
 
   if (fileName.length > 1) {
     fileName.pop();

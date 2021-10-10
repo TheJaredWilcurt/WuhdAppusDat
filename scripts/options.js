@@ -140,7 +140,7 @@ function updateDOM () {
   let saturation = calculateSliderValue(DEFAULT_BACKGROUND_SATURATION, settings.backgroundSaturation, MAX_SATURATION);
   backgroundSaturationInput.value = saturation;
   fauxBackgroundSaturation.innerText = saturation;
-  updateDOMCheckbox(alwaysOnTopInput, 'alwaysOnTop', DEFAULT_ALWAYS_ON_TOP)
+  updateDOMCheckbox(alwaysOnTopInput, 'alwaysOnTop', DEFAULT_ALWAYS_ON_TOP);
   updateDOMCheckbox(visibleOnAllWorkspacesInput, 'visibleOnAllWorkspaces', DEFAULT_VISIBLE_ON_ALL_WORKSPACES);
   updateDOMCheckbox(systemTrayInput, 'systemTray', DEFAULT_SYSTEM_TRAY);
   closingAppInput.value = settings.closingApp || DEFAULT_CLOSING_APP;
@@ -183,7 +183,8 @@ function convertSettingToPercent (value, MAX) {
   return value;
 }
 
-const vue = Vue
+// eslint-disable-next-line no-unused-vars
+const app = Vue
   .createApp({
     data: function () {
       return {
@@ -524,7 +525,7 @@ function initializeWindowControls () {
 
   controls.forEach(function (control) {
     let button = document.getElementsByClassName('window-control-' + control.button)[0];
-    button.addEventListener('click', function (evt) {
+    button.addEventListener('click', function () {
       nw.Window.get()[control.action]();
     });
   });

@@ -54,7 +54,7 @@ function createTray () {
     // Place the menu in the tray
     global.tray.menu = menu;
 
-    global.tray.on('click', function (evt) {
+    global.tray.on('click', function () {
       global.appWindow.show();
     });
   };

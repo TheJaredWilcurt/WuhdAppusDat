@@ -5,6 +5,8 @@
   "main": "window-manager.js",
   "scripts": {
     "start": "nw .",
+    "lint": "eslint --config=.eslintrc.js window-manager.js scripts",
+    "fix": "eslint --fix --config=.eslintrc.js window-manager.js scripts",
     "postinstall": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.33.4 --arch=x64",
     "post-install": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.33.4 --arch=x64"
   },
@@ -34,6 +36,10 @@
     "npm install -g nw-gyp"
   ],
   "devDependencies": {
+    "@babel/eslint-parser": "^7.15.7",
+    "babel-eslint": "^10.1.0",
+    "eslint": "6.x.x",
+    "eslint-config-tjw-base": "^1.0.0",
     "nw": "0.33.4-sdk"
   },
   "dependencies": {
