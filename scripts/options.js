@@ -2,7 +2,10 @@
 
 const fs = require('fs');
 
-const settings = require('./scripts/settings.js').loadSettings();
+const {
+  loadSettings,
+  saveSettings
+} = require('./scripts/settings.js');
 const {
   APP_TITLE,
   DEFAULT_BACKGROUND,
@@ -24,9 +27,10 @@ const {
   DEFAULT_INTERVAL,
   MAX_CONTRAST,
   MAX_BRIGHTNESS,
-  MAX_SATURATION,
-  SETTINGS_LOCATION
+  MAX_SATURATION
 } = require('./scripts/global-constants.js');
+
+const settings = loadSettings();
 
 document.querySelector('title').innerText = APP_TITLE + ' Options';
 document.getElementById('app-title').innerText = APP_TITLE;
@@ -95,17 +99,6 @@ function hide (el) {
 }
 function show (el) {
   removeClass(el, 'hidden');
-}
-
-function saveSettings (settings) {
-  settings.version = nw.App.manifest.version;
-  const data = JSON.stringify(settings, null, 2);
-  try {
-    fs.writeFileSync(SETTINGS_LOCATION, data);
-  } catch (err) {
-    console.log('Error saving settings', err);
-  }
-  global.refreshParent();
 }
 
 function calculateSliderValue (DEFAULT_VALUE, setting, MAX) {

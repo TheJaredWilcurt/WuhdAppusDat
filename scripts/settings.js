@@ -16,6 +16,18 @@ function loadSettings () {
   }
 }
 
+function saveSettings (settings) {
+  settings.version = nw.App.manifest.version;
+  const data = JSON.stringify(settings, null, 2);
+  try {
+    fs.writeFileSync(SETTINGS_LOCATION, data);
+  } catch (err) {
+    console.log('Error saving settings', err);
+  }
+  global.refreshParent();
+}
+
 module.exports = {
-  loadSettings
+  loadSettings,
+  saveSettings
 };
