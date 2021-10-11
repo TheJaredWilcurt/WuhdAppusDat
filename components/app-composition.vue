@@ -9,6 +9,7 @@
         @click="activeTab = tab"
       >{{ tab }}</a>
     </nav>
+
     <app-options v-show="activeTab === 'Options'"></app-options>
     <text-options v-show="activeTab === 'Text'"></text-options>
     <background-options v-show="activeTab === 'Background'"></background-options>
@@ -17,7 +18,6 @@
 </template>
 
 <script>
-
 module.exports = {
   name: 'app-composition',
   components: {
@@ -28,7 +28,7 @@ module.exports = {
   },
   data: function () {
     return {
-      activeTab: 'About',
+      activeTab: 'Background',
       tabs: [
         'Options',
         'Text',

@@ -1,11 +1,12 @@
 <template>
   <div>
+    p-p
   </div>
 </template>
 
 <script>
 module.exports = {
-  name: 'range-slider',
+  name: 'p-p',
   props: {},
   data: function () {
     return {

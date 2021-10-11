@@ -38,7 +38,6 @@ const {
   APP_VERSION
 } = window.require('./scripts/global-constants.js');
 
-
 module.exports = {
   name: 'about-app',
   data: function () {
