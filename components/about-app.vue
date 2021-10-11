@@ -23,7 +23,7 @@
     <strong>Technology Colophon:</strong>
 
     <ul>
-      <li>Written in Vanilla JS, HTML, and CSS.</li>
+      <li>Made with Vue.js and HTTP-Vue-Loader.</li>
       <li>Built with NW.js and Node.js.</li>
       <li>Windows version relies on &#8220;windows-active-process&#8221; library.</li>
       <li>Linux/OSX version relies on &#8220;active-win&#8221; library.</li>
