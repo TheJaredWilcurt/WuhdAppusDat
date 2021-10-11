@@ -1,8 +1,36 @@
+<template>
+  <div id="app-map-container" class="app-map-container">
+    <p>
+      <a href="#" @click.prevent="appMapVisible = !appMapVisible">
+        <template v-if="appMapVisible">
+          Hide app name alias form
+        </template>
+        <template v-else>
+          Show app name alias form
+        </template>
+      </a>
+    </p>
+    <template v-if="appMapVisible">
+      <p>There are <strong>{{ appMaps.length - 1 }}</strong> custom app name aliases.</p>
+      <div v-for="(app, appIndex) in appMaps" class="pill-form">
+        <input v-model="app.file" class="pill-label">
+        <input v-model="app.alias" class="pill-content">
+        <button
+          class="pill-end last-pill-section"
+          title="Remove"
+          @click="removeAppMap(appIndex)"
+        >&times;</button>
+      </div>
+      {{ appMapToBeSaved }}
+    </template>
+  </div>
+</template>
+
+<script>
 const fs = require('fs');
 
-// eslint-disable-next-line no-unused-vars
-const app = new Vue({
-  el: '#app-map-container',
+module.exports = {
+  name: 'app-composition',
   data: function () {
     return {
       appMapVisible: false,
@@ -49,4 +77,8 @@ const app = new Vue({
   created: function () {
     this.prepareAppMap();
   }
-});
+};
+</script>
+
+<style>
+</style>
