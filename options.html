@@ -6,26 +6,11 @@
     <link rel="stylesheet" href="styles/options.css">
   </head>
   <body>
-    <nav id="menu-bar" class="window-title-bar">
-      <span>
-        <img class="icon" src="icon/WuhdAppusDat16.png" alt="app icon">
-        <strong id="app-title" class="app-title"></strong>
-      </span>
-
-      <div class="window-controls">
-        <i aria-label="window control minimize" class="window-control-minimize"></i>
-        <i aria-label="window control restore" class="window-control-restore hidden"></i>
-        <i aria-label="window control maximize" class="window-control-maximize"></i>
-        <i aria-label="window control close" class="window-control-close"></i>
-      </div>
-    </nav>
-
-    <div id="main-content" class="wrapper">
-      <div id="app"></div>
-    </div>
+    <div id="app"></div>
 
     <script src="scripts/vue.min.js"></script>
     <script src="scripts/http-vue-loader.min.js"></script>
+    <!-- <script src="scripts/options.js"></script> -->
     <script>
       Vue.config.devtools = true;
       const app = new Vue({
@@ -36,6 +21,5 @@
         }
       });
     </script>
-    <!-- <script src="scripts/options.js"></script> -->
   </body>
 </html>

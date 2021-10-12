@@ -32,12 +32,6 @@ const settings = loadSettings();
 
 document.querySelector('title').innerText = APP_TITLE + ' Options';
 document.getElementById('app-title').innerText = APP_TITLE;
-document.getElementById('app-version').innerText = nw.App.manifest.version;
-
-const optionsTab = document.getElementById('options-tab');
-const textTab = document.getElementById('text-tab');
-const backgroundTab = document.getElementById('background-tab');
-const aboutTab = document.getElementById('about-tab');
 
 const clearBackground = document.getElementById('clear-background');
 const currentBackgroundImage = document.getElementById('current-background-image');
@@ -188,32 +182,6 @@ function toggleSection () {
   show('#' + current + '-container');
 }
 function eventBindings () {
-  const tabBindings = [
-    {
-      el: optionsTab,
-      name: 'options'
-    },
-    {
-      el: textTab,
-      name: 'text'
-    },
-    {
-      el: backgroundTab,
-      name: 'background'
-    },
-    {
-      el: aboutTab,
-      name: 'about'
-    }
-  ];
-  tabBindings.forEach(function (tab) {
-    tab.el.addEventListener('click', function (evt) {
-      evt.preventDefault();
-      settings.lastViewedSection = tab.name;
-      saveAndUpdateDOM();
-    });
-  });
-
   // type="file"
   clearBackground.addEventListener('click', function (evt) {
     evt.preventDefault();
@@ -457,33 +425,6 @@ function externalLinks () {
   });
 }
 
-function initializeWindowControls () {
-  let controls = [
-    { button: 'minimize', action: 'minimize' },
-    { button: 'restore', action: 'restore' },
-    { button: 'maximize', action: 'maximize' },
-    { button: 'close', action: 'hide' }
-  ];
-
-  controls.forEach(function (control) {
-    let button = document.getElementsByClassName('window-control-' + control.button)[0];
-    button.addEventListener('click', function () {
-      nw.Window.get()[control.action]();
-    });
-  });
-
-  nw.Window.get().on('maximize', function () {
-    hide('.window-control-maximize');
-    show('.window-control-restore');
-    addClass('#main-content', 'border-radius-0');
-  });
-
-  nw.Window.get().on('restore', function () {
-    hide('.window-control-restore');
-    show('.window-control-maximize');
-    removeClass('#main-content', 'border-radius-0');
-  });
-}
 
 function initialize () {
   if (process.platform === 'darwin') {
@@ -492,10 +433,9 @@ function initialize () {
   if (nw.Window.get().canSetVisibleOnAllWorkspaces()) {
     show('#visible-on-all-workspaces-container');
   }
-  initializeWindowControls();
-  eventBindings();
-  updateDOM();
-  externalLinks();
+  // eventBindings();
+  // updateDOM();
+  // externalLinks();
 }
 
 initialize();

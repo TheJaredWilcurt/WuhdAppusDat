@@ -1,6 +1,6 @@
 <template>
   <div id="about-container" class="about-container">
-    <h2>{{ APP_TITLE }} v<span id="app-version">{{ APP_VERSION }}</span></h2>
+    <h2>{{ APP_TITLE }} v{{ APP_VERSION }}</h2>
     <p>
       Created by <a href="https://TheJaredWilcurt.com" class="external">TheJaredWilcurt</a> &copy;2021.
       Source code available on

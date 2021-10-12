@@ -1,26 +1,36 @@
 <template>
   <div>
-    <nav class="tabs">
-      <a
-        v-for="(tab, tabIndex) in tabs"
-        :key="'tab' + tabIndex"
-        class="tab"
-        :class="{ 'active': activeTab === tab }"
-        @click="activeTab = tab"
-      >{{ tab }}</a>
-    </nav>
+    <menu-bar :isMaximized="isMaximized"></menu-bar>
 
-    <app-options v-show="activeTab === 'Options'"></app-options>
-    <text-options v-show="activeTab === 'Text'"></text-options>
-    <background-options v-show="activeTab === 'Background'"></background-options>
-    <about-app v-show="activeTab === 'About'"></about-app>
+    <div
+      class="wrapper"
+      :class="{ 'border-radius-0': isMaximized }"
+    >
+      <nav class="tabs">
+        <a
+          v-for="(tab, tabIndex) in tabs"
+          :key="'tab' + tabIndex"
+          class="tab"
+          :class="{ 'active': activeTab === tab }"
+          @click="activeTab = tab"
+        >{{ tab }}</a>
+      </nav>
+
+      <app-options v-show="activeTab === 'Options'"></app-options>
+      <text-options v-show="activeTab === 'Text'"></text-options>
+      <background-options v-show="activeTab === 'Background'"></background-options>
+      <about-app v-show="activeTab === 'About'"></about-app>
+    </div>
   </div>
 </template>
 
 <script>
+const win = window.nw.Window.get();
+
 module.exports = {
   name: 'app-composition',
   components: {
+    'menu-bar': httpVueLoader('components/menu-bar.vue'),
     'app-options': httpVueLoader('components/app-options.vue'),
     'text-options': httpVueLoader('components/text-options.vue'),
     'background-options': httpVueLoader('components/background-options.vue'),
@@ -28,6 +38,7 @@ module.exports = {
   },
   data: function () {
     return {
+      isMaximized: false,
       activeTab: 'Background',
       tabs: [
         'Options',
@@ -36,9 +47,39 @@ module.exports = {
         'About'
       ]
     };
+  },
+  created: function () {
+    win.on('maximize', () => {
+      this.isMaximized = true;
+    });
+
+    win.on('restore', () => {
+      this.isMaximized = false;
+    });
   }
 };
 </script>
 
 <style>
+.tabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 20px 0px 28px 0px;
+}
+.tab {
+  display: inline-block;
+  padding: 0px;
+  color: salmon;
+  font-size: 28px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+.tab:hover {
+  color: #D17A71;
+}
+.tab.active {
+  text-decoration: underline;
+}
 </style>

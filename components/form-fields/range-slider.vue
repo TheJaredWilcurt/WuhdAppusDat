@@ -15,7 +15,7 @@
         @input="emitInput($event)"
       >
     </span>
-    <span>
+    <span class="range-value">
       {{ value }}
     </span>
     <button
@@ -70,4 +70,8 @@ module.exports = {
 </script>
 
 <style>
+.range-value {
+  min-width: 49px;
+  justify-content: flex-end;
+}
 </style>
