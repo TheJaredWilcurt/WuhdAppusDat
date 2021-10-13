@@ -100,9 +100,6 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   background: #FFF8FC;
   color: #754D4D;
 }
-.pill-form-checkbox {
-  flex-grow: 0;
-}
 .pill-label {
   background: #CCC;
   border-radius: 100px 0px 0px 100px;

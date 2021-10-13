@@ -125,7 +125,7 @@ function updateDOM () {
   let saturation = calculateSliderValue(DEFAULT_BACKGROUND_SATURATION, settings.backgroundSaturation, MAX_SATURATION);
   backgroundSaturationInput.value = saturation;
   fauxBackgroundSaturation.innerText = saturation;
-  updateDOMCheckbox(alwaysOnTopInput, 'alwaysOnTop', DEFAULT_ALWAYS_ON_TOP);
+
   updateDOMCheckbox(visibleOnAllWorkspacesInput, 'visibleOnAllWorkspaces', DEFAULT_VISIBLE_ON_ALL_WORKSPACES);
   updateDOMCheckbox(systemTrayInput, 'systemTray', DEFAULT_SYSTEM_TRAY);
   closingAppInput.value = settings.closingApp || DEFAULT_CLOSING_APP;
@@ -277,37 +277,6 @@ function eventBindings () {
     });
   });
 
-  // type="checkbox"
-  const checkboxes = [
-    {
-      el: alwaysOnTopInput,
-      setting: 'alwaysOnTop',
-      faux: fauxAlwaysOnTop
-    },
-    {
-      el: visibleOnAllWorkspacesInput,
-      setting: 'visibleOnAllWorkspaces',
-      faux: fauxVisibleOnAllWorkspaces
-    },
-    {
-      el: fontStyleInput,
-      setting: 'fontStyle',
-      faux: fauxFontStyle
-    }
-  ];
-  checkboxes.forEach(function (checkbox) {
-    checkbox.el.addEventListener('click', function (evt) {
-      evt.stopPropagation();
-      const value = evt.currentTarget.checked;
-      settings[checkbox.setting] = value;
-      saveAndUpdateDOM();
-    });
-    checkbox.faux.addEventListener('click', function (evt) {
-      evt.stopPropagation();
-      checkbox.el.click();
-    });
-  });
-
   systemTrayInput.addEventListener('click', function (evt) {
     evt.stopPropagation();
     const value = evt.currentTarget.checked;
@@ -316,14 +285,6 @@ function eventBindings () {
       settings.closingApp = 'exit';
     }
     saveAndUpdateDOM();
-  });
-  fauxSystemTray.addEventListener('click', function (evt) {
-    evt.stopPropagation();
-    systemTrayInput.click();
-  });
-  fauxAlwaysOnTop.addEventListener('click', function (evt) {
-    evt.stopPropagation();
-    alwaysOnTopInput.click();
   });
 
   // type="color"

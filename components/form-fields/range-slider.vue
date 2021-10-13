@@ -1,15 +1,15 @@
 <template>
   <div class="pill-form">
     <label
-      v-html="displayLabel"
+      v-html="displayLabel(label)"
       class="pill-label"
-      :for="forId"
+      :for="forId(label)"
     ></label>
     <span class="pill-content">
       <input
         :value="value"
         type="range"
-        :id="forId"
+        :id="forId(label)"
         :min="min"
         :max="max"
         @input="emitInput($event)"
@@ -27,6 +27,8 @@
 </template>
 
 <script>
+const methods = window.require('./scripts/methods.js');
+
 module.exports = {
   name: 'range-slider',
   props: {
@@ -52,18 +54,9 @@ module.exports = {
     }
   },
   methods: {
+    ...methods,
     emitInput: function ($event) {
       this.$emit('input', $event.target.value);
-    }
-  },
-  computed: {
-    displayLabel: function () {
-      let label = this.label.split(' ').join('&nbsp;');
-      return label + ':';
-    },
-    forId: function () {
-      let label = this.label.toLowerCase().split(' ').join('-');
-      return label + '-input';
     }
   }
 };

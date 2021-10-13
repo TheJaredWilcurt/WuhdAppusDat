@@ -1,13 +1,6 @@
 <template>
   <div id="options-container" class="pill-form-container">
-    <div class="pill-form pill-form-checkbox">
-      <label class="pill-label" for="always-on-top-input">
-        Always&nbsp;on&nbsp;top:
-      </label>
-      <span id="faux-always-on-top" class="pill-content last-pill-section">
-        <input type="checkbox" id="always-on-top-input">
-      </select>
-    </div>
+    <check-box v-model="alwaysOnTop" label="Always on top"></check-box>
 
     <div id="visible-on-all-workspaces-container" class="pill-form pill-form-checkbox hidden">
       <label class="pill-label" for="visible-on-all-workspaces-input">
@@ -56,12 +49,23 @@
 </template>
 
 <script>
+const {
+  DEFAULT_ALWAYS_ON_TOP
+} = window.require('./scripts/global-constants.js');
 
 module.exports = {
   name: 'app-options',
+  components: {
+    'check-box': httpVueLoader('components/form-fields/check-box.vue')
+  },
   data: function () {
     return {
+      alwaysOnTop: DEFAULT_ALWAYS_ON_TOP,
+      closingApp: 'exit',
+      systemTray: false
     };
+  },
+  computed: {
   }
 };
 </script>
