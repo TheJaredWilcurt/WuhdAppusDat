@@ -39,7 +39,7 @@ module.exports = {
   data: function () {
     return {
       isMaximized: false,
-      activeTab: 'Options',
+      activeTab: 'Background',
       tabs: [
         'Options',
         'Text',
@@ -49,6 +49,8 @@ module.exports = {
     };
   },
   created: function () {
+    this.$store.commit('setDefaults');
+
     win.on('maximize', () => {
       this.isMaximized = true;
     });

@@ -16,7 +16,7 @@
     <button id="background-bubbles" title="Pink Bubbles Background" class="pill-form pill-button pill-button-bubbles"></button>
 
     <range-slider
-      v-model="backgroundHue"
+      v-model="backgroundHueRotate"
       label="Background Hue"
       max="360"
       :default-value="DEFAULT_BACKGROUND_HUE_ROTATE"
@@ -37,7 +37,7 @@
     <range-slider
       v-model="backgroundSaturation"
       label="Background Saturation"
-      :default-value="DEFAULT_BACKGROUND_CONTRAST"
+      :default-value="DEFAULT_BACKGROUND_SATURATION"
     ></range-slider>
   </div>
 </template>
@@ -49,6 +49,7 @@ const {
   DEFAULT_BACKGROUND_HUE_ROTATE,
   DEFAULT_BACKGROUND_SATURATION
 } = window.require('./scripts/global-constants.js');
+const { mapSetting } = window.require('./scripts/computeds.js');
 
 module.exports = {
   name: 'background-options',
@@ -60,13 +61,14 @@ module.exports = {
       DEFAULT_BACKGROUND_BRIGHTNESS,
       DEFAULT_BACKGROUND_CONTRAST,
       DEFAULT_BACKGROUND_HUE_ROTATE,
-      DEFAULT_BACKGROUND_SATURATION,
-
-      backgroundHue: DEFAULT_BACKGROUND_HUE_ROTATE,
-      backgroundBrightness: DEFAULT_BACKGROUND_BRIGHTNESS,
-      backgroundContrast: DEFAULT_BACKGROUND_CONTRAST,
-      backgroundSaturation: DEFAULT_BACKGROUND_SATURATION
+      DEFAULT_BACKGROUND_SATURATION
     };
+  },
+  computed: {
+    ...mapSetting('backgroundHueRotate'),
+    ...mapSetting('backgroundBrightness'),
+    ...mapSetting('backgroundContrast'),
+    ...mapSetting('backgroundSaturation')
   }
 };
 </script>
