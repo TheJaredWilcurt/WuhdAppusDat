@@ -12,13 +12,13 @@
         @click="windowControl('minimize')"
       ></i>
       <i
-        v-show="!isMaximized"
+        v-show="isMaximized"
         aria-label="window control restore"
         class="window-control-restore"
         @click="windowControl('restore')"
       ></i>
       <i
-        v-show="isMaximized"
+        v-show="!isMaximized"
         aria-label="window control maximize"
         class="window-control-maximize"
         @click="windowControl('maximize')"
@@ -39,7 +39,7 @@ const {
 } = window.require('./scripts/global-constants.js');
 
 module.exports = {
-  name: 'app-composition',
+  name: 'menu-bar',
   props: {
     isMaximized: {
       type: Boolean,

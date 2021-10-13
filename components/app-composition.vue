@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <menu-bar :isMaximized="isMaximized"></menu-bar>
+  <div class="container">
+    <menu-bar :is-maximized="isMaximized"></menu-bar>
 
     <div
       class="wrapper"
@@ -61,6 +61,9 @@ module.exports = {
 </script>
 
 <style>
+.container {
+  height: calc(100% - 35px);
+}
 .tabs {
   display: flex;
   align-items: center;
