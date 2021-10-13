@@ -52,6 +52,7 @@
 const {
   DEFAULT_ALWAYS_ON_TOP
 } = window.require('./scripts/global-constants.js');
+const { mapSetting } = window.require('./scripts/computeds.js');
 
 module.exports = {
   name: 'app-options',
@@ -60,12 +61,12 @@ module.exports = {
   },
   data: function () {
     return {
-      alwaysOnTop: DEFAULT_ALWAYS_ON_TOP,
       closingApp: 'exit',
       systemTray: false
     };
   },
   computed: {
+    ...mapSetting('alwaysOnTop')
   }
 };
 </script>

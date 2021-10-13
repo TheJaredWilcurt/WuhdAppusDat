@@ -9,16 +9,82 @@
     <div id="app"></div>
 
     <script src="scripts/vue.min.js"></script>
+    <script src="scripts/vuex.min.js"></script>
     <script src="scripts/http-vue-loader.min.js"></script>
     <!-- <script src="scripts/options.js"></script> -->
     <script>
+
       Vue.config.devtools = true;
+      Vue.use(Vuex)
+
+      const globalConstants = window.require('./scripts/global-constants.js');
+      const store = new Vuex.Store({
+        state: {
+          settings: {
+            version: '',
+            lastViewedSection: '',
+
+            alwaysOnTop: false,
+            systemTray: false,
+            closingApp: 'exit',
+
+            fontSize: 51,
+            fontStyle: false,
+            fontWeight: 600,
+            textColor: '',
+            textPosition: 36,
+            textShadow: 'black',
+
+            background: 'images/leaves.png',
+            backgroundHueRotate: 0,
+            backgroundBrightness: 1,
+            backgroundSaturation: 1,
+            backgroundContrast: 1
+          }
+        },
+        mutations: {
+          setDefaults: function (state) {
+            state.settings.version = globalConstants.APP_VERSION;
+            state.settings.lastViewedSection = 'Options';
+
+            state.settings.alwaysOnTop = globalConstants.DEFAULT_ALWAYS_ON_TOP;
+            state.settings.systemTray = globalConstants.DEFAULT_SYSTEM_TRAY;
+            state.settings.closingApp = globalConstants.DEFAULT_CLOSING_APP;
+
+            state.settings.fontSize = globalConstants.DEFAULT_FONT_SIZE;
+            state.settings.fontStyle = globalConstants.DEFAULT_FONT_STYLE;
+            state.settings.fontWeight = globalConstants.DEFAULT_FONT_WEIGHT;
+            state.settings.textColor = globalConstants.DEFAULT_TEXT_COLOR;
+            state.settings.textPosition = globalConstants.DEFAULT_TEXT_POSITION;
+            state.settings.textShadow = globalConstants.DEFAULT_TEXT_SHADOW;
+
+            state.settings.background = globalConstants.DEFAULT_BACKGROUND;
+            state.settings.backgroundHueRotate = globalConstants.DEFAULT_BACKGROUND_HUE_ROTATE;
+            state.settings.backgroundBrightness = globalConstants.DEFAULT_BACKGROUND_BRIGHTNESS;
+            state.settings.backgroundSaturation = globalConstants.DEFAULT_BACKGROUND_SATURATION;
+            state.settings.backgroundContrast = globalConstants.DEFAULT_BACKGROUND_CONTRAST;
+
+            // globalConstants.DEFAULT_VISIBLE_ON_ALL_WORKSPACES;
+            // globalConstants.DEFAULT_FONT;
+            // globalConstants.DEFAULT_INTERVAL;
+            // globalConstants.MAX_CONTRAST;
+            // globalConstants.MAX_BRIGHTNESS;
+            // globalConstants.MAX_SATURATION;
+            // globalConstants.SETTINGS_LOCATION;
+          },
+          mutateSetting: function (state, { setting, value }) {
+            state.settings[setting] = value;
+          }
+        }
+      });
+
       const app = new Vue({
         el: '#app',
         template: '<app-composition />',
         components: {
           'app-composition': httpVueLoader('components/app-composition.vue')
-        }
+        },
+        store
       });
     </script>
   </body>
