@@ -41,7 +41,7 @@ module.exports = {
       required: true
     },
     min: {
-      type: Number,
+      type: [String, Number],
       default: 0
     },
     max: {
@@ -56,7 +56,9 @@ module.exports = {
   methods: {
     ...methods,
     emitInput: function ($event) {
-      this.$emit('input', $event.target.value);
+      let amount = $event && $event.target && $event.target.value;
+      amount = parseInt(amount || this.min);
+      this.$emit('input', amount);
     }
   }
 };
