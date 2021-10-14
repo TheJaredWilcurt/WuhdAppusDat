@@ -49,7 +49,7 @@ const {
   DEFAULT_BACKGROUND_HUE_ROTATE,
   DEFAULT_BACKGROUND_SATURATION
 } = window.require('./scripts/global-constants.js');
-const { mapSetting } = window.require('./scripts/computeds.js');
+const { mapSettings } = window.require('./scripts/computeds.js');
 
 module.exports = {
   name: 'background-options',
@@ -65,10 +65,12 @@ module.exports = {
     };
   },
   computed: {
-    ...mapSetting('backgroundHueRotate'),
-    ...mapSetting('backgroundBrightness'),
-    ...mapSetting('backgroundContrast'),
-    ...mapSetting('backgroundSaturation')
+    ...mapSettings([
+      'backgroundHueRotate',
+      'backgroundBrightness',
+      'backgroundContrast',
+      'backgroundSaturation'
+    ])
   }
 };
 </script>

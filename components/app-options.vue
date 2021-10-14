@@ -47,7 +47,7 @@
 </template>
 
 <script>
-const { mapSetting } = window.require('./scripts/computeds.js');
+const { mapSettings } = window.require('./scripts/computeds.js');
 const canSetVisibleOnAllWorkspaces = window.nw.Window.get().canSetVisibleOnAllWorkspaces();
 
 // If !systemTray then dropdown is disabled and set to exit
@@ -85,9 +85,13 @@ module.exports = {
         }
       }
     },
-    ...mapSetting('alwaysOnTop'),
-    ...mapSetting('visibleOnAllWorkspaces'),
-    ...mapSetting('closingApp')
+    ...mapSettings([
+      'alwaysOnTop',
+      'closingApp',
+      'updateInterval',
+      'updateInterval',
+      'visibleOnAllWorkspaces'
+    ])
   }
 };
 </script>
