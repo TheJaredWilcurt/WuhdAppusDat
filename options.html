@@ -28,6 +28,7 @@
             systemTray: false,
             closingApp: 'exit',
             visibleOnAllWorkspaces: false,
+            updateInterval: 3,
 
             fontSize: 51,
             fontStyle: false,
@@ -52,6 +53,7 @@
             state.settings.systemTray = globalConstants.DEFAULT_SYSTEM_TRAY;
             state.settings.closingApp = globalConstants.DEFAULT_CLOSING_APP;
             state.settings.visibleOnAllWorkspaces = globalConstants.DEFAULT_VISIBLE_ON_ALL_WORKSPACES;
+            state.settings.updateInterval = globalConstants.DEFAULT_INTERVAL;
 
             state.settings.fontSize = globalConstants.DEFAULT_FONT_SIZE;
             state.settings.fontStyle = globalConstants.DEFAULT_FONT_STYLE;
@@ -67,7 +69,6 @@
             state.settings.backgroundContrast = globalConstants.DEFAULT_BACKGROUND_CONTRAST;
 
             // globalConstants.DEFAULT_FONT;
-            // globalConstants.DEFAULT_INTERVAL;
             // globalConstants.MAX_CONTRAST;
             // globalConstants.MAX_BRIGHTNESS;
             // globalConstants.MAX_SATURATION;

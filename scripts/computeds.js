@@ -1,7 +1,7 @@
 function mapSettings (settings) {
   const mapped = {};
 
-  settings.forEach(function (setting) {
+  settings.forEach((setting) => {
     mapped[setting] = {
       get: function () {
         return this.$store.state.settings[setting];

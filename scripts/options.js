@@ -11,8 +11,6 @@ const {
   DEFAULT_BACKGROUND_CONTRAST,
   DEFAULT_BACKGROUND_HUE_ROTATE,
   DEFAULT_BACKGROUND_SATURATION,
-  DEFAULT_CLOSING_APP,
-  DEFAULT_SYSTEM_TRAY,
   DEFAULT_TEXT_COLOR,
   DEFAULT_TEXT_SHADOW,
   DEFAULT_FONT,
@@ -20,7 +18,6 @@ const {
   DEFAULT_FONT_WEIGHT,
   DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_POSITION,
-  DEFAULT_INTERVAL,
   MAX_CONTRAST,
   MAX_BRIGHTNESS,
   MAX_SATURATION
@@ -66,9 +63,6 @@ const clearFontWeight = document.getElementById('clear-font-weight');
 const textPositionInput = document.getElementById('text-position-input');
 const fauxTextPosition = document.getElementById('faux-text-position');
 const clearTextPosition = document.getElementById('clear-text-position');
-const updateIntervalInput = document.getElementById('update-interval-input');
-const fauxUpdateInterval = document.getElementById('faux-update-interval');
-const clearUpdateInterval = document.getElementById('clear-update-interval');
 
 function addClass (el, className) {
   document.querySelector(el).classList.add(className);
@@ -131,8 +125,6 @@ function updateDOM () {
   fauxFontWeight.innerText = (settings.fontWeight || DEFAULT_FONT_WEIGHT) / 100;
   textPositionInput.value = (settings.textPosition || DEFAULT_TEXT_POSITION) + 400;
   fauxTextPosition.innerText = (settings.textPosition || DEFAULT_TEXT_POSITION) + 400;
-  updateIntervalInput.value = (settings.interval || DEFAULT_INTERVAL) / 1000;
-  fauxUpdateInterval.innerText = (settings.interval || DEFAULT_INTERVAL) / 1000;
 }
 
 function saveAndUpdateDOM () {
@@ -325,16 +317,6 @@ function eventBindings () {
   clearTextPosition.addEventListener('click', function (evt) {
     evt.preventDefault();
     settings.textPosition = DEFAULT_TEXT_POSITION;
-    saveAndUpdateDOM();
-  });
-  updateIntervalInput.addEventListener('input', function (evt) {
-    let value = parseInt(evt.currentTarget.value);
-    settings.interval = value * 1000;
-    saveAndUpdateDOM();
-  });
-  clearUpdateInterval.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.interval = DEFAULT_INTERVAL;
     saveAndUpdateDOM();
   });
 }

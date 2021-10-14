@@ -23,23 +23,13 @@
       label="Closing app"
     ></drop-down>
 
-    <div class="pill-form">
-      <label class="pill-label" for="update-interval-input">
-        Update&nbsp;Interval:
-      </label>
-      <span class="pill-content">
-        <input
-          id="update-interval-input"
-          type="range"
-          min="1"
-          max="15"
-        >
-      </span>
-      <span id="faux-update-interval">
-        15
-      </span>
-      <button id="clear-update-interval" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-    </div>
+    <range-slider
+      v-model="updateInterval"
+      label="Update Interval"
+      min="1"
+      max="15"
+      :default-value="DEFAULT_INTERVAL"
+    ></range-slider>
 
     <p>The "Update Interval" controls how often (in seconds) we check to see what application currently has focus. Faster speeds may not work as well on very low end devices, most people won't notice though.</p>
     <p>Changes to system tray take effect on next launch.</p>
@@ -47,19 +37,23 @@
 </template>
 
 <script>
+const {
+  DEFAULT_INTERVAL
+} = window.require('./scripts/global-constants.js');
 const { mapSettings } = window.require('./scripts/computeds.js');
 const canSetVisibleOnAllWorkspaces = window.nw.Window.get().canSetVisibleOnAllWorkspaces();
-
-// If !systemTray then dropdown is disabled and set to exit
 
 module.exports = {
   name: 'app-options',
   components: {
     'check-box': httpVueLoader('components/form-fields/check-box.vue'),
-    'drop-down': httpVueLoader('components/form-fields/drop-down.vue')
+    'drop-down': httpVueLoader('components/form-fields/drop-down.vue'),
+    'range-slider': httpVueLoader('components/form-fields/range-slider.vue')
   },
   data: function () {
     return {
+      DEFAULT_INTERVAL,
+
       canSetVisibleOnAllWorkspaces,
       closingAppOptions: [
         {
@@ -88,7 +82,6 @@ module.exports = {
     ...mapSettings([
       'alwaysOnTop',
       'closingApp',
-      'updateInterval',
       'updateInterval',
       'visibleOnAllWorkspaces'
     ])
