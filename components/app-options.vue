@@ -1,15 +1,15 @@
 <template>
   <div id="options-container" class="pill-form-container">
-    <check-box v-model="alwaysOnTop" label="Always on top"></check-box>
+    <check-box
+      v-model="alwaysOnTop"
+      label="Always on top"
+    ></check-box>
 
-    <div id="visible-on-all-workspaces-container" class="pill-form pill-form-checkbox hidden">
-      <label class="pill-label" for="visible-on-all-workspaces-input">
-        Visible&nbsp;On&nbsp;All&nbsp;Workspaces:
-      </label>
-      <span id="faux-visible-on-all-workspaces" class="pill-content last-pill-section">
-        <input id="visible-on-all-workspaces-input" type="checkbox">
-      </span>
-    </div>
+    <check-box
+      v-show="canSetVisibleOnAllWorkspaces"
+      v-model="visibleOnAllWorkspaces"
+      label="Visible On All Workspaces"
+    ></check-box>
 
     <div class="pill-form pill-form-checkbox">
       <label class="pill-label" for="system-tray-input">
@@ -55,6 +55,7 @@
 
 <script>
 const { mapSetting } = window.require('./scripts/computeds.js');
+const canSetVisibleOnAllWorkspaces = window.nw.Window.get().canSetVisibleOnAllWorkspaces();
 
 module.exports = {
   name: 'app-options',
@@ -63,12 +64,14 @@ module.exports = {
   },
   data: function () {
     return {
+      canSetVisibleOnAllWorkspaces,
       closingApp: 'exit',
       systemTray: false
     };
   },
   computed: {
-    ...mapSetting('alwaysOnTop')
+    ...mapSetting('alwaysOnTop'),
+    ...mapSetting('visibleOnAllWorkspaces')
   }
 };
 </script>

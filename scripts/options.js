@@ -11,9 +11,7 @@ const {
   DEFAULT_BACKGROUND_CONTRAST,
   DEFAULT_BACKGROUND_HUE_ROTATE,
   DEFAULT_BACKGROUND_SATURATION,
-  DEFAULT_ALWAYS_ON_TOP,
   DEFAULT_CLOSING_APP,
-  DEFAULT_VISIBLE_ON_ALL_WORKSPACES,
   DEFAULT_SYSTEM_TRAY,
   DEFAULT_TEXT_COLOR,
   DEFAULT_TEXT_SHADOW,
@@ -51,12 +49,7 @@ const clearBackgroundContrast = document.getElementById('clear-background-contra
 const backgroundSaturationInput = document.getElementById('background-saturation-input');
 const fauxBackgroundSaturation = document.getElementById('faux-background-saturation');
 const clearBackgroundSaturation = document.getElementById('clear-background-saturation');
-const alwaysOnTopInput = document.getElementById('always-on-top-input');
-const fauxAlwaysOnTop = document.getElementById('faux-always-on-top');
-const visibleOnAllWorkspacesInput = document.getElementById('visible-on-all-workspaces-input');
-const fauxVisibleOnAllWorkspaces = document.getElementById('faux-visible-on-all-workspaces');
 const systemTrayInput = document.getElementById('system-tray-input');
-const fauxSystemTray = document.getElementById('faux-system-tray');
 const closingAppInput = document.getElementById('closing-app-input');
 const clearTextColor = document.getElementById('clear-text-color');
 const textColorInput = document.getElementById('text-color-input');
@@ -68,7 +61,6 @@ const clearFont = document.getElementById('clear-font');
 const fontSizeInput = document.getElementById('font-size-input');
 const fauxFontSize = document.getElementById('faux-font-size');
 const clearFontSize = document.getElementById('clear-font-size');
-const fauxFontStyle = document.getElementById('faux-font-style');
 const fontStyleInput = document.getElementById('font-style-input');
 const fontWeightInput = document.getElementById('font-weight-input');
 const fauxFontWeight = document.getElementById('faux-font-weight');
@@ -126,7 +118,6 @@ function updateDOM () {
   backgroundSaturationInput.value = saturation;
   fauxBackgroundSaturation.innerText = saturation;
 
-  updateDOMCheckbox(visibleOnAllWorkspacesInput, 'visibleOnAllWorkspaces', DEFAULT_VISIBLE_ON_ALL_WORKSPACES);
   updateDOMCheckbox(systemTrayInput, 'systemTray', DEFAULT_SYSTEM_TRAY);
   closingAppInput.value = settings.closingApp || DEFAULT_CLOSING_APP;
   if (settings.systemTray) {
@@ -390,9 +381,6 @@ function externalLinks () {
 function initialize () {
   if (process.platform === 'darwin') {
     addClass('body', 'osx');
-  }
-  if (nw.Window.get().canSetVisibleOnAllWorkspaces()) {
-    show('#visible-on-all-workspaces-container');
   }
   // eventBindings();
   // updateDOM();
