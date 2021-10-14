@@ -49,7 +49,6 @@ const clearBackgroundContrast = document.getElementById('clear-background-contra
 const backgroundSaturationInput = document.getElementById('background-saturation-input');
 const fauxBackgroundSaturation = document.getElementById('faux-background-saturation');
 const clearBackgroundSaturation = document.getElementById('clear-background-saturation');
-const closingAppInput = document.getElementById('closing-app-input');
 const clearTextColor = document.getElementById('clear-text-color');
 const textColorInput = document.getElementById('text-color-input');
 const fauxBackgroundInput = document.getElementById('faux-background-input');
@@ -116,14 +115,7 @@ function updateDOM () {
   let saturation = calculateSliderValue(DEFAULT_BACKGROUND_SATURATION, settings.backgroundSaturation, MAX_SATURATION);
   backgroundSaturationInput.value = saturation;
   fauxBackgroundSaturation.innerText = saturation;
-  closingAppInput.value = settings.closingApp || DEFAULT_CLOSING_APP;
-  if (settings.systemTray) {
-    closingAppInput.parentElement.classList.remove('disabled');
-    closingAppInput.removeAttribute('disabled');
-  } else {
-    closingAppInput.parentElement.classList.add('disabled');
-    closingAppInput.setAttribute('disabled', 'disabled');
-  }
+
   fauxTextColor.style.background = settings.textColor || DEFAULT_TEXT_COLOR;
   textColorInput.value = settings.textColor || DEFAULT_TEXT_COLOR;
   textShadowInput.value = settings.textShadow || DEFAULT_TEXT_SHADOW;
@@ -288,11 +280,6 @@ function eventBindings () {
   });
 
   // select option
-  closingAppInput.addEventListener('input', function (evt) {
-    const value = evt.currentTarget.value;
-    settings.closingApp = value;
-    saveAndUpdateDOM();
-  });
   textShadowInput.addEventListener('input', function (evt) {
     const value = evt.currentTarget.value;
     settings.textShadow = value;

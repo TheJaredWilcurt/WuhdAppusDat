@@ -16,15 +16,12 @@
       label="System Tray"
     ></check-box>
 
-    <div class="pill-form">
-      <label class="pill-label" for="closing-app-input">
-        Closing&nbsp;app:
-      </label>
-      <select id="closing-app-input" class="pill-content last-pill-section">
-        <option value="exit">exits</option>
-        <option value="tray">sends to tray</option>
-      </select>
-    </div>
+    <drop-down
+      v-model="closingApp"
+      :options="closingAppOptions"
+      :disabled="!systemTray"
+      label="Closing app"
+    ></drop-down>
 
     <div class="pill-form">
       <label class="pill-label" for="update-interval-input">
@@ -58,18 +55,39 @@ const canSetVisibleOnAllWorkspaces = window.nw.Window.get().canSetVisibleOnAllWo
 module.exports = {
   name: 'app-options',
   components: {
-    'check-box': httpVueLoader('components/form-fields/check-box.vue')
+    'check-box': httpVueLoader('components/form-fields/check-box.vue'),
+    'drop-down': httpVueLoader('components/form-fields/drop-down.vue')
   },
   data: function () {
     return {
       canSetVisibleOnAllWorkspaces,
-      closingApp: 'exit'
+      closingAppOptions: [
+        {
+          label: 'exits',
+          value: 'exit'
+        },
+        {
+          label: 'sends to tray',
+          value: 'tray'
+        }
+      ]
     };
   },
   computed: {
+    systemTray: {
+      get: function () {
+        return this.$store.state.settings.systemTray;
+      },
+      set: function (value) {
+        this.$store.commit('mutateSetting', { setting: 'systemTray', value });
+        if (!value) {
+          this.$store.commit('mutateSetting', { setting: 'closingApp', value: 'exit' });
+        }
+      }
+    },
     ...mapSetting('alwaysOnTop'),
     ...mapSetting('visibleOnAllWorkspaces'),
-    ...mapSetting('systemTray')
+    ...mapSetting('closingApp')
   }
 };
 </script>
