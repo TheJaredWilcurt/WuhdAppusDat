@@ -10,13 +10,13 @@
       @click="$emit('input', !value)"
     >
       <input
+        :id="forId(label)"
         :checked="value"
         type="checkbox"
-        :id="forId(label)"
         @click.stop
         @input="$emit('input', !value)"
       >
-    </select>
+    </span>
   </div>
 </template>
 

@@ -8,10 +8,34 @@ module.exports = {
     node: true
   },
   globals: {
+    'httpVueLoader': true,
     'nw': true,
-    'Vue': true
+    'Vue': true,
+    'Vuex': true
   },
   extends: [
-    'tjw-base'
-  ]
+    'tjw-base',
+    'tjw-vue'
+  ],
+  rules: {
+    'vue/html-self-closing': [
+      'error',
+      {
+        html: {
+          void: 'never',
+          normal: 'never',
+          component: 'never'
+        },
+        svg: 'always',
+        math: 'always'
+      }
+    ],
+    'vue/attribute-hyphenation': [
+      'error',
+      'always',
+      {
+        'ignore': []
+      }
+    ]
+  }
 };

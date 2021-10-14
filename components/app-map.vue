@@ -12,7 +12,11 @@
     </p>
     <template v-if="appMapVisible">
       <p>There are <strong>{{ appMaps.length - 1 }}</strong> custom app name aliases.</p>
-      <div v-for="(app, appIndex) in appMaps" class="pill-form">
+      <div
+        v-for="(app, appIndex) in appMaps"
+        class="pill-form"
+        :key="'app' + appIndex"
+      >
         <input v-model="app.file" class="pill-label">
         <input v-model="app.alias" class="pill-content">
         <button

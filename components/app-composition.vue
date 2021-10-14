@@ -9,10 +9,10 @@
       <nav class="tabs">
         <a
           v-for="(tab, tabIndex) in tabs"
-          :key="'tab' + tabIndex"
           class="tab"
           :class="{ 'active': activeTab === tab }"
           @click="activeTab = tab"
+          :key="'tab' + tabIndex"
         >{{ tab }}</a>
       </nav>
 

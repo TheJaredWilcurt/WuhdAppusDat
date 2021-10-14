@@ -4,9 +4,9 @@
       <label class="pill-label" for="background-image-input">
         Background&nbsp;image:
       </label>
-      <span class="pill-content" id="faux-background-input">
+      <span id="faux-background-input" class="pill-content">
         <span id="current-background-image" class="truncate"></span>
-        <input type="file" id="background-image-input" class="hidden">
+        <input id="background-image-input" type="file" class="hidden">
       </span>
       <button id="clear-background" class="pill-end last-pill-section" title="Set to none">&times;</button>
     </div>

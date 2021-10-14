@@ -7,9 +7,9 @@
     ></label>
     <span class="pill-content">
       <input
+        :id="forId(label)"
         :value="value"
         type="range"
-        :id="forId(label)"
         :min="min"
         :max="max"
         @input="emitInput($event)"
