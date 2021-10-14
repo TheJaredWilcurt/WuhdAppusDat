@@ -11,14 +11,10 @@
       label="Visible On All Workspaces"
     ></check-box>
 
-    <div class="pill-form pill-form-checkbox">
-      <label class="pill-label" for="system-tray-input">
-        System&nbsp;Tray:
-      </label>
-      <span id="faux-system-tray" class="pill-content last-pill-section">
-        <input id="system-tray-input" type="checkbox">
-      </span>
-    </div>
+    <check-box
+      v-model="systemTray"
+      label="System Tray"
+    ></check-box>
 
     <div class="pill-form">
       <label class="pill-label" for="closing-app-input">
@@ -57,6 +53,8 @@
 const { mapSetting } = window.require('./scripts/computeds.js');
 const canSetVisibleOnAllWorkspaces = window.nw.Window.get().canSetVisibleOnAllWorkspaces();
 
+// If !systemTray then dropdown is disabled and set to exit
+
 module.exports = {
   name: 'app-options',
   components: {
@@ -65,13 +63,13 @@ module.exports = {
   data: function () {
     return {
       canSetVisibleOnAllWorkspaces,
-      closingApp: 'exit',
-      systemTray: false
+      closingApp: 'exit'
     };
   },
   computed: {
     ...mapSetting('alwaysOnTop'),
-    ...mapSetting('visibleOnAllWorkspaces')
+    ...mapSetting('visibleOnAllWorkspaces'),
+    ...mapSetting('systemTray')
   }
 };
 </script>

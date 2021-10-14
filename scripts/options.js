@@ -49,7 +49,6 @@ const clearBackgroundContrast = document.getElementById('clear-background-contra
 const backgroundSaturationInput = document.getElementById('background-saturation-input');
 const fauxBackgroundSaturation = document.getElementById('faux-background-saturation');
 const clearBackgroundSaturation = document.getElementById('clear-background-saturation');
-const systemTrayInput = document.getElementById('system-tray-input');
 const closingAppInput = document.getElementById('closing-app-input');
 const clearTextColor = document.getElementById('clear-text-color');
 const textColorInput = document.getElementById('text-color-input');
@@ -117,8 +116,6 @@ function updateDOM () {
   let saturation = calculateSliderValue(DEFAULT_BACKGROUND_SATURATION, settings.backgroundSaturation, MAX_SATURATION);
   backgroundSaturationInput.value = saturation;
   fauxBackgroundSaturation.innerText = saturation;
-
-  updateDOMCheckbox(systemTrayInput, 'systemTray', DEFAULT_SYSTEM_TRAY);
   closingAppInput.value = settings.closingApp || DEFAULT_CLOSING_APP;
   if (settings.systemTray) {
     closingAppInput.parentElement.classList.remove('disabled');
@@ -266,16 +263,6 @@ function eventBindings () {
       settings[filter.setting] = filter.default;
       saveAndUpdateDOM();
     });
-  });
-
-  systemTrayInput.addEventListener('click', function (evt) {
-    evt.stopPropagation();
-    const value = evt.currentTarget.checked;
-    settings.systemTray = value;
-    if (!value) {
-      settings.closingApp = 'exit';
-    }
-    saveAndUpdateDOM();
   });
 
   // type="color"
