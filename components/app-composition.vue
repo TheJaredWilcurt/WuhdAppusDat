@@ -39,7 +39,7 @@ module.exports = {
   data: function () {
     return {
       isMaximized: false,
-      activeTab: 'Options',
+      activeTab: 'Text',
       tabs: [
         'Options',
         'Text',

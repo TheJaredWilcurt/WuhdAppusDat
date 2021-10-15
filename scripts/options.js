@@ -50,7 +50,6 @@ const clearTextColor = document.getElementById('clear-text-color');
 const textColorInput = document.getElementById('text-color-input');
 const fauxBackgroundInput = document.getElementById('faux-background-input');
 const fauxTextColor = document.getElementById('faux-text-color');
-const textShadowInput = document.getElementById('text-shadow-input');
 const fontInput = document.getElementById('font-input');
 const clearFont = document.getElementById('clear-font');
 const fontSizeInput = document.getElementById('font-size-input');
@@ -112,7 +111,6 @@ function updateDOM () {
 
   fauxTextColor.style.background = settings.textColor || DEFAULT_TEXT_COLOR;
   textColorInput.value = settings.textColor || DEFAULT_TEXT_COLOR;
-  textShadowInput.value = settings.textShadow || DEFAULT_TEXT_SHADOW;
   let font = DEFAULT_FONT;
   if (typeof(settings.font) === 'string') {
     font = settings.font;
@@ -271,12 +269,6 @@ function eventBindings () {
     textColorInput.click();
   });
 
-  // select option
-  textShadowInput.addEventListener('input', function (evt) {
-    const value = evt.currentTarget.value;
-    settings.textShadow = value;
-    saveAndUpdateDOM();
-  });
   // type="text"
   fontInput.addEventListener('input', function (evt) {
     const value = evt.currentTarget.value;

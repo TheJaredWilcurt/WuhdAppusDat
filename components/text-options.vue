@@ -10,16 +10,11 @@
       <button id="clear-text-color" class="pill-end last-pill-section" title="Reset to default">&times;</button>
     </div>
 
-    <div class="pill-form">
-      <label class="pill-label" for="text-shadow-input">
-        Text&nbsp;shadow:
-      </label>
-      <select id="text-shadow-input" class="pill-content last-pill-section">
-        <option value="none">None</option>
-        <option value="black">Black</option>
-        <option value="white">White</option>
-      </select>
-    </div>
+    <drop-down
+      v-model="textShadow"
+      :options="textShadowOptions"
+      label="Text shadow"
+    ></drop-down>
 
     <div class="pill-form">
       <label class="pill-label" for="font-input">
@@ -95,11 +90,35 @@
 </template>
 
 <script>
+const { mapSettings } = window.require('./scripts/computeds.js');
+
 module.exports = {
   name: 'text-options',
+  components: {
+    'drop-down': httpVueLoader('components/form-fields/drop-down.vue')
+  },
   data: function () {
     return {
+      textShadowOptions: [
+        {
+          label: 'None',
+          value: 'none'
+        },
+        {
+          label: 'Black',
+          value: 'black'
+        },
+        {
+          label: 'White',
+          value: 'white'
+        }
+      ]
     };
+  },
+  computed: {
+    ...mapSettings([
+      'textShadow'
+    ])
   }
 };
 </script>

@@ -37,9 +37,7 @@
 </template>
 
 <script>
-const {
-  DEFAULT_INTERVAL
-} = window.require('./scripts/global-constants.js');
+const { DEFAULT_INTERVAL } = window.require('./scripts/global-constants.js');
 const { mapSettings } = window.require('./scripts/computeds.js');
 const canSetVisibleOnAllWorkspaces = window.nw.Window.get().canSetVisibleOnAllWorkspaces();
 
