@@ -14,7 +14,7 @@ const globalConstants = Object.freeze({
   DEFAULT_SYSTEM_TRAY: false,
   DEFAULT_TEXT_COLOR: '#FFEB3B',
   DEFAULT_TEXT_SHADOW: 'black',
-  DEFAULT_FONT: 'Petrona',
+  DEFAULT_FONT_FAMILY: 'Petrona',
   DEFAULT_FONT_ITALICS: false,
   DEFAULT_FONT_SIZE: 32,
   DEFAULT_FONT_WEIGHT: 4,

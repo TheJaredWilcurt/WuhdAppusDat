@@ -12,13 +12,11 @@
       label="Text shadow"
     ></drop-down>
 
-    <div class="pill-form">
-      <label class="pill-label" for="font-input">
-        Font:
-      </label>
-      <input id="font-input" class="pill-content" type="text">
-      <button id="clear-font" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-    </div>
+    <text-input
+      v-model="fontFamily"
+      label="Font"
+      :default-value="DEFAULT_FONT_FAMILY"
+    ></text-input>
 
     <range-slider
       v-model="fontSize"
@@ -53,6 +51,7 @@
 
 <script>
 const {
+  DEFAULT_FONT_FAMILY,
   DEFAULT_FONT_SIZE,
   DEFAULT_FONT_WEIGHT,
   DEFAULT_TEXT_COLOR,
@@ -66,10 +65,12 @@ module.exports = {
     'check-box': httpVueLoader('components/form-fields/check-box.vue'),
     'color-picker': httpVueLoader('components/form-fields/color-picker.vue'),
     'drop-down': httpVueLoader('components/form-fields/drop-down.vue'),
-    'range-slider': httpVueLoader('components/form-fields/range-slider.vue')
+    'range-slider': httpVueLoader('components/form-fields/range-slider.vue'),
+    'text-input': httpVueLoader('components/form-fields/text-input.vue')
   },
   data: function () {
     return {
+      DEFAULT_FONT_FAMILY,
       DEFAULT_FONT_SIZE,
       DEFAULT_FONT_WEIGHT,
       DEFAULT_TEXT_COLOR,
@@ -93,6 +94,7 @@ module.exports = {
   },
   computed: {
     ...mapSettings([
+      'fontFamily',
       'fontItalics',
       'fontSize',
       'fontWeight',

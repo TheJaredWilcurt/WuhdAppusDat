@@ -8,7 +8,7 @@ const {
   APP_TITLE,
   DEFAULT_BACKGROUND,
   DEFAULT_TEXT_COLOR,
-  DEFAULT_FONT,
+  DEFAULT_FONT_FAMILY,
   DEFAULT_FONT_SIZE,
   DEFAULT_FONT_WEIGHT,
   DEFAULT_FONT_ITALICS,
@@ -106,7 +106,7 @@ function applySettings () {
 
   // Text font/color
   appName.style.color = settings.textColor || DEFAULT_TEXT_COLOR;
-  appName.style.fontFamily = settings.font || DEFAULT_FONT;
+  appName.style.fontFamily = settings.font || DEFAULT_FONT_FAMILY;
   appName.style.fontSize = (settings.fontSize || DEFAULT_FONT_SIZE) + 'px';
   appName.style.fontWeight = settings.fontWeight || DEFAULT_FONT_WEIGHT;
   appName.style.marginTop = (settings.textPosition || DEFAULT_TEXT_POSITION) + 'px';

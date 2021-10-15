@@ -6,16 +6,7 @@ const {
 } = require('./scripts/settings.js');
 const {
   APP_TITLE,
-  DEFAULT_BACKGROUND,
-  DEFAULT_BACKGROUND_BRIGHTNESS,
-  DEFAULT_BACKGROUND_CONTRAST,
-  DEFAULT_BACKGROUND_HUE_ROTATE,
-  DEFAULT_BACKGROUND_SATURATION,
-  DEFAULT_TEXT_COLOR,
-  DEFAULT_FONT,
-  MAX_CONTRAST,
-  MAX_BRIGHTNESS,
-  MAX_SATURATION
+  DEFAULT_BACKGROUND
 } = require('./scripts/global-constants.js');
 
 const settings = loadSettings();
@@ -29,73 +20,13 @@ const backgroundImageInput = document.getElementById('background-image-input');
 const backgroundLeaves = document.getElementById('background-leaves');
 const backgroundSpikes = document.getElementById('background-spikes');
 const backgroundBubbles = document.getElementById('background-bubbles');
-const backgroundHueInput = document.getElementById('background-hue-input');
-const fauxBackgroundHue = document.getElementById('faux-background-hue');
-const clearBackgroundHue = document.getElementById('clear-background-hue');
-const backgroundBrightnessInput = document.getElementById('background-brightness-input');
-const fauxBackgroundBrightness = document.getElementById('faux-background-brightness');
-const clearBackgroundBrightness = document.getElementById('clear-background-brightness');
-const backgroundContrastInput = document.getElementById('background-contrast-input');
-const fauxBackgroundContrast = document.getElementById('faux-background-contrast');
-const clearBackgroundContrast = document.getElementById('clear-background-contrast');
-const backgroundSaturationInput = document.getElementById('background-saturation-input');
-const fauxBackgroundSaturation = document.getElementById('faux-background-saturation');
-const clearBackgroundSaturation = document.getElementById('clear-background-saturation');
-const fauxBackgroundInput = document.getElementById('faux-background-input');
-
-const fontInput = document.getElementById('font-input');
-const clearFont = document.getElementById('clear-font');
 
 function addClass (el, className) {
   document.querySelector(el).classList.add(className);
 }
-function removeClass (el, className) {
-  document.querySelector(el).classList.remove(className);
-}
-function hide (el) {
-  addClass(el, 'hidden');
-}
-function show (el) {
-  removeClass(el, 'hidden');
-}
-
-function calculateSliderValue (DEFAULT_VALUE, setting, MAX) {
-  let value = DEFAULT_VALUE;
-  if (typeof(setting) === 'number') {
-    value = setting;
-  }
-  value = Math.round(value / MAX * 100);
-  return value;
-}
-
-function updateDOMCheckbox (el, setting, DEFAULT_VALUE) {
-  let value = DEFAULT_VALUE;
-  if (typeof(settings[setting]) === 'boolean') {
-    value = settings[setting];
-  }
-  el.checked = value;
-}
 
 function updateDOM () {
-  toggleSection();
   currentBackgroundImage.innerText = settings.background || DEFAULT_BACKGROUND;
-  fauxBackgroundInput.setAttribute('title', (settings.background || DEFAULT_BACKGROUND));
-  backgroundHueInput.value = settings.backgroundHueRotate || DEFAULT_BACKGROUND_HUE_ROTATE;
-  fauxBackgroundHue.innerText = settings.backgroundHueRotate || DEFAULT_BACKGROUND_HUE_ROTATE;
-  let brightness = calculateSliderValue(DEFAULT_BACKGROUND_BRIGHTNESS, settings.backgroundBrightness, MAX_BRIGHTNESS);
-  backgroundBrightnessInput.value = brightness;
-  fauxBackgroundBrightness.innerText = brightness;
-  let contrast = calculateSliderValue(DEFAULT_BACKGROUND_CONTRAST, settings.backgroundContrast, MAX_CONTRAST);
-  backgroundContrastInput.value = contrast;
-  fauxBackgroundContrast.innerText = contrast;
-  let saturation = calculateSliderValue(DEFAULT_BACKGROUND_SATURATION, settings.backgroundSaturation, MAX_SATURATION);
-  backgroundSaturationInput.value = saturation;
-  fauxBackgroundSaturation.innerText = saturation;
-  let font = DEFAULT_FONT;
-  if (typeof(settings.font) === 'string') {
-    font = settings.font;
-  }
-  fontInput.value = font;
 }
 
 function saveAndUpdateDOM () {
@@ -103,6 +34,7 @@ function saveAndUpdateDOM () {
   updateDOM();
 }
 
+// used by background brightness, saturation, contrast
 function convertSettingToPercent (value, MAX) {
   value = parseInt(value);
   if (value !== 0) {
@@ -111,19 +43,6 @@ function convertSettingToPercent (value, MAX) {
   return value;
 }
 
-function toggleSection () {
-  let current = settings.lastViewedSection || 'options';
-  removeClass('#options-tab', 'active');
-  removeClass('#text-tab', 'active');
-  removeClass('#background-tab', 'active');
-  removeClass('#about-tab', 'active');
-  hide('#options-container');
-  hide('#text-container');
-  hide('#background-container');
-  hide('#about-container');
-  addClass('#' + current + '-tab', 'active');
-  show('#' + current + '-container');
-}
 function eventBindings () {
   // type="file"
   clearBackground.addEventListener('click', function (evt) {
@@ -143,9 +62,6 @@ function eventBindings () {
 
     settings.background = file;
     saveAndUpdateDOM();
-  });
-  fauxBackgroundInput.addEventListener('click', function () {
-    backgroundImageInput.click();
   });
 
   // Background images
@@ -169,72 +85,6 @@ function eventBindings () {
       settings.background = backgroundImage.file;
       saveAndUpdateDOM();
     });
-  });
-
-  // Background filters
-  backgroundHueInput.addEventListener('input', function (evt) {
-    let value = parseInt(evt.currentTarget.value);
-    settings.backgroundHueRotate = value;
-    saveAndUpdateDOM();
-  });
-  backgroundBrightnessInput.addEventListener('input', function (evt) {
-    settings.backgroundBrightness = convertSettingToPercent(evt.currentTarget.value, MAX_BRIGHTNESS);
-    saveAndUpdateDOM();
-  });
-  backgroundContrastInput.addEventListener('input', function (evt) {
-    settings.backgroundContrast = convertSettingToPercent(evt.currentTarget.value, MAX_CONTRAST);
-    saveAndUpdateDOM();
-  });
-  backgroundSaturationInput.addEventListener('input', function (evt) {
-    settings.backgroundSaturation = convertSettingToPercent(evt.currentTarget.value, MAX_SATURATION);
-    saveAndUpdateDOM();
-  });
-
-  const clearBackgroundFilters = [
-    {
-      clearEl: clearBackgroundHue,
-      setting: 'backgroundHueRotate',
-      default: DEFAULT_BACKGROUND_HUE_ROTATE
-    },
-    {
-      clearEl: clearBackgroundBrightness,
-      setting: 'backgroundBrightness',
-      default: DEFAULT_BACKGROUND_BRIGHTNESS
-    },
-    {
-      clearEl: clearBackgroundContrast,
-      setting: 'backgroundContrast',
-      default: DEFAULT_BACKGROUND_CONTRAST
-    },
-    {
-      clearEl: clearBackgroundSaturation,
-      setting: 'backgroundSaturation',
-      default: DEFAULT_BACKGROUND_SATURATION
-    }
-  ];
-  clearBackgroundFilters.forEach(function (filter) {
-    filter.clearEl.addEventListener('click', function (evt) {
-      evt.preventDefault();
-      settings[filter.setting] = filter.default;
-      saveAndUpdateDOM();
-    });
-  });
-
-  // type="color"
-  fauxBackgroundInput.addEventListener('click', function () {
-    backgroundImageInput.click();
-  });
-
-  // type="text"
-  fontInput.addEventListener('input', function (evt) {
-    const value = evt.currentTarget.value;
-    settings.font = value;
-    saveAndUpdateDOM();
-  });
-  clearFont.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.font = DEFAULT_FONT;
-    saveAndUpdateDOM();
   });
 }
 
