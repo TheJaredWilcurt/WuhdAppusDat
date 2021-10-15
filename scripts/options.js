@@ -13,7 +13,6 @@ const {
   DEFAULT_BACKGROUND_SATURATION,
   DEFAULT_TEXT_COLOR,
   DEFAULT_FONT,
-  DEFAULT_FONT_WEIGHT,
   DEFAULT_TEXT_POSITION,
   MAX_CONTRAST,
   MAX_BRIGHTNESS,
@@ -49,9 +48,6 @@ const fauxBackgroundInput = document.getElementById('faux-background-input');
 const fauxTextColor = document.getElementById('faux-text-color');
 const fontInput = document.getElementById('font-input');
 const clearFont = document.getElementById('clear-font');
-const fontWeightInput = document.getElementById('font-weight-input');
-const fauxFontWeight = document.getElementById('faux-font-weight');
-const clearFontWeight = document.getElementById('clear-font-weight');
 const textPositionInput = document.getElementById('text-position-input');
 const fauxTextPosition = document.getElementById('faux-text-position');
 const clearTextPosition = document.getElementById('clear-text-position');
@@ -109,8 +105,6 @@ function updateDOM () {
     font = settings.font;
   }
   fontInput.value = font;
-  fontWeightInput.value = (settings.fontWeight || DEFAULT_FONT_WEIGHT) / 100;
-  fauxFontWeight.innerText = (settings.fontWeight || DEFAULT_FONT_WEIGHT) / 100;
   textPositionInput.value = (settings.textPosition || DEFAULT_TEXT_POSITION) + 400;
   fauxTextPosition.innerText = (settings.textPosition || DEFAULT_TEXT_POSITION) + 400;
 }
@@ -271,16 +265,6 @@ function eventBindings () {
     saveAndUpdateDOM();
   });
   // type="range"
-  fontWeightInput.addEventListener('input', function (evt) {
-    let value = parseInt(evt.currentTarget.value);
-    settings.fontWeight = value * 100;
-    saveAndUpdateDOM();
-  });
-  clearFontWeight.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.fontWeight = DEFAULT_FONT_WEIGHT;
-    saveAndUpdateDOM();
-  });
   textPositionInput.addEventListener('input', function (evt) {
     let value = parseInt(evt.currentTarget.value);
     settings.textPosition = value - 400;

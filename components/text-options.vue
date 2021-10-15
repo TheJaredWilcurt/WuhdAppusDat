@@ -36,23 +36,14 @@
       label="Italics"
     ></check-box>
 
-    <div class="pill-form">
-      <label class="pill-label" for="font-weight-input">
-        Font&nbsp;Weight:
-      </label>
-      <span class="pill-content">
-        <input
-          id="font-weight-input"
-          type="range"
-          min="1"
-          max="9"
-        >
-      </span>
-      <span id="faux-font-weight">
-        4
-      </span>
-      <button id="clear-font-weight" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-    </div>
+    <range-slider
+      v-model="fontWeight"
+      label="Font Weight"
+      min="1"
+      max="9"
+      :multiplier="100"
+      :default-value="DEFAULT_FONT_WEIGHT"
+    ></range-slider>
 
     <div class="pill-form">
       <label class="pill-label" for="text-position-input">
@@ -76,7 +67,8 @@
 
 <script>
 const {
-  DEFAULT_FONT_SIZE
+  DEFAULT_FONT_SIZE,
+  DEFAULT_FONT_WEIGHT
 } = window.require('./scripts/global-constants.js');
 const { mapSettings } = window.require('./scripts/computeds.js');
 
@@ -90,6 +82,7 @@ module.exports = {
   data: function () {
     return {
       DEFAULT_FONT_SIZE,
+      DEFAULT_FONT_WEIGHT,
 
       textShadowOptions: [
         {
@@ -111,6 +104,7 @@ module.exports = {
     ...mapSettings([
       'fontItalics',
       'fontSize',
+      'fontWeight',
       'textShadow'
     ])
   }

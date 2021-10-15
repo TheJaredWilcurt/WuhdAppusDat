@@ -16,7 +16,7 @@
       >
     </span>
     <span class="range-value">
-      {{ value }}
+      {{ value * multiplier }}
     </span>
     <button
       class="pill-end last-pill-section"
@@ -48,6 +48,10 @@ module.exports = {
       type: [String, Number],
       default: 100
     },
+    multiplier: {
+      type: Number,
+      default: 1
+    },
     defaultValue: {
       type: Number,
       required: true
@@ -66,7 +70,7 @@ module.exports = {
 
 <style>
 .range-value {
-  min-width: 49px;
+  min-width: 51px;
   justify-content: flex-end;
 }
 </style>
