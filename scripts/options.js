@@ -41,10 +41,8 @@ const clearBackgroundContrast = document.getElementById('clear-background-contra
 const backgroundSaturationInput = document.getElementById('background-saturation-input');
 const fauxBackgroundSaturation = document.getElementById('faux-background-saturation');
 const clearBackgroundSaturation = document.getElementById('clear-background-saturation');
-const clearTextColor = document.getElementById('clear-text-color');
-const textColorInput = document.getElementById('text-color-input');
 const fauxBackgroundInput = document.getElementById('faux-background-input');
-const fauxTextColor = document.getElementById('faux-text-color');
+
 const fontInput = document.getElementById('font-input');
 const clearFont = document.getElementById('clear-font');
 
@@ -93,9 +91,6 @@ function updateDOM () {
   let saturation = calculateSliderValue(DEFAULT_BACKGROUND_SATURATION, settings.backgroundSaturation, MAX_SATURATION);
   backgroundSaturationInput.value = saturation;
   fauxBackgroundSaturation.innerText = saturation;
-
-  fauxTextColor.style.background = settings.textColor || DEFAULT_TEXT_COLOR;
-  textColorInput.value = settings.textColor || DEFAULT_TEXT_COLOR;
   let font = DEFAULT_FONT;
   if (typeof(settings.font) === 'string') {
     font = settings.font;
@@ -226,25 +221,8 @@ function eventBindings () {
   });
 
   // type="color"
-  textColorInput.addEventListener('input', function (evt) {
-    let color = (
-      evt &&
-      evt.currentTarget &&
-      evt.currentTarget.value
-    ) || '';
-    settings.textColor = color.toUpperCase();
-    saveAndUpdateDOM();
-  });
-  clearTextColor.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.textColor = undefined;
-    saveAndUpdateDOM();
-  });
   fauxBackgroundInput.addEventListener('click', function () {
     backgroundImageInput.click();
-  });
-  fauxTextColor.addEventListener('click', function () {
-    textColorInput.click();
   });
 
   // type="text"

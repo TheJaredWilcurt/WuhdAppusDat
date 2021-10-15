@@ -1,14 +1,10 @@
 <template>
   <div id="text-container" class="pill-form-container">
-    <div class="pill-form">
-      <label class="pill-label" for="text-color-input">
-        Text&nbsp;color:
-      </label>
-      <span id="faux-text-color" class="pill-content">
-        <input id="text-color-input" type="color" class="hidden">
-      </span>
-      <button id="clear-text-color" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-    </div>
+    <color-picker
+      v-model="textColor"
+      label="Text Color"
+      :default-value="DEFAULT_TEXT_COLOR"
+    ></color-picker>
 
     <drop-down
       v-model="textShadow"
@@ -59,6 +55,7 @@
 const {
   DEFAULT_FONT_SIZE,
   DEFAULT_FONT_WEIGHT,
+  DEFAULT_TEXT_COLOR,
   DEFAULT_TEXT_POSITION
 } = window.require('./scripts/global-constants.js');
 const { mapSettings } = window.require('./scripts/computeds.js');
@@ -67,6 +64,7 @@ module.exports = {
   name: 'text-options',
   components: {
     'check-box': httpVueLoader('components/form-fields/check-box.vue'),
+    'color-picker': httpVueLoader('components/form-fields/color-picker.vue'),
     'drop-down': httpVueLoader('components/form-fields/drop-down.vue'),
     'range-slider': httpVueLoader('components/form-fields/range-slider.vue')
   },
@@ -74,6 +72,7 @@ module.exports = {
     return {
       DEFAULT_FONT_SIZE,
       DEFAULT_FONT_WEIGHT,
+      DEFAULT_TEXT_COLOR,
       DEFAULT_TEXT_POSITION,
 
       textShadowOptions: [
@@ -97,6 +96,7 @@ module.exports = {
       'fontItalics',
       'fontSize',
       'fontWeight',
+      'textColor',
       'textPosition',
       'textShadow'
     ])
