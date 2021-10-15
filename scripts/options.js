@@ -13,7 +13,6 @@ const {
   DEFAULT_BACKGROUND_SATURATION,
   DEFAULT_TEXT_COLOR,
   DEFAULT_FONT,
-  DEFAULT_TEXT_POSITION,
   MAX_CONTRAST,
   MAX_BRIGHTNESS,
   MAX_SATURATION
@@ -48,9 +47,6 @@ const fauxBackgroundInput = document.getElementById('faux-background-input');
 const fauxTextColor = document.getElementById('faux-text-color');
 const fontInput = document.getElementById('font-input');
 const clearFont = document.getElementById('clear-font');
-const textPositionInput = document.getElementById('text-position-input');
-const fauxTextPosition = document.getElementById('faux-text-position');
-const clearTextPosition = document.getElementById('clear-text-position');
 
 function addClass (el, className) {
   document.querySelector(el).classList.add(className);
@@ -105,8 +101,6 @@ function updateDOM () {
     font = settings.font;
   }
   fontInput.value = font;
-  textPositionInput.value = (settings.textPosition || DEFAULT_TEXT_POSITION) + 400;
-  fauxTextPosition.innerText = (settings.textPosition || DEFAULT_TEXT_POSITION) + 400;
 }
 
 function saveAndUpdateDOM () {
@@ -262,17 +256,6 @@ function eventBindings () {
   clearFont.addEventListener('click', function (evt) {
     evt.preventDefault();
     settings.font = DEFAULT_FONT;
-    saveAndUpdateDOM();
-  });
-  // type="range"
-  textPositionInput.addEventListener('input', function (evt) {
-    let value = parseInt(evt.currentTarget.value);
-    settings.textPosition = value - 400;
-    saveAndUpdateDOM();
-  });
-  clearTextPosition.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.textPosition = DEFAULT_TEXT_POSITION;
     saveAndUpdateDOM();
   });
 }

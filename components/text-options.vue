@@ -45,30 +45,21 @@
       :default-value="DEFAULT_FONT_WEIGHT"
     ></range-slider>
 
-    <div class="pill-form">
-      <label class="pill-label" for="text-position-input">
-        Text&nbsp;Position:
-      </label>
-      <span class="pill-content">
-        <input
-          id="text-position-input"
-          type="range"
-          min="0"
-          max="800"
-        >
-      </span>
-      <span id="faux-text-position">
-        400
-      </span>
-      <button id="clear-text-position" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-    </div>
+    <range-slider
+      v-model="textPosition"
+      label="Text Position"
+      min="-400"
+      max="400"
+      :default-value="DEFAULT_TEXT_POSITION"
+    ></range-slider>
   </div>
 </template>
 
 <script>
 const {
   DEFAULT_FONT_SIZE,
-  DEFAULT_FONT_WEIGHT
+  DEFAULT_FONT_WEIGHT,
+  DEFAULT_TEXT_POSITION
 } = window.require('./scripts/global-constants.js');
 const { mapSettings } = window.require('./scripts/computeds.js');
 
@@ -83,6 +74,7 @@ module.exports = {
     return {
       DEFAULT_FONT_SIZE,
       DEFAULT_FONT_WEIGHT,
+      DEFAULT_TEXT_POSITION,
 
       textShadowOptions: [
         {
@@ -105,6 +97,7 @@ module.exports = {
       'fontItalics',
       'fontSize',
       'fontWeight',
+      'textPosition',
       'textShadow'
     ])
   }
