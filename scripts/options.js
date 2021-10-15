@@ -14,7 +14,6 @@ const {
   DEFAULT_TEXT_COLOR,
   DEFAULT_FONT,
   DEFAULT_FONT_WEIGHT,
-  DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_POSITION,
   MAX_CONTRAST,
   MAX_BRIGHTNESS,
@@ -50,7 +49,6 @@ const fauxBackgroundInput = document.getElementById('faux-background-input');
 const fauxTextColor = document.getElementById('faux-text-color');
 const fontInput = document.getElementById('font-input');
 const clearFont = document.getElementById('clear-font');
-const fontStyleInput = document.getElementById('font-style-input');
 const fontWeightInput = document.getElementById('font-weight-input');
 const fauxFontWeight = document.getElementById('faux-font-weight');
 const clearFontWeight = document.getElementById('clear-font-weight');
@@ -111,7 +109,6 @@ function updateDOM () {
     font = settings.font;
   }
   fontInput.value = font;
-  updateDOMCheckbox(fontStyleInput, 'fontStyle', DEFAULT_FONT_STYLE);
   fontWeightInput.value = (settings.fontWeight || DEFAULT_FONT_WEIGHT) / 100;
   fauxFontWeight.innerText = (settings.fontWeight || DEFAULT_FONT_WEIGHT) / 100;
   textPositionInput.value = (settings.textPosition || DEFAULT_TEXT_POSITION) + 400;

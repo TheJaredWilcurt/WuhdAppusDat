@@ -31,14 +31,10 @@
       :default-value="DEFAULT_FONT_SIZE"
     ></range-slider>
 
-    <div class="pill-form pill-form-checkbox">
-      <label class="pill-label" for="font-style-input">
-        Italics:
-      </label>
-      <span id="faux-font-style" class="pill-content last-pill-section">
-        <input id="font-style-input" type="checkbox">
-      </span>
-    </div>
+    <check-box
+      v-model="fontItalics"
+      label="Italics"
+    ></check-box>
 
     <div class="pill-form">
       <label class="pill-label" for="font-weight-input">
@@ -87,6 +83,7 @@ const { mapSettings } = window.require('./scripts/computeds.js');
 module.exports = {
   name: 'text-options',
   components: {
+    'check-box': httpVueLoader('components/form-fields/check-box.vue'),
     'drop-down': httpVueLoader('components/form-fields/drop-down.vue'),
     'range-slider': httpVueLoader('components/form-fields/range-slider.vue')
   },
@@ -112,6 +109,7 @@ module.exports = {
   },
   computed: {
     ...mapSettings([
+      'fontItalics',
       'fontSize',
       'textShadow'
     ])

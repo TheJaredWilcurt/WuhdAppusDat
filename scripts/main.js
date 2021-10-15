@@ -11,7 +11,7 @@ const {
   DEFAULT_FONT,
   DEFAULT_FONT_SIZE,
   DEFAULT_FONT_WEIGHT,
-  DEFAULT_FONT_STYLE,
+  DEFAULT_FONT_ITALICS,
   DEFAULT_TEXT_POSITION,
   DEFAULT_INTERVAL,
   DEFAULT_VISIBLE_ON_ALL_WORKSPACES
@@ -113,7 +113,7 @@ function applySettings () {
   let fontStyle = 'normal';
   if (
     (typeof(settings.fontStyle) === 'boolean' && settings.fontStyle) ||
-    (typeof(settings.fontStyle) !== 'boolean' && DEFAULT_FONT_STYLE)
+    (typeof(settings.fontStyle) !== 'boolean' && DEFAULT_FONT_ITALICS)
   ) {
     fontStyle = 'italic';
   }
