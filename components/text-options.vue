@@ -24,23 +24,12 @@
       <button id="clear-font" class="pill-end last-pill-section" title="Reset to default">&times;</button>
     </div>
 
-    <div class="pill-form">
-      <label class="pill-label" for="font-size-input">
-        Font&nbsp;Size:
-      </label>
-      <span class="pill-content">
-        <input
-          id="font-size-input"
-          type="range"
-          min="1"
-          max="100"
-        >
-      </span>
-      <span id="faux-font-size">
-        15
-      </span>
-      <button id="clear-font-size" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-    </div>
+    <range-slider
+      v-model="fontSize"
+      label="Font Size"
+      min="1"
+      :default-value="DEFAULT_FONT_SIZE"
+    ></range-slider>
 
     <div class="pill-form pill-form-checkbox">
       <label class="pill-label" for="font-style-input">
@@ -90,15 +79,21 @@
 </template>
 
 <script>
+const {
+  DEFAULT_FONT_SIZE
+} = window.require('./scripts/global-constants.js');
 const { mapSettings } = window.require('./scripts/computeds.js');
 
 module.exports = {
   name: 'text-options',
   components: {
-    'drop-down': httpVueLoader('components/form-fields/drop-down.vue')
+    'drop-down': httpVueLoader('components/form-fields/drop-down.vue'),
+    'range-slider': httpVueLoader('components/form-fields/range-slider.vue')
   },
   data: function () {
     return {
+      DEFAULT_FONT_SIZE,
+
       textShadowOptions: [
         {
           label: 'None',
@@ -117,6 +112,7 @@ module.exports = {
   },
   computed: {
     ...mapSettings([
+      'fontSize',
       'textShadow'
     ])
   }

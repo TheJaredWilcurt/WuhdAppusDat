@@ -12,9 +12,7 @@ const {
   DEFAULT_BACKGROUND_HUE_ROTATE,
   DEFAULT_BACKGROUND_SATURATION,
   DEFAULT_TEXT_COLOR,
-  DEFAULT_TEXT_SHADOW,
   DEFAULT_FONT,
-  DEFAULT_FONT_SIZE,
   DEFAULT_FONT_WEIGHT,
   DEFAULT_FONT_STYLE,
   DEFAULT_TEXT_POSITION,
@@ -52,9 +50,6 @@ const fauxBackgroundInput = document.getElementById('faux-background-input');
 const fauxTextColor = document.getElementById('faux-text-color');
 const fontInput = document.getElementById('font-input');
 const clearFont = document.getElementById('clear-font');
-const fontSizeInput = document.getElementById('font-size-input');
-const fauxFontSize = document.getElementById('faux-font-size');
-const clearFontSize = document.getElementById('clear-font-size');
 const fontStyleInput = document.getElementById('font-style-input');
 const fontWeightInput = document.getElementById('font-weight-input');
 const fauxFontWeight = document.getElementById('faux-font-weight');
@@ -116,8 +111,6 @@ function updateDOM () {
     font = settings.font;
   }
   fontInput.value = font;
-  fontSizeInput.value = settings.fontSize || DEFAULT_FONT_SIZE;
-  fauxFontSize.innerText = settings.fontSize || DEFAULT_FONT_SIZE;
   updateDOMCheckbox(fontStyleInput, 'fontStyle', DEFAULT_FONT_STYLE);
   fontWeightInput.value = (settings.fontWeight || DEFAULT_FONT_WEIGHT) / 100;
   fauxFontWeight.innerText = (settings.fontWeight || DEFAULT_FONT_WEIGHT) / 100;
@@ -281,16 +274,6 @@ function eventBindings () {
     saveAndUpdateDOM();
   });
   // type="range"
-  fontSizeInput.addEventListener('input', function (evt) {
-    let value = parseInt(evt.currentTarget.value);
-    settings.fontSize = value;
-    saveAndUpdateDOM();
-  });
-  clearFontSize.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    settings.fontSize = DEFAULT_FONT_SIZE;
-    saveAndUpdateDOM();
-  });
   fontWeightInput.addEventListener('input', function (evt) {
     let value = parseInt(evt.currentTarget.value);
     settings.fontWeight = value * 100;
