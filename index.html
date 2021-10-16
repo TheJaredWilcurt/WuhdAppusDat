@@ -237,7 +237,9 @@
                 this.settings[key] = settings[key];
               }
             });
+
             this.updateInterval();
+            window.nw.Window.get().setAlwaysOnTop(!!this.settings.alwaysOnTop);
           },
           // used by background brightness, saturation, contrast
           convertSettingToPercent: function (value, max) {

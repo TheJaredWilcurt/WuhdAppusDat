@@ -79,7 +79,7 @@ module.exports = {
 
 <style>
 .range-value {
-  min-width: 51px;
+  min-width: 55px;
   justify-content: flex-end;
 }
 </style>

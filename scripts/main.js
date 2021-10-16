@@ -26,20 +26,7 @@ function applySettings () {
   }
   settings.appMap = appMap;
 
-  let alwaysOnTopValidated;
-  if (typeof(settings.alwaysOnTop) === 'boolean') {
-    alwaysOnTopValidated = settings.alwaysOnTop;
-  } else {
-
-  }
-
-
-  nw.Window.get().setAlwaysOnTop(alwaysOnTopValidated);
-
-
-
   let visibleOnAllWorkspacesValidated;
-
 
   if (typeof(settings.visibleOnAllWorkspaces) === 'boolean') {
     visibleOnAllWorkspacesValidated = settings.visibleOnAllWorkspaces;
