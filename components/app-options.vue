@@ -27,8 +27,10 @@
       v-model="updateInterval"
       label="Update Interval"
       min="1"
-      max="15"
-      :default-value="DEFAULT_INTERVAL"
+      max="30"
+      :multiplier="0.5"
+      :to-fixed="1"
+      :default-value="DEFAULT_INTERVAL * 2"
     ></range-slider>
 
     <p>The "Update Interval" controls how often (in seconds) we check to see what application currently has focus. Faster speeds may not work as well on very low end devices, most people won't notice though.</p>

@@ -16,7 +16,7 @@
       >
     </span>
     <span class="range-value">
-      {{ value * multiplier }}
+      {{ visibleValue }}
     </span>
     <button
       class="pill-end last-pill-section"
@@ -52,6 +52,10 @@ module.exports = {
       type: Number,
       default: 1
     },
+    toFixed: {
+      type: Number,
+      default: 0
+    },
     defaultValue: {
       type: Number,
       required: true
@@ -63,6 +67,11 @@ module.exports = {
       let amount = $event && $event.target && $event.target.value;
       amount = parseInt(amount || this.min);
       this.$emit('input', amount);
+    }
+  },
+  computed: {
+    visibleValue: function () {
+      return (this.value * this.multiplier).toFixed(this.toFixed);
     }
   }
 };
