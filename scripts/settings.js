@@ -1,6 +1,6 @@
-const fs = global.require('fs');
+const fs = require('fs');
 
-const { SETTINGS_LOCATION } = global.require('./global-constants.js');
+const { SETTINGS_LOCATION } = require('./global-constants.js');
 
 function loadSettings () {
   const settings = {};
@@ -18,13 +18,14 @@ function loadSettings () {
 
 function saveSettings (settings) {
   // global.windowManager.appWindow(settings);
-  settings.version = global.nw.App.manifest.version;
+  settings.version = nw.App.manifest.version;
   const data = JSON.stringify(settings, null, 2);
   try {
     fs.writeFileSync(SETTINGS_LOCATION, data);
   } catch (err) {
     console.log('Error saving settings', err);
   }
+  global.refreshParent();
 }
 
 module.exports = {

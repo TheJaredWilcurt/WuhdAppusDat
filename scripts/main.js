@@ -17,7 +17,6 @@ const {
   DEFAULT_VISIBLE_ON_ALL_WORKSPACES
 } = require('./scripts/global-constants.js');
 
-loadSettings();
 document.querySelector('title').innerText = APP_TITLE;
 
 const appName = document.getElementById('app-name');
@@ -155,7 +154,7 @@ function appNameCleanUp (fileName) {
   if (fileName === atob('ZWxlY3Ryb24=')) {
     fileName = atob('RWxlY3Ryb20gKFVzaW5nIDk4JSBvZiBhdmFpbGFibGUgbWVtb3J5KQ==');
   } else {
-    fileName = settings.appMap[fileName.toLowerCase()] || fileName;
+    fileName = (settings && settings.appMap && settings.appMap[fileName.toLowerCase()]) || fileName;
   }
   return fileName || '';
 }
@@ -197,11 +196,11 @@ function setAppName () {
 
 function initialize () {
   global.refreshParent = function () {
-    applySettings();
+    // applySettings();
   };
 
-  applySettings();
-  eventBindings();
+  // applySettings();
+  // eventBindings();
   setAppName();
 }
 
