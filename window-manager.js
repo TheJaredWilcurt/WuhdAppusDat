@@ -1,11 +1,13 @@
 require('./scripts/tray.js').createTray();
 const settings = require('./scripts/settings.js').loadSettings();
 const { DEFAULT_SYSTEM_TRAY } = require('./scripts/global-constants.js');
+global.windowManager = {};
 
 let systemTray = DEFAULT_SYSTEM_TRAY;
 if (settings && typeof(settings.systemTray) === 'boolean') {
   systemTray = settings.systemTray;
 }
+
 
 const optionsWindowOptions = {
   id: 'WuhdAppusDat-options',
@@ -32,7 +34,7 @@ const appWindowOptions = {
 
 nw.Window.open('options.html', optionsWindowOptions, function (optionsWin) {
   optionsWin.setShadow(false);
-  global.optionsWindow = optionsWin;
+  global.windowManager.optionsWindow = optionsWin;
 
   optionsWin.on('closed', function () {
     optionsWin = null;
@@ -40,7 +42,7 @@ nw.Window.open('options.html', optionsWindowOptions, function (optionsWin) {
 
   nw.Window.open('index.html', appWindowOptions, function (appWin) {
     appWin.setShadow(false);
-    global.appWindow = appWin;
+    global.windowManager.appWindow = appWin;
 
     if (systemTray) {
       global.createTray();
@@ -49,23 +51,16 @@ nw.Window.open('options.html', optionsWindowOptions, function (optionsWin) {
     appWin.on('closed', function () {
       this.hide();
       appWin = null;
-      global.appWindow = null;
+      global.windowManager.appWindow = null;
 
       if (optionsWin !== null) {
         optionsWin.close(true);
       }
 
-      global.optionsWindow.close(true);
+      global.windowManager.optionsWindow.close(true);
 
       // After closing the new window, close the main window.
       this.close(true);
     });
   });
 });
-
-setInterval(function () {
-  if (!global.appWindow) {
-    // I don't like this hack, but it works for now
-    nw.Window.get().close();
-  }
-}, 3000);

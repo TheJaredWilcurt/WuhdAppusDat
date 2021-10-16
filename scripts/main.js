@@ -146,7 +146,7 @@ function eventBindings () {
 
   let optionsIcon = document.getElementById('window-control-options');
   optionsIcon.addEventListener('click', function () {
-    global.optionsWindow.show();
+    global.windowManager.optionsWindow.show();
   });
 }
 

@@ -17,21 +17,21 @@ function createTray () {
         type: 'normal',
         label: 'Options',
         click: function () {
-          global.optionsWindow.show();
+          global.windowManager.optionsWindow.show();
         }
       },
       {
         type: 'normal',
         label: 'Show Window',
         click: function () {
-          global.appWindow.show();
+          global.windowManager.appWindow.show();
         }
       },
       {
         type: 'normal',
         label: 'Hide Window',
         click: function () {
-          global.appWindow.hide();
+          global.windowManager.appWindow.hide();
         }
       },
       {
@@ -41,7 +41,7 @@ function createTray () {
         type: 'normal',
         label: 'Exit',
         click: function () {
-          global.appWindow.close();
+          global.windowManager.appWindow.close();
         }
       }
     ];
@@ -55,7 +55,7 @@ function createTray () {
     global.tray.menu = menu;
 
     global.tray.on('click', function () {
-      global.appWindow.show();
+      global.windowManager.appWindow.show();
     });
   };
 
