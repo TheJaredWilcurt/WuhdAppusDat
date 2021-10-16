@@ -49,7 +49,7 @@ module.exports = {
     };
   },
   created: function () {
-    this.$store.commit('setDefaults');
+    this.$store.commit('loadSettings');
 
     win.on('maximize', () => {
       this.isMaximized = true;

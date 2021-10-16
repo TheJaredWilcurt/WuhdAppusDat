@@ -8,7 +8,6 @@ if (settings && typeof(settings.systemTray) === 'boolean') {
   systemTray = settings.systemTray;
 }
 
-
 const optionsWindowOptions = {
   id: 'WuhdAppusDat-options',
   icon: 'icon/WuhdAppusDat-Icon.png',
