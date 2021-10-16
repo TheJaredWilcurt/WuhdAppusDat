@@ -10,21 +10,22 @@
         <a
           v-for="(tab, tabIndex) in tabs"
           class="tab"
-          :class="{ 'active': activeTab === tab }"
-          @click="activeTab = tab"
+          :class="{ 'active': lastViewedSection === tab }"
+          @click="lastViewedSection = tab"
           :key="'tab' + tabIndex"
         >{{ tab }}</a>
       </nav>
 
-      <app-options v-show="activeTab === 'Options'"></app-options>
-      <text-options v-show="activeTab === 'Text'"></text-options>
-      <background-options v-show="activeTab === 'Background'"></background-options>
-      <about-app v-show="activeTab === 'About'"></about-app>
+      <app-options v-show="lastViewedSection === 'Options'"></app-options>
+      <text-options v-show="lastViewedSection === 'Text'"></text-options>
+      <background-options v-show="lastViewedSection === 'Background'"></background-options>
+      <about-app v-show="lastViewedSection === 'About'"></about-app>
     </div>
   </div>
 </template>
 
 <script>
+const { mapSettings } = window.require('./scripts/computeds.js');
 const win = window.nw.Window.get();
 
 module.exports = {
@@ -39,7 +40,6 @@ module.exports = {
   data: function () {
     return {
       isMaximized: false,
-      activeTab: 'Background',
       tabs: [
         'Options',
         'Text',
@@ -47,6 +47,11 @@ module.exports = {
         'About'
       ]
     };
+  },
+  computed: {
+    ...mapSettings([
+      'lastViewedSection'
+    ])
   },
   created: function () {
     this.$store.commit('loadSettings');
