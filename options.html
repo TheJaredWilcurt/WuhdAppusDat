@@ -48,7 +48,12 @@
         mutations: {
           mutateSetting: function (state, { setting, value }) {
             state.settings[setting] = value;
-            settingsHelpers.saveSettings(state.settings);
+
+            const settings = { ...state.settings };
+            settings.version = window.nw.App.manifest.version;
+
+            settingsHelpers.saveSettings(settings);
+            settingsHelpers.sendSettings(settings);
           },
           loadSettings: function (state) {
             const settings = settingsHelpers.loadSettings() || {};
@@ -64,7 +69,7 @@
         }
       });
 
-      const app = new Vue({
+      window.App = new Vue({
         el: '#app',
         template: '<app-composition />',
         components: {

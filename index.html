@@ -124,6 +124,7 @@
       Vue.config.devtools = true;
 
       const path = window.require('path');
+      const settingsHelpers = window.require('./scripts/settings.js');
 
       window.App = new Vue({
         el: '#app',
@@ -298,6 +299,8 @@
         },
         created: function () {
           this.setAppName();
+          const settings = settingsHelpers.getSettings();
+          this.settingsChanged(settings);
         }
       });
     </script>

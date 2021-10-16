@@ -2,6 +2,7 @@ const fs = require('fs');
 
 const { SETTINGS_LOCATION } = require('./global-constants.js');
 
+// Load from disk
 function loadSettings () {
   const settings = {};
   if (!fs.existsSync(SETTINGS_LOCATION)) {
@@ -16,7 +17,18 @@ function loadSettings () {
   }
 }
 
+// Save to disk
 function saveSettings (settings) {
+  const data = JSON.stringify(settings, null, 2);
+  try {
+    fs.writeFileSync(SETTINGS_LOCATION, data);
+  } catch (err) {
+    console.log('Error saving settings', err);
+  }
+}
+
+// Send vuex settings from Options window to main window
+function sendSettings (settings) {
   if (
     global.windowManager &&
     global.windowManager.appWindow &&
@@ -26,16 +38,29 @@ function saveSettings (settings) {
   ) {
     global.windowManager.appWindow.window.App.settingsChanged(settings);
   }
-  settings.version = nw.App.manifest.version;
-  const data = JSON.stringify(settings, null, 2);
-  try {
-    fs.writeFileSync(SETTINGS_LOCATION, data);
-  } catch (err) {
-    console.log('Error saving settings', err);
+}
+
+// Get vuex settings from Options window
+function getSettings () {
+  if (
+    global.windowManager &&
+    global.windowManager.optionsWindow &&
+    global.windowManager.optionsWindow.window &&
+    global.windowManager.optionsWindow.window.App &&
+    global.windowManager.optionsWindow.window.App.$store &&
+    global.windowManager.optionsWindow.window.App.$store.state &&
+    global.windowManager.optionsWindow.window.App.$store.state.settings
+  ) {
+    return {
+      ...global.windowManager.optionsWindow.window.App.$store.state.settings
+    };
   }
+  return {};
 }
 
 module.exports = {
+  getSettings,
   loadSettings,
-  saveSettings
+  saveSettings,
+  sendSettings
 };
