@@ -110,7 +110,7 @@
         </div>
       </nav>
 
-      <div id="background" class="container"></div>
+      <div class="container" :style="backgroundStyles"></div>
       <div class="container">
         <h1 class="app-name" :style="textStyles">
           {{ currentlyInFocusApp }}
@@ -224,6 +224,54 @@
           }
         },
         computed: {
+          backgroundStyles: function () {
+            let backgroundImage = this.settings.backgroundImage;
+            const shippedBackgrounds = [
+              'images/none.png',
+              'images/leaves.png',
+              'images/spikes.png',
+              'images/bubbles.png'
+            ];
+
+            if (
+              backgroundImage &&
+              !shippedBackgrounds.includes(backgroundImage)
+            ) {
+              backgroundImage = 'file://' + backgroundImage.split('\\').join('/');
+            }
+            if (backgroundImage) {
+              backgroundImage = 'url("' + backgroundImage + '")';
+            }
+
+            let brightness;
+            let contrast;
+            let hueRotate;
+            let saturation;
+            if (typeof(this.settings.backgroundBrightness) === 'number') {
+              brightness = 'brightness(' + this.settings.backgroundBrightness + ')';
+            }
+            if (typeof(this.settings.backgroundContrast) === 'number') {
+              contrast = 'contrast(' + this.settings.backgroundContrast + ')';
+            }
+            if (typeof(this.settings.backgroundHueRotate) === 'number') {
+              hueRotate = 'hue-rotate(' + this.settings.backgroundHueRotate + 'deg)';
+            }
+            if (typeof(this.settings.backgroundSaturation) === 'number') {
+              saturation = 'saturate(' + this.settings.backgroundSaturation + ')';
+            }
+            let filters = [
+              brightness,
+              contrast,
+              hueRotate,
+              saturation
+            ].filter(Boolean).join(' ');
+
+
+            return [
+              'background-image:' + backgroundImage,
+              'filter:' + filters || 'none'
+            ].join(';');
+          },
           textStyles: function () {
             let fontItalics = 'normal';
             if (this.settings.fontItalics) {
