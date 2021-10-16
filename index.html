@@ -125,7 +125,7 @@
 
       const path = window.require('path');
 
-      const app = new Vue({
+      window.App = new Vue({
         el: '#app',
         data: {
           currentlyInFocusApp: 'cool',
@@ -225,9 +225,9 @@
         },
         computed: {
           textStyles: function () {
-            let fontStyle = 'normal';
-            if (this.settings.fontStyle) {
-              fontStyle = 'italic';
+            let fontItalics = 'normal';
+            if (this.settings.fontItalics) {
+              fontItalics = 'italic';
             }
 
             let textShadow = 'none';
@@ -242,7 +242,7 @@
               'color:' + this.settings.textColor,
               'font-family:' + this.settings.fontFamily,
               'font-size:' + this.settings.fontSize + 'px',
-              'font-style:' + fontStyle,
+              'font-style:' + fontItalics,
               'font-weight:' + (this.settings.fontWeight * 100),
               'text-shadow:' + textShadow
             ].join(';');

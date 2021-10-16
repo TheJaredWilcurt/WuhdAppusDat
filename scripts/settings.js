@@ -21,10 +21,10 @@ function saveSettings (settings) {
     global.windowManager &&
     global.windowManager.appWindow &&
     global.windowManager.appWindow.window &&
-    global.windowManager.appWindow.window.app &&
-    global.windowManager.appWindow.window.app.settingsChanged
+    global.windowManager.appWindow.window.App &&
+    global.windowManager.appWindow.window.App.settingsChanged
   ) {
-    global.windowManager.appWindow.window.app.settingsChanged(settings);
+    global.windowManager.appWindow.window.App.settingsChanged(settings);
   }
   settings.version = nw.App.manifest.version;
   const data = JSON.stringify(settings, null, 2);
