@@ -1,18 +1,12 @@
 // nw.Window.get().showDevTools();
 
 const fs = require('fs');
-const path = require('path');
+
 
 const loadSettings = require('./scripts/settings.js').loadSettings;
 const {
   APP_TITLE,
   DEFAULT_BACKGROUND_IMAGE,
-  DEFAULT_TEXT_COLOR,
-  DEFAULT_FONT_FAMILY,
-  DEFAULT_FONT_SIZE,
-  DEFAULT_FONT_WEIGHT,
-  DEFAULT_FONT_ITALICS,
-  DEFAULT_TEXT_POSITION,
   DEFAULT_INTERVAL,
   DEFAULT_VISIBLE_ON_ALL_WORKSPACES
 } = require('./scripts/global-constants.js');
@@ -102,96 +96,6 @@ function applySettings () {
     saturation
   ].filter(Boolean).join(' ');
   background.style.filter = filters || 'none';
-
-  // Text font/color
-  appName.style.color = settings.textColor || DEFAULT_TEXT_COLOR;
-  appName.style.fontFamily = settings.font || DEFAULT_FONT_FAMILY;
-  appName.style.fontSize = (settings.fontSize || DEFAULT_FONT_SIZE) + 'px';
-  appName.style.fontWeight = settings.fontWeight || DEFAULT_FONT_WEIGHT;
-  appName.style.marginTop = (settings.textPosition || DEFAULT_TEXT_POSITION) + 'px';
-  let fontStyle = 'normal';
-  if (
-    (typeof(settings.fontStyle) === 'boolean' && settings.fontStyle) ||
-    (typeof(settings.fontStyle) !== 'boolean' && DEFAULT_FONT_ITALICS)
-  ) {
-    fontStyle = 'italic';
-  }
-  appName.style.fontStyle = fontStyle;
-
-
-  // Text Shadow
-  if (settings.textShadow === 'none') {
-    appName.style.textShadow = 'none';
-  } else if (settings.textShadow === 'white') {
-    appName.style.textShadow = '1px 1px 11px #FFF, 1px 1px 18px #FFF';
-  } else {
-    appName.style.textShadow = '1px 1px 11px #000, 1px 1px 18px #000';
-  }
-}
-
-function eventBindings () {
-  let closeIcon = document.getElementById('window-control-close');
-  closeIcon.addEventListener('click', function () {
-    const settings = loadSettings();
-    if (global.tray && settings.closingApp === 'tray' && settings.systemTray) {
-      nw.Window.get().hide();
-    } else {
-      if (global.tray) {
-        global.removeTray();
-      }
-      nw.Window.get().close(true);
-    }
-  });
-
-  let optionsIcon = document.getElementById('window-control-options');
-  optionsIcon.addEventListener('click', function () {
-    global.windowManager.optionsWindow.show();
-  });
-}
-
-function appNameCleanUp (fileName) {
-  fileName = fileName.split('_').join(' ');
-  if (fileName === atob('ZWxlY3Ryb24=')) {
-    fileName = atob('RWxlY3Ryb20gKFVzaW5nIDk4JSBvZiBhdmFpbGFibGUgbWVtb3J5KQ==');
-  } else {
-    fileName = (settings && settings.appMap && settings.appMap[fileName.toLowerCase()]) || fileName;
-  }
-  return fileName || '';
-}
-
-async function setLinuxOrOSXAppName () {
-  const activeWin = require('active-win');
-  let win = await activeWin();
-  let fileName = win && win.owner && win.owner.name;
-  if (!fileName || typeof(fileName) !== 'string') {
-    fileName = '';
-  }
-  appName.innerText = appNameCleanUp(fileName);
-}
-
-function setWindowsAppName () {
-  const getActiveProcessName = require('windows-active-process').getActiveProcessName;
-  let filePath = getActiveProcessName();
-  if (!filePath || typeof(filePath) !== 'string') {
-    filePath = '';
-  }
-  let splitPath = filePath.split(path.sep);
-  let fileName = splitPath[splitPath.length - 1];
-  fileName = fileName.split('.');
-
-  if (fileName.length > 1) {
-    fileName.pop();
-  }
-  fileName = fileName.join('');
-  appName.innerText = appNameCleanUp(fileName);
-}
-
-function setAppName () {
-  if (process.platform === 'win32') {
-    setWindowsAppName();
-  } else {
-    setLinuxOrOSXAppName();
-  }
 }
 
 function initialize () {
@@ -200,8 +104,6 @@ function initialize () {
   };
 
   // applySettings();
-  // eventBindings();
-  setAppName();
 }
 
 initialize();

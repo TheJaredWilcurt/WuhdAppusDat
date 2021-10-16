@@ -17,7 +17,15 @@ function loadSettings () {
 }
 
 function saveSettings (settings) {
-  // global.windowManager.appWindow(settings);
+  if (
+    global.windowManager &&
+    global.windowManager.appWindow &&
+    global.windowManager.appWindow.window &&
+    global.windowManager.appWindow.window.app &&
+    global.windowManager.appWindow.window.app.settingsChanged
+  ) {
+    global.windowManager.appWindow.window.app.settingsChanged(settings);
+  }
   settings.version = nw.App.manifest.version;
   const data = JSON.stringify(settings, null, 2);
   try {
@@ -25,7 +33,6 @@ function saveSettings (settings) {
   } catch (err) {
     console.log('Error saving settings', err);
   }
-  global.refreshParent();
 }
 
 module.exports = {

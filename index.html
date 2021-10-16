@@ -79,41 +79,179 @@
     </style>
   </head>
   <body>
-    <nav class="drag-on">
-      <div class="grabber"></div>
-      <div class="drag-off pull-right">
-        <button
-          id="window-control-options"
-          class="window-control options-icon"
-          title="Options"
-        >
-          <svg
-            aria-hidden="true"
-            focusable="false"
-            role="img"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
-            style="width: 20px"
+    <div id="app">
+      <nav class="drag-on">
+        <div class="grabber"></div>
+        <div class="drag-off pull-right">
+          <button
+            class="window-control options-icon"
+            title="Options"
+            @click="openOptionsWindow"
           >
-            <path
-              d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"
-              style="fill: currentColor; stroke-width: 29px; stroke: #666;"
-            />
-          </svg>
-        </button>
-        <button
-          id="window-control-close"
-          class="window-control close-icon"
-          title="Close"
-        >&times;</button>
-      </div>
-    </nav>
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              role="img"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+              style="width: 20px"
+            >
+              <path
+                d="M487.4 315.7l-42.6-24.6c4.3-23.2 4.3-47 0-70.2l42.6-24.6c4.9-2.8 7.1-8.6 5.5-14-11.1-35.6-30-67.8-54.7-94.6-3.8-4.1-10-5.1-14.8-2.3L380.8 110c-17.9-15.4-38.5-27.3-60.8-35.1V25.8c0-5.6-3.9-10.5-9.4-11.7-36.7-8.2-74.3-7.8-109.2 0-5.5 1.2-9.4 6.1-9.4 11.7V75c-22.2 7.9-42.8 19.8-60.8 35.1L88.7 85.5c-4.9-2.8-11-1.9-14.8 2.3-24.7 26.7-43.6 58.9-54.7 94.6-1.7 5.4.6 11.2 5.5 14L67.3 221c-4.3 23.2-4.3 47 0 70.2l-42.6 24.6c-4.9 2.8-7.1 8.6-5.5 14 11.1 35.6 30 67.8 54.7 94.6 3.8 4.1 10 5.1 14.8 2.3l42.6-24.6c17.9 15.4 38.5 27.3 60.8 35.1v49.2c0 5.6 3.9 10.5 9.4 11.7 36.7 8.2 74.3 7.8 109.2 0 5.5-1.2 9.4-6.1 9.4-11.7v-49.2c22.2-7.9 42.8-19.8 60.8-35.1l42.6 24.6c4.9 2.8 11 1.9 14.8-2.3 24.7-26.7 43.6-58.9 54.7-94.6 1.5-5.5-.7-11.3-5.6-14.1zM256 336c-44.1 0-80-35.9-80-80s35.9-80 80-80 80 35.9 80 80-35.9 80-80 80z"
+                style="fill: currentColor; stroke-width: 29px; stroke: #666;"
+              />
+            </svg>
+          </button>
+          <button
+            class="window-control close-icon"
+            title="Close"
+            @click="closeApp"
+          >&times;</button>
+        </div>
+      </nav>
 
-    <div id="background" class="container"></div>
-    <div class="container">
-      <h1 id="app-name" class="app-name"></h1>
+      <div id="background" class="container"></div>
+      <div class="container">
+        <h1 class="app-name" :style="textStyles">
+          {{ currentlyInFocusApp }}
+        </h1>
+      </div>
     </div>
 
-    <script src="scripts/main.js"></script>
+    <script src="scripts/vue.min.js"></script>
+    <!-- <script src="scripts/main.js"></script> -->
+    <script>
+      Vue.config.devtools = true;
+
+      const path = window.require('path');
+
+      const app = new Vue({
+        el: '#app',
+        data: {
+          currentlyInFocusApp: 'cool',
+          settings: {
+            version: null,
+            lastViewedSection: null,
+
+            alwaysOnTop: null,
+            systemTray: null,
+            closingApp: null,
+            visibleOnAllWorkspaces: null,
+            updateInterval: null,
+
+            fontFamily: '',
+            fontSize: null,
+            fontItalics: null,
+            fontWeight: null,
+            textColor: null,
+            textPosition: null,
+            textShadow: null,
+
+            backgroundImage: null,
+            backgroundHueRotate: null,
+            backgroundBrightness: null,
+            backgroundSaturation: null,
+            backgroundContrast: null
+          }
+        },
+        methods: {
+          openOptionsWindow: function () {
+            window.global.windowManager.optionsWindow.show();
+          },
+          closeApp: function () {
+            if (window.global.tray && this.settings.closingApp === 'tray' && this.settings.systemTray) {
+              window.nw.Window.get().hide();
+            } else {
+              if (window.global.tray) {
+                window.global.removeTray();
+              }
+              window.nw.Window.get().close(true);
+            }
+          },
+          appNameCleanUp: function (fileName) {
+            // fix later
+            let settings;
+
+            fileName = fileName.split('_').join(' ');
+            if (fileName === atob('ZWxlY3Ryb24=')) {
+              fileName = atob('RWxlY3Ryb20gKFVzaW5nIDk4JSBvZiBhdmFpbGFibGUgbWVtb3J5KQ==');
+            } else {
+              fileName = (settings && settings.appMap && settings.appMap[fileName.toLowerCase()]) || fileName;
+            }
+            return fileName || '';
+          },
+          setLinuxOrOSXAppName: async function () {
+            const activeWin = window.require('active-win');
+            let win = await activeWin();
+            let fileName = win && win.owner && win.owner.name;
+            if (!fileName || typeof(fileName) !== 'string') {
+              fileName = '';
+            }
+            fileName = this.appNameCleanUp(fileName);
+            this.currentlyInFocusApp = fileName;
+          },
+          setWindowsAppName: function () {
+            const getActiveProcessName = window.require('windows-active-process').getActiveProcessName;
+            let filePath = getActiveProcessName();
+            if (!filePath || typeof(filePath) !== 'string') {
+              filePath = '';
+            }
+            let splitPath = filePath.split(path.sep);
+            let fileName = splitPath[splitPath.length - 1];
+            fileName = fileName.split('.');
+
+            if (fileName.length > 1) {
+              fileName.pop();
+            }
+            fileName = fileName.join('');
+            fileName = this.appNameCleanUp(fileName);
+            this.currentlyInFocusApp = fileName;
+          },
+          setAppName: function () {
+            if (window.process.platform === 'win32') {
+              this.setWindowsAppName();
+            } else {
+              this.setLinuxOrOSXAppName();
+            }
+          },
+          settingsChanged: function (settings) {
+            const settingKeys = Object.keys(this.settings);
+            Object.entries(settings).forEach(([key, value]) => {
+              if (settingKeys.includes(key)) {
+                this.settings[key] = settings[key];
+              }
+            })
+          }
+        },
+        computed: {
+          textStyles: function () {
+            let fontStyle = 'normal';
+            if (this.settings.fontStyle) {
+              fontStyle = 'italic';
+            }
+
+            let textShadow = 'none';
+            if (this.settings.textShadow === 'white') {
+              textShadow = '1px 1px 11px #FFF, 1px 1px 18px #FFF';
+            } else if (this.settings.textShadow === 'black') {
+              textShadow = '1px 1px 11px #000, 1px 1px 18px #000';
+            }
+
+            return [
+              'margin-top:' + this.settings.textPosition + 'px',
+              'color:' + this.settings.textColor,
+              'font-family:' + this.settings.fontFamily,
+              'font-size:' + this.settings.fontSize + 'px',
+              'font-style:' + fontStyle,
+              'font-weight:' + (this.settings.fontWeight * 100),
+              'text-shadow:' + textShadow
+            ].join(';');
+          }
+        },
+        created: function () {
+          this.setAppName();
+        }
+      });
+    </script>
   </body>
 </html>
