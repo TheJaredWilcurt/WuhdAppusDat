@@ -119,19 +119,21 @@
     </div>
 
     <script src="scripts/vue.min.js"></script>
-    <!-- <script src="scripts/main.js"></script> -->
     <script>
       Vue.config.devtools = true;
 
       const path = window.require('path');
       const settingsHelpers = window.require('./scripts/settings.js');
       const {
+        APP_TITLE,
         DEFAULT_INTERVAL,
         MAX_BRIGHTNESS,
         MAX_CONTRAST,
         MAX_SATURATION,
         SATURATION_UPPER_MULTIPLIER
       } = require('./scripts/global-constants.js');
+
+      document.querySelector('title').innerText = APP_TITLE;
 
       window.App = new Vue({
         el: '#app',
