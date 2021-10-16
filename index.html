@@ -129,7 +129,8 @@
         DEFAULT_INTERVAL,
         MAX_BRIGHTNESS,
         MAX_CONTRAST,
-        MAX_SATURATION
+        MAX_SATURATION,
+        SATURATION_UPPER_MULTIPLIER
       } = require('./scripts/global-constants.js');
 
       window.App = new Vue({
@@ -279,7 +280,6 @@
             if (typeof(this.settings.backgroundBrightness) === 'number') {
               brightness = this.settings.backgroundBrightness;
               brightness = this.convertSettingToPercent(brightness, MAX_BRIGHTNESS)
-              console.log(brightness);
               brightness = 'brightness(' + brightness + ')';
             }
             if (typeof(this.settings.backgroundContrast) === 'number') {
@@ -289,7 +289,15 @@
             }
             if (typeof(this.settings.backgroundSaturation) === 'number') {
               saturation = this.settings.backgroundSaturation;
-              saturation = this.convertSettingToPercent(saturation, MAX_SATURATION);
+              if (saturation > 0) {
+                saturation = this.convertSettingToPercent(saturation, MAX_SATURATION / SATURATION_UPPER_MULTIPLIER);
+                saturation = saturation + 1;
+              } else if (saturation < 0) {
+                saturation = (saturation * -1) / 100;
+                saturation = 1 - saturation;
+              } else {
+                saturation = 1;
+              }
               saturation = 'saturate(' + saturation + ')';
             }
             let filters = [

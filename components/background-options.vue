@@ -45,6 +45,8 @@
     <range-slider
       v-model="backgroundSaturation"
       label="Background Saturation"
+      :min="-100"
+      :max="100 * SATURATION_UPPER_MULTIPLIER"
       :default-value="DEFAULT_BACKGROUND_SATURATION"
     ></range-slider>
   </div>
@@ -55,7 +57,8 @@ const {
   DEFAULT_BACKGROUND_BRIGHTNESS,
   DEFAULT_BACKGROUND_CONTRAST,
   DEFAULT_BACKGROUND_HUE_ROTATE,
-  DEFAULT_BACKGROUND_SATURATION
+  DEFAULT_BACKGROUND_SATURATION,
+  SATURATION_UPPER_MULTIPLIER
 } = window.require('./scripts/global-constants.js');
 const { mapSettings } = window.require('./scripts/computeds.js');
 
@@ -71,7 +74,8 @@ module.exports = {
       DEFAULT_BACKGROUND_BRIGHTNESS,
       DEFAULT_BACKGROUND_CONTRAST,
       DEFAULT_BACKGROUND_HUE_ROTATE,
-      DEFAULT_BACKGROUND_SATURATION
+      DEFAULT_BACKGROUND_SATURATION,
+      SATURATION_UPPER_MULTIPLIER
     };
   },
   computed: {
