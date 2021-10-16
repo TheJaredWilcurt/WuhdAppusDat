@@ -13,7 +13,6 @@
     <script src="scripts/http-vue-loader.min.js"></script>
     <!-- <script src="scripts/options.js"></script> -->
     <script>
-
       Vue.config.devtools = true;
       Vue.use(Vuex)
 
@@ -38,7 +37,7 @@
             textPosition: 36,
             textShadow: 'black',
 
-            background: 'images/leaves.png',
+            backgroundImage: 'images/leaves.png',
             backgroundHueRotate: 0,
             backgroundBrightness: 1,
             backgroundSaturation: 1,
@@ -64,7 +63,7 @@
             state.settings.textPosition = globalConstants.DEFAULT_TEXT_POSITION;
             state.settings.textShadow = globalConstants.DEFAULT_TEXT_SHADOW;
 
-            state.settings.background = globalConstants.DEFAULT_BACKGROUND;
+            state.settings.backgroundImage = globalConstants.DEFAULT_BACKGROUND_IMAGE;
             state.settings.backgroundHueRotate = globalConstants.DEFAULT_BACKGROUND_HUE_ROTATE;
             state.settings.backgroundBrightness = globalConstants.DEFAULT_BACKGROUND_BRIGHTNESS;
             state.settings.backgroundSaturation = globalConstants.DEFAULT_BACKGROUND_SATURATION;

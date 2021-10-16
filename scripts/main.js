@@ -6,7 +6,7 @@ const path = require('path');
 const loadSettings = require('./scripts/settings.js').loadSettings;
 const {
   APP_TITLE,
-  DEFAULT_BACKGROUND,
+  DEFAULT_BACKGROUND_IMAGE,
   DEFAULT_TEXT_COLOR,
   DEFAULT_FONT_FAMILY,
   DEFAULT_FONT_SIZE,
@@ -67,7 +67,7 @@ function applySettings () {
   nw.Window.get().setVisibleOnAllWorkspaces(visibleOnAllWorkspacesValidated);
 
   // Background image
-  let backgroundImage = (settings && settings.background) || DEFAULT_BACKGROUND;
+  let backgroundImage = (settings && settings.background) || DEFAULT_BACKGROUND_IMAGE;
 
   if (
     settings &&

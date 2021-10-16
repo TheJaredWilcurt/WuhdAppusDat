@@ -1,15 +1,9 @@
 <template>
   <div id="background-container" class="pill-form-container">
-    <div class="pill-form">
-      <label class="pill-label" for="background-image-input">
-        Background&nbsp;image:
-      </label>
-      <span id="faux-background-input" class="pill-content">
-        <span id="current-background-image" class="truncate"></span>
-        <input id="background-image-input" type="file" class="hidden">
-      </span>
-      <button id="clear-background" class="pill-end last-pill-section" title="Set to none">&times;</button>
-    </div>
+    <image-picker
+      v-model="backgroundImage"
+      label="Background image"
+    ></image-picker>
 
     <button id="background-leaves" title="Leaves Background" class="pill-form pill-button pill-button-leaves"></button>
     <button id="background-spikes" title="Spikes Background" class="pill-form pill-button pill-button-spikes"></button>
@@ -54,6 +48,7 @@ const { mapSettings } = window.require('./scripts/computeds.js');
 module.exports = {
   name: 'background-options',
   components: {
+    'image-picker': httpVueLoader('components/form-fields/image-picker.vue'),
     'range-slider': httpVueLoader('components/form-fields/range-slider.vue')
   },
   data: function () {
@@ -66,9 +61,10 @@ module.exports = {
   },
   computed: {
     ...mapSettings([
-      'backgroundHueRotate',
       'backgroundBrightness',
       'backgroundContrast',
+      'backgroundHueRotate',
+      'backgroundImage',
       'backgroundSaturation'
     ])
   }

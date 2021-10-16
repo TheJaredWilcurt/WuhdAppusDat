@@ -4,34 +4,19 @@ const {
   loadSettings,
   saveSettings
 } = require('./scripts/settings.js');
-const {
-  APP_TITLE,
-  DEFAULT_BACKGROUND
-} = require('./scripts/global-constants.js');
+const { APP_TITLE } = require('./scripts/global-constants.js');
 
 const settings = loadSettings();
 
 document.querySelector('title').innerText = APP_TITLE + ' Options';
 document.getElementById('app-title').innerText = APP_TITLE;
 
-const clearBackground = document.getElementById('clear-background');
-const currentBackgroundImage = document.getElementById('current-background-image');
-const backgroundImageInput = document.getElementById('background-image-input');
 const backgroundLeaves = document.getElementById('background-leaves');
 const backgroundSpikes = document.getElementById('background-spikes');
 const backgroundBubbles = document.getElementById('background-bubbles');
 
 function addClass (el, className) {
   document.querySelector(el).classList.add(className);
-}
-
-function updateDOM () {
-  currentBackgroundImage.innerText = settings.background || DEFAULT_BACKGROUND;
-}
-
-function saveAndUpdateDOM () {
-  saveSettings(settings);
-  updateDOM();
 }
 
 // used by background brightness, saturation, contrast
@@ -44,26 +29,6 @@ function convertSettingToPercent (value, MAX) {
 }
 
 function eventBindings () {
-  // type="file"
-  clearBackground.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    backgroundImageInput.value = '';
-    settings.background = 'none.png';
-    saveAndUpdateDOM();
-  });
-  backgroundImageInput.addEventListener('input', function (evt) {
-    let file = (
-      evt &&
-      evt.currentTarget &&
-      evt.currentTarget.files &&
-      evt.currentTarget.files[0] &&
-      evt.currentTarget.files[0].path
-    );
-
-    settings.background = file;
-    saveAndUpdateDOM();
-  });
-
   // Background images
   const backgroundImages = [
     {
@@ -83,7 +48,7 @@ function eventBindings () {
     backgroundImage.el.addEventListener('click', function (evt) {
       evt.preventDefault();
       settings.background = backgroundImage.file;
-      saveAndUpdateDOM();
+      saveSettings(settings);
     });
   });
 }
@@ -106,7 +71,6 @@ function initialize () {
     addClass('body', 'osx');
   }
   // eventBindings();
-  // updateDOM();
   // externalLinks();
 }
 
