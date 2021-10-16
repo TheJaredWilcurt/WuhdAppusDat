@@ -81,8 +81,8 @@
   <body>
     <div id="app">
       <main-nav
-        closing-app="settings.closingApp"
-        system-tray="settings.systemTray"
+        :closing-app="settings.closingApp"
+        :system-tray="settings.systemTray"
       ></main-nav>
 
       <div class="container" :style="backgroundStyles"></div>
@@ -94,6 +94,7 @@
     </div>
 
     <script src="scripts/vue.min.js"></script>
+    <script src="scripts/http-vue-loader.min.js"></script>
     <script>
       Vue.config.devtools = true;
 
@@ -116,7 +117,7 @@
           'main-nav': httpVueLoader('components/main-nav.vue')
         },
         data: {
-          currentlyInFocusApp: 'cool',
+          currentlyInFocusApp: '',
           interval: null,
           settings: {
             version: null,
