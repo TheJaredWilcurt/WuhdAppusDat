@@ -2,22 +2,12 @@
   <div id="about-container" class="about-container">
     <h2>{{ APP_TITLE }} v{{ APP_VERSION }}</h2>
     <p>
-      Created by <a href="https://TheJaredWilcurt.com" class="external">TheJaredWilcurt</a> &copy;2021.
-      Source code available on
-      <a
-        href="#"
-        :title="wuhdAppUrl"
-        @click.prevent="openInDefaultBrowser(wuhdAppUrl)"
-      >GitHub</a>.
+      Created by <external-link text="TheJaredWilcurt" :url="tjwUrl"></external-link> &copy;2021.
+      Source code available on <external-link text="GitHub" :url="wuhdAppUrl"></external-link>.
     </p>
 
     <p>
-      &#8220;<em>Leaves</em>&#8221; and &#8220;<em>Spikes</em>&#8221; background images created by
-      <a
-        href="#"
-        :title="chluaidUrl"
-        @click="openInDefaultBrowser(chluaidUrl)"
-      >Adam Phillips</a> (chluaid).
+      &#8220;<em>Leaves</em>&#8221; and &#8220;<em>Spikes</em>&#8221; background images created by <external-link text="Adam Phillips" :url="chluaidUrl"></external-link> (chluaid).
     </p>
 
     <strong>Technology Colophon:</strong>
@@ -33,25 +23,22 @@
 </template>
 
 <script>
-const {
-  APP_TITLE,
-  APP_VERSION
-} = window.require('./scripts/global-constants.js');
+const { APP_TITLE, APP_VERSION } = window.require('./scripts/global-constants.js');
 
 module.exports = {
   name: 'about-app',
+  components: {
+    'external-link': httpVueLoader('components/form-fields/external-link.vue')
+  },
   data: function () {
     return {
       APP_TITLE,
       APP_VERSION,
+
+      tjwUrl: 'https://TheJaredWilcurt.com',
       chluaidUrl: 'https://www.twitch.tv/chluaid',
       wuhdAppUrl: 'https://github.com/TheJaredWilcurt/WuhdAppusDat'
     };
-  },
-  methods: {
-    openInDefaultBrowser: function (url) {
-      window.nw.Shell.openExternal(url);
-    }
   }
 };
 </script>
@@ -60,11 +47,5 @@ module.exports = {
 .about-container {
   padding: 0px 18px;
   color: #531;
-}
-a.external {
-  color: #C24F42;
-}
-a.external:hover {
-  color: salmon;
 }
 </style>
