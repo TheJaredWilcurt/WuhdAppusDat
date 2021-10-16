@@ -5,9 +5,23 @@
       label="Background image"
     ></image-picker>
 
-    <button id="background-leaves" title="Leaves Background" class="pill-form pill-button pill-button-leaves"></button>
-    <button id="background-spikes" title="Spikes Background" class="pill-form pill-button pill-button-spikes"></button>
-    <button id="background-bubbles" title="Pink Bubbles Background" class="pill-form pill-button pill-button-bubbles"></button>
+    <image-button
+      v-model="backgroundImage"
+      label="Leaves"
+      image="images/leaves.png"
+    ></image-button>
+
+    <image-button
+      v-model="backgroundImage"
+      label="Spikes"
+      image="images/spikes.png"
+    ></image-button>
+
+    <image-button
+      v-model="backgroundImage"
+      label="Pink Bubbles"
+      image="images/bubbles.png"
+    ></image-button>
 
     <range-slider
       v-model="backgroundHueRotate"
@@ -48,6 +62,7 @@ const { mapSettings } = window.require('./scripts/computeds.js');
 module.exports = {
   name: 'background-options',
   components: {
+    'image-button': httpVueLoader('components/form-fields/image-button.vue'),
     'image-picker': httpVueLoader('components/form-fields/image-picker.vue'),
     'range-slider': httpVueLoader('components/form-fields/range-slider.vue')
   },

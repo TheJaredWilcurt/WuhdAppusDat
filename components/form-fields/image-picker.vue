@@ -11,6 +11,7 @@
         type="file"
         class="hidden"
         @input="emitInput($event)"
+        :key="value"
       >
       <span class="truncate">
         {{ value }}
