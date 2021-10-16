@@ -24,7 +24,11 @@ const globalConstants = Object.freeze({
   MAX_BRIGHTNESS: 15,
   MAX_SATURATION: 24,
   SATURATION_UPPER_MULTIPLIER: 3,
-  SETTINGS_LOCATION: path.join(nw.App.dataPath, 'settings.json')
+  SETTINGS_LOCATION: path.join(nw.App.dataPath, 'settings.json'),
+  TAB_NAME_OPTIONS: 'Options',
+  TAB_NAME_TEXT: 'Text',
+  TAB_NAME_BACKGROUND: 'Background',
+  TAB_NAME_ABOUT: 'About'
 });
 
 module.exports = globalConstants;

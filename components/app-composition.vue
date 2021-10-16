@@ -16,16 +16,23 @@
         >{{ tab }}</a>
       </nav>
 
-      <app-options v-show="lastViewedSection === 'Options'"></app-options>
-      <text-options v-show="lastViewedSection === 'Text'"></text-options>
-      <background-options v-show="lastViewedSection === 'Background'"></background-options>
-      <about-app v-show="lastViewedSection === 'About'"></about-app>
+      <app-options v-show="lastViewedSection === TAB_NAME_OPTIONS"></app-options>
+      <text-options v-show="lastViewedSection === TAB_NAME_TEXT"></text-options>
+      <background-options v-show="lastViewedSection === TAB_NAME_BACKGROUND"></background-options>
+      <about-app v-show="lastViewedSection === TAB_NAME_ABOUT"></about-app>
     </div>
   </div>
 </template>
 
 <script>
 const { mapSettings } = window.require('./scripts/computeds.js');
+const {
+  TAB_NAME_OPTIONS,
+  TAB_NAME_TEXT,
+  TAB_NAME_BACKGROUND,
+  TAB_NAME_ABOUT
+} = window.require('./scripts/global-constants.js');
+
 const win = window.nw.Window.get();
 
 module.exports = {
@@ -39,12 +46,17 @@ module.exports = {
   },
   data: function () {
     return {
+      TAB_NAME_OPTIONS,
+      TAB_NAME_TEXT,
+      TAB_NAME_BACKGROUND,
+      TAB_NAME_ABOUT,
+
       isMaximized: false,
       tabs: [
-        'Options',
-        'Text',
-        'Background',
-        'About'
+        TAB_NAME_OPTIONS,
+        TAB_NAME_TEXT,
+        TAB_NAME_BACKGROUND,
+        TAB_NAME_ABOUT
       ]
     };
   },
