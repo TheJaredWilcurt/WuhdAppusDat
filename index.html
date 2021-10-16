@@ -125,11 +125,13 @@
 
       const path = window.require('path');
       const settingsHelpers = window.require('./scripts/settings.js');
+      const { DEFAULT_INTERVAL } = require('./scripts/global-constants.js');
 
       window.App = new Vue({
         el: '#app',
         data: {
           currentlyInFocusApp: 'cool',
+          interval: null,
           settings: {
             version: null,
             lastViewedSection: null,
@@ -156,6 +158,13 @@
           }
         },
         methods: {
+          updateInterval: function () {
+            if (this.interval) {
+              clearInterval(this.interval);
+            }
+            const amount = (this.settings.updateInterval || DEFAULT_INTERVAL) * 1000;
+            this.interval = setInterval(this.setAppName, amount);
+          },
           openOptionsWindow: function () {
             window.global.windowManager.optionsWindow.show();
           },
@@ -221,7 +230,8 @@
               if (settingKeys.includes(key)) {
                 this.settings[key] = settings[key];
               }
-            })
+            });
+            this.updateInterval();
           }
         },
         computed: {

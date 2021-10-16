@@ -6,13 +6,11 @@ const fs = require('fs');
 const loadSettings = require('./scripts/settings.js').loadSettings;
 const {
   APP_TITLE,
-  DEFAULT_INTERVAL,
   DEFAULT_VISIBLE_ON_ALL_WORKSPACES
 } = require('./scripts/global-constants.js');
 
 document.querySelector('title').innerText = APP_TITLE;
 
-let interval;
 let settings;
 
 function applySettings () {
@@ -27,11 +25,6 @@ function applySettings () {
     });
   }
   settings.appMap = appMap;
-
-  if (interval) {
-    clearInterval(interval);
-  }
-  interval = setInterval(setAppName, (settings.interval || DEFAULT_INTERVAL));
 
   let alwaysOnTopValidated;
   if (typeof(settings.alwaysOnTop) === 'boolean') {
