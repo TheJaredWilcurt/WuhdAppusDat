@@ -25,16 +25,6 @@ function applySettings () {
     });
   }
   settings.appMap = appMap;
-
-  let visibleOnAllWorkspacesValidated;
-
-  if (typeof(settings.visibleOnAllWorkspaces) === 'boolean') {
-    visibleOnAllWorkspacesValidated = settings.visibleOnAllWorkspaces;
-
-  } else {
-    visibleOnAllWorkspacesValidated = DEFAULT_VISIBLE_ON_ALL_WORKSPACES;
-  }
-  nw.Window.get().setVisibleOnAllWorkspaces(visibleOnAllWorkspacesValidated);
 }
 
 function initialize () {

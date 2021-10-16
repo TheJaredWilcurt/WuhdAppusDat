@@ -239,7 +239,8 @@
             });
 
             this.updateInterval();
-            window.nw.Window.get().setAlwaysOnTop(!!this.settings.alwaysOnTop);
+            window.nw.Window.get().setAlwaysOnTop(!!settings.alwaysOnTop);
+            window.nw.Window.get().setVisibleOnAllWorkspaces(!!settings.visibleOnAllWorkspaces);
           },
           // used by background brightness, saturation, contrast
           convertSettingToPercent: function (value, max) {
