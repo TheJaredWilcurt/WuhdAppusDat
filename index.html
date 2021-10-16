@@ -125,7 +125,12 @@
 
       const path = window.require('path');
       const settingsHelpers = window.require('./scripts/settings.js');
-      const { DEFAULT_INTERVAL } = require('./scripts/global-constants.js');
+      const {
+        DEFAULT_INTERVAL,
+        MAX_BRIGHTNESS,
+        MAX_CONTRAST,
+        MAX_SATURATION
+      } = require('./scripts/global-constants.js');
 
       window.App = new Vue({
         el: '#app',
@@ -232,6 +237,16 @@
               }
             });
             this.updateInterval();
+          },
+          // used by background brightness, saturation, contrast
+          convertSettingToPercent: function (value, max) {
+            value = parseFloat(value);
+            if (value !== 0) {
+              value = (max * value) / 100;
+            }
+            value = value.toFixed(3);
+            value = parseFloat(value);
+            return value;
           }
         },
         computed: {
@@ -258,17 +273,24 @@
             let contrast;
             let hueRotate;
             let saturation;
-            if (typeof(this.settings.backgroundBrightness) === 'number') {
-              brightness = 'brightness(' + this.settings.backgroundBrightness + ')';
-            }
-            if (typeof(this.settings.backgroundContrast) === 'number') {
-              contrast = 'contrast(' + this.settings.backgroundContrast + ')';
-            }
             if (typeof(this.settings.backgroundHueRotate) === 'number') {
               hueRotate = 'hue-rotate(' + this.settings.backgroundHueRotate + 'deg)';
             }
+            if (typeof(this.settings.backgroundBrightness) === 'number') {
+              brightness = this.settings.backgroundBrightness;
+              brightness = this.convertSettingToPercent(brightness, MAX_BRIGHTNESS)
+              console.log(brightness);
+              brightness = 'brightness(' + brightness + ')';
+            }
+            if (typeof(this.settings.backgroundContrast) === 'number') {
+              contrast = this.settings.backgroundContrast;
+              contrast = this.convertSettingToPercent(contrast, MAX_CONTRAST);
+              contrast = 'contrast(' + contrast + ')';
+            }
             if (typeof(this.settings.backgroundSaturation) === 'number') {
-              saturation = 'saturate(' + this.settings.backgroundSaturation + ')';
+              saturation = this.settings.backgroundSaturation;
+              saturation = this.convertSettingToPercent(saturation, MAX_SATURATION);
+              saturation = 'saturate(' + saturation + ')';
             }
             let filters = [
               brightness,
