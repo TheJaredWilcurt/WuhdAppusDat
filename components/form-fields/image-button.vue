@@ -49,17 +49,17 @@ module.exports = {
   border-radius: 100px;
 }
 .pill-button-leaves {
-  background-image: url('../images/leaves.png');
+  background-image: url('../../images/leaves.png');
   background-size: 455px;
   background-position: -39px -10px;
 }
 .pill-button-spikes {
-  background-image: url('../images/spikes.png');
+  background-image: url('../../images/spikes.png');
   background-size: 455px;
   background-position: -39px -10px;
 }
 .pill-button-bubbles {
-  background-image: url('../images/bubbles.png');
+  background-image: url('../../images/bubbles.png');
   background-size: 345px;
 }
 </style>

@@ -37,8 +37,7 @@ module.exports = {
       type: Array,
       required: true,
       validator: function (arr) {
-        let valid = !!arr.length;
-        arr.every(function (item) {
+        let valid = arr.every(function (item) {
           return (
             typeof(item) === 'object' &&
             !Array.isArray(item) &&
@@ -48,7 +47,7 @@ module.exports = {
             typeof(item.label) === 'string'
           );
         });
-        return valid;
+        return arr.length && valid;
       }
     },
     label: {

@@ -1,5 +1,5 @@
 <template>
-  <div id="background-container" class="pill-form-container">
+  <div class="pill-form-container">
     <image-picker
       v-model="backgroundImage"
       label="Background image"
