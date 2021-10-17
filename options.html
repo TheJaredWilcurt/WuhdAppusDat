@@ -1,261 +1,88 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WuhdAppusDat Options</title>
+    <title>Options</title>
     <link rel="stylesheet" href="fonts/petrona.css">
     <link rel="stylesheet" href="styles/options.css">
   </head>
   <body>
-    <nav id="menu-bar" class="window-title-bar">
-      <span>
-        <img class="icon" src="icon/WuhdAppusDat16.png" alt="app icon">
-        <strong id="app-title" class="app-title"></strong>
-      </span>
+    <div id="app"></div>
 
-      <div class="window-controls">
-        <i aria-label="window control minimize" class="window-control-minimize"></i>
-        <i aria-label="window control restore" class="window-control-restore hidden"></i>
-        <i aria-label="window control maximize" class="window-control-maximize"></i>
-        <i aria-label="window control close" class="window-control-close"></i>
-      </div>
-    </nav>
+    <script src="scripts/vue.min.js"></script>
+    <script src="scripts/vuex.min.js"></script>
+    <script src="scripts/http-vue-loader.min.js"></script>
+    <script>
+      Vue.config.devtools = true;
 
-    <div id="main-content" class="wrapper">
-      <nav class="tabs">
-        <a id="options-tab" class="tab active" href="#">Options</a>
-        <a id="text-tab" class="tab" href="#">Text</a>
-        <a id="background-tab" class="tab" href="#">Background</a>
-        <a id="about-tab" class="tab" href="#">About</a>
-      </nav>
+      const globalConstants = window.require('./scripts/global-constants.js');
+      const settingsHelpers = window.require('./scripts/settings.js');
 
-      <div id="background-container" class="pill-form-container">
-        <div class="pill-form">
-          <label class="pill-label" for="background-image-input">
-            Background&nbsp;image:
-          </label>
-          <span class="pill-content" id="faux-background-input">
-            <span id="current-background-image" class="truncate"></span>
-            <input type="file" id="background-image-input" class="hidden">
-          </span>
-          <button id="clear-background" class="pill-end last-pill-section" title="Set to none">&times;</button>
-        </div>
+      document.querySelector('title').innerText = globalConstants.APP_TITLE + ' Options';
+      if (process.platform === 'darwin') {
+        document.querySelector('body').classList.add('osx');
+      }
 
-        <button id="background-leaves" title="Leaves Background" class="pill-form pill-button pill-button-leaves"></button>
-        <button id="background-spikes" title="Spikes Background" class="pill-form pill-button pill-button-spikes"></button>
-        <button id="background-bubbles" title="Pink Bubbles Background" class="pill-form pill-button pill-button-bubbles"></button>
+      Vue.use(Vuex);
 
-        <div class="pill-form">
-          <label class="pill-label" for="background-hue-input">
-            Background&nbsp;Hue:
-          </label>
-          <span class="pill-content">
-            <input type="range" id="background-hue-input" min="0" max="360">
-          </span>
-          <span id="faux-background-hue">
-            0
-          </span>
-          <button id="clear-background-hue" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-        </div>
+      const store = new Vuex.Store({
+        state: {
+          settings: {
+            version: globalConstants.APP_VERSION,
+            lastViewedSection: globalConstants.TAB_NAME_OPTIONS,
 
-        <div class="pill-form">
-          <label class="pill-label" for="background-brightness-input">
-            Background&nbsp;Brightness:
-          </label>
-          <span class="pill-content">
-            <input type="range" id="background-brightness-input" min="0" max="100">
-          </span>
-          <span id="faux-background-brightness">
-            1
-          </span>
-          <button id="clear-background-brightness" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-        </div>
+            alwaysOnTop: globalConstants.DEFAULT_ALWAYS_ON_TOP,
+            systemTray: globalConstants.DEFAULT_SYSTEM_TRAY,
+            closingApp: globalConstants.DEFAULT_CLOSING_APP,
+            visibleOnAllWorkspaces: globalConstants.DEFAULT_VISIBLE_ON_ALL_WORKSPACES,
+            updateInterval: globalConstants.DEFAULT_INTERVAL,
 
-        <div class="pill-form">
-          <label class="pill-label" for="background-contrast-input">
-            Background&nbsp;Contrast:
-          </label>
-          <span class="pill-content">
-            <input type="range" id="background-contrast-input" min="0" max="100">
-          </span>
-          <span id="faux-background-contrast">
-            1
-          </span>
-          <button id="clear-background-contrast" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-        </div>
+            fontFamily: globalConstants.DEFAULT_FONT_FAMILY,
+            fontSize: globalConstants.DEFAULT_FONT_SIZE,
+            fontItalics: globalConstants.DEFAULT_FONT_ITALICS,
+            fontWeight: globalConstants.DEFAULT_FONT_WEIGHT,
+            textColor: globalConstants.DEFAULT_TEXT_COLOR,
+            textPosition: globalConstants.DEFAULT_TEXT_POSITION,
+            textShadow: globalConstants.DEFAULT_TEXT_SHADOW,
 
-        <div class="pill-form">
-          <label class="pill-label" for="background-saturation-input">
-            Background&nbsp;Saturation:
-          </label>
-          <span class="pill-content">
-            <input type="range" id="background-saturation-input" min="0" max="100">
-          </span>
-          <span id="faux-background-saturation">
-            1
-          </span>
-          <button id="clear-background-saturation" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-        </div>
-      </div>
+            backgroundImage: globalConstants.DEFAULT_BACKGROUND_IMAGE,
+            backgroundHueRotate: globalConstants.DEFAULT_BACKGROUND_HUE_ROTATE,
+            backgroundBrightness: globalConstants.DEFAULT_BACKGROUND_BRIGHTNESS,
+            backgroundSaturation: globalConstants.DEFAULT_BACKGROUND_SATURATION,
+            backgroundContrast: globalConstants.DEFAULT_BACKGROUND_CONTRAST
+          }
+        },
+        mutations: {
+          mutateSetting: function (state, { setting, value }) {
+            state.settings[setting] = value;
 
+            const settings = { ...state.settings };
+            settings.version = window.nw.App.manifest.version;
 
-      <div id="text-container" class="pill-form-container">
-        <div class="pill-form">
-          <label class="pill-label" for="text-color-input">
-            Text&nbsp;color:
-          </label>
-          <span class="pill-content" id="faux-text-color">
-            <input type="color" id="text-color-input" class="hidden">
-          </span>
-          <button id="clear-text-color" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-        </div>
+            settingsHelpers.saveSettings(settings);
+            settingsHelpers.sendSettings(settings);
+          },
+          loadSettings: function (state) {
+            const settings = settingsHelpers.loadSettings() || {};
+            delete settings.version;
 
-        <div class="pill-form">
-          <label class="pill-label" for="text-shadow-input">
-            Text&nbsp;shadow:
-          </label>
-          <select class="pill-content last-pill-section" id="text-shadow-input">
-            <option value="none">None</option>
-            <option value="black">Black</option>
-            <option value="white">White</option>
-          </select>
-        </div>
+            const settingKeys = Object.keys(state.settings);
+            Object.entries(settings).forEach(function ([key, value]) {
+              if (settingKeys.includes(key) && value !== undefined) {
+                state.settings[key] = settings[key];
+              }
+            });
+          }
+        }
+      });
 
-        <div class="pill-form">
-          <label class="pill-label" for="font-input">
-            Font:
-          </label>
-          <input class="pill-content" type="text" id="font-input">
-          <button id="clear-font" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-        </div>
-
-        <div class="pill-form">
-          <label class="pill-label" for="font-size-input">
-            Font&nbsp;Size:
-          </label>
-          <span class="pill-content">
-            <input type="range" id="font-size-input" min="1" max="100">
-          </span>
-          <span id="faux-font-size">
-            15
-          </span>
-          <button id="clear-font-size" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-        </div>
-
-        <div class="pill-form pill-form-checkbox">
-          <label class="pill-label" for="font-style-input">
-            Italics:
-          </label>
-          <span id="faux-font-style" class="pill-content last-pill-section">
-            <input type="checkbox" id="font-style-input">
-          </select>
-        </div>
-
-        <div class="pill-form">
-          <label class="pill-label" for="font-weight-input">
-            Font&nbsp;Weight:
-          </label>
-          <span class="pill-content">
-            <input type="range" id="font-weight-input" min="1" max="9">
-          </span>
-          <span id="faux-font-weight">
-            4
-          </span>
-          <button id="clear-font-weight" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-        </div>
-
-        <div class="pill-form">
-          <label class="pill-label" for="text-position-input">
-            Text&nbsp;Position:
-          </label>
-          <span class="pill-content">
-            <input type="range" id="text-position-input" min="0" max="800">
-          </span>
-          <span id="faux-text-position">
-            400
-          </span>
-          <button id="clear-text-position" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-        </div>
-      </div>
-
-
-      <div id="options-container" class="pill-form-container">
-        <div class="pill-form pill-form-checkbox">
-          <label class="pill-label" for="always-on-top-input">
-            Always&nbsp;on&nbsp;top:
-          </label>
-          <span id="faux-always-on-top" class="pill-content last-pill-section">
-            <input type="checkbox" id="always-on-top-input">
-          </select>
-        </div>
-
-        <div id="visible-on-all-workspaces-container" class="pill-form pill-form-checkbox hidden">
-          <label class="pill-label" for="visible-on-all-workspaces-input">
-            Visible&nbsp;On&nbsp;All&nbsp;Workspaces:
-          </label>
-          <span id="faux-visible-on-all-workspaces" class="pill-content last-pill-section">
-            <input type="checkbox" id="visible-on-all-workspaces-input">
-          </select>
-        </div>
-
-        <div class="pill-form pill-form-checkbox">
-          <label class="pill-label" for="system-tray-input">
-            System&nbsp;Tray:
-          </label>
-          <span id="faux-system-tray" class="pill-content last-pill-section">
-            <input type="checkbox" id="system-tray-input">
-          </select>
-        </div>
-
-        <div class="pill-form">
-          <label class="pill-label" for="closing-app-input">
-            Closing&nbsp;app:
-          </label>
-          <select class="pill-content last-pill-section" id="closing-app-input">
-            <option value="exit">exits</option>
-            <option value="tray">sends to tray</option>
-          </select>
-        </div>
-
-        <div class="pill-form">
-          <label class="pill-label" for="update-interval-input">
-            Update&nbsp;Interval:
-          </label>
-          <span class="pill-content">
-            <input type="range" id="update-interval-input" min="1" max="15">
-          </span>
-          <span id="faux-update-interval">
-            15
-          </span>
-          <button id="clear-update-interval" class="pill-end last-pill-section" title="Reset to default">&times;</button>
-        </div>
-
-        <p>The "Update Interval" controls how often (in seconds) we check to see what application currently has focus. Faster speeds may not work as well on very low end devices, most people won't notice though.</p>
-        <p>Changes to system tray take effect on next launch.</p>
-      </div>
-
-
-      <div id="about-container" class="about-container hidden">
-        <h2>WuhdAppusDat v<span id="app-version">2.0.0</span></h2>
-        <p>
-          Created by <a href="https://TheJaredWilcurt.com" class="external">TheJaredWilcurt</a> &copy;2020.
-          Source code available on <a href="https://github.com/TheJaredWilcurt/WuhdAppusDat" class="external">GitHub</a>.
-        </p>
-
-        <p>&#8220;<em>Leaves</em>&#8221; and &#8220;<em>Spikes</em>&#8221; background images created by <a href="https://www.twitch.tv/chluaid" class="external">Adam Phillips</a> (chluaid).</p>
-
-        <strong>Technology Colophon:</strong>
-
-        <ul>
-          <li>Written in Vanilla JS, HTML, and CSS.</li>
-          <li>Built with NW.js and Node.js.</li>
-          <li>Windows version relies on &#8220;windows-active-process&#8221; library.</li>
-          <li>Linux/OSX version relies on &#8220;active-win&#8221; library.</li>
-          <li>Built on Windows 7, OSX 10.11, Ubuntu 17, with SublimeText 3 and Photoshop CS6.</li>
-        </ul>
-      </div>
-    </div>
-
-    <script src="settings.js"></script>
-    <script src="scripts/options.js"></script>
+      window.App = new Vue({
+        el: '#app',
+        template: '<app-composition />',
+        components: {
+          'app-composition': httpVueLoader('components/app-composition.vue')
+        },
+        store
+      });
+    </script>
   </body>
 </html>
