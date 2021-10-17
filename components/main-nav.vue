@@ -24,7 +24,7 @@
       <button
         v-text="'&times;'"
         class="window-control close-icon"
-        title="Close"
+        :title="closingTitle"
         @click="closeApp"
       ></button>
     </div>
@@ -63,6 +63,14 @@ module.exports = {
         }
         win.close(true);
       }
+    }
+  },
+  computed: {
+    closingTitle: function () {
+      if (this.closingApp === 'tray') {
+        return 'Send to Tray';
+      }
+      return 'Close';
     }
   }
 };

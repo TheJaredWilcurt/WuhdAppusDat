@@ -1,5 +1,5 @@
 <template>
-  <div id="app-map-container" class="app-map-container">
+  <div class="app-map-container">
     <p>
       <a href="#" @click.prevent="appMapVisible = !appMapVisible">
         <template v-if="appMapVisible">
