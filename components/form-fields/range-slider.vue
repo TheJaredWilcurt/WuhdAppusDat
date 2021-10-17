@@ -78,6 +78,33 @@ module.exports = {
 </script>
 
 <style>
+input[type=range] {
+  width: 100%;
+  -webkit-appearance: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 300px;
+  height: 5px;
+  background: #BBB;
+  border: none;
+  border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+  width: 16px;
+  height: 16px;
+  background: salmon;
+  border: none;
+  border-radius: 50%;
+  margin-top: -4px;
+  -webkit-appearance: none;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #CCC;
+}
+
 .range-value {
   min-width: 55px;
   justify-content: flex-end;

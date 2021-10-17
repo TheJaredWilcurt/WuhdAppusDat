@@ -25,7 +25,7 @@ body,
 input,
 select,
 option {
-  font-family: Petrona, georgia;
+  font-family: Petrona, Georgia;
 }
 h2 {
   margin-top: 0px;
@@ -38,35 +38,6 @@ p {
   line-height: 1.3;
 }
 
-
-input[type=range] {
-  width: 100%;
-  -webkit-appearance: none;
-}
-input[type=range]::-webkit-slider-runnable-track {
-  width: 300px;
-  height: 5px;
-  background: #BBB;
-  border: none;
-  border-radius: 3px;
-}
-input[type=range]::-webkit-slider-thumb {
-  width: 16px;
-  height: 16px;
-  background: salmon;
-  border: none;
-  border-radius: 50%;
-  margin-top: -4px;
-  -webkit-appearance: none;
-}
-input[type=range]:focus {
-  outline: none;
-}
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #CCC;
-}
-
-
 .wrapper {
   height: 100%;
   background: #FFFAF1;
@@ -74,6 +45,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   padding: 0px;
   overflow: auto;
 }
+
 .pill-form-container {
   display: flex;
   flex-wrap: wrap;
@@ -112,33 +84,7 @@ input.pill-label {
   border: 0px;
   cursor: text;
 }
-.pill-button {
-  width: 40px;
-  height: 40px;
-  max-width: 40px;
-  max-height: 40px;
-  min-width: 40px;
-  min-height: 40px;
-  background-color: transparent;
-  background-position: center center;
-  background-repeat: no-repeat;
-  border: none;
-  border-radius: 100px;
-}
-.pill-button-leaves {
-  background-image: url('../images/leaves.png');
-  background-size: 455px;
-  background-position: -39px -10px;
-}
-.pill-button-spikes {
-  background-image: url('../images/spikes.png');
-  background-size: 455px;
-  background-position: -39px -10px;
-}
-.pill-button-bubbles {
-  background-image: url('../images/bubbles.png');
-  background-size: 345px;
-}
+
 .pill-content {
   flex-grow: 1;
   background: #FFF;
@@ -170,6 +116,7 @@ input.pill-label {
   padding: 0px 10px;
   line-height: 45px;
 }
+
 input[disabled],
 select[disabled],
 .disabled:hover input,
@@ -184,13 +131,6 @@ select[disabled],
 .disabled:hover > .pill-label {
   background: #F3E8D2;
   color: #A08888;
-}
-
-
-
-.app-map-container {
-  width: 100%;
-  text-align: center;
 }
 
 .truncate {

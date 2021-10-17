@@ -85,4 +85,8 @@ module.exports = {
 </script>
 
 <style>
+.app-map-container {
+  width: 100%;
+  text-align: center;
+}
 </style>

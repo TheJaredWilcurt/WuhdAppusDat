@@ -1,5 +1,5 @@
 <template>
-  <div id="options-container" class="pill-form-container">
+  <div class="pill-form-container">
     <check-box
       v-model="alwaysOnTop"
       label="Always on top"
@@ -88,6 +88,3 @@ module.exports = {
   }
 };
 </script>
-
-<style>
-</style>
