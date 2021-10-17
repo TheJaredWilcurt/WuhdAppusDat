@@ -48,10 +48,20 @@
             backgroundHueRotate: globalConstants.DEFAULT_BACKGROUND_HUE_ROTATE,
             backgroundBrightness: globalConstants.DEFAULT_BACKGROUND_BRIGHTNESS,
             backgroundSaturation: globalConstants.DEFAULT_BACKGROUND_SATURATION,
-            backgroundContrast: globalConstants.DEFAULT_BACKGROUND_CONTRAST
+            backgroundContrast: globalConstants.DEFAULT_BACKGROUND_CONTRAST,
+
+            appMap: {
+              ...globalConstants.DEFAULT_APP_MAP
+            }
           }
         },
         mutations: {
+          mutateAppMap: function (state, { key, value }) {
+            state.settings.appMap[key] = value;
+          },
+          deleteAppFromAppMap: function (state, key) {
+            delete state.settings.appMap[key];
+          },
           mutateSetting: function (state, { setting, value }) {
             state.settings[setting] = value;
 
