@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>WuhdAppusDat Options</title>
+    <title>Options</title>
     <link rel="stylesheet" href="fonts/petrona.css">
     <link rel="stylesheet" href="styles/options.css">
   </head>
@@ -11,13 +11,19 @@
     <script src="scripts/vue.min.js"></script>
     <script src="scripts/vuex.min.js"></script>
     <script src="scripts/http-vue-loader.min.js"></script>
-    <!-- <script src="scripts/options.js"></script> -->
     <script>
       Vue.config.devtools = true;
-      Vue.use(Vuex);
 
       const globalConstants = window.require('./scripts/global-constants.js');
       const settingsHelpers = window.require('./scripts/settings.js');
+
+      document.querySelector('title').innerText = globalConstants.APP_TITLE + ' Options';
+      if (process.platform === 'darwin') {
+        document.querySelector('body').classList.add('osx');
+      }
+
+      Vue.use(Vuex);
+
       const store = new Vuex.Store({
         state: {
           settings: {
