@@ -1,5 +1,5 @@
 <template>
-  <div id="text-container" class="pill-form-container">
+  <div class="pill-form-container">
     <color-picker
       v-model="textColor"
       label="Text Color"
