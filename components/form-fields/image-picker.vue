@@ -32,7 +32,7 @@ module.exports = {
   name: 'image-picker',
   props: {
     value: {
-      type: [String, Number],
+      type: String,
       required: false
     },
     label: {

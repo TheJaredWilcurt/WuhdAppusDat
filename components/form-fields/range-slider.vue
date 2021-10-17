@@ -65,13 +65,15 @@ module.exports = {
     ...methods,
     emitInput: function ($event) {
       let amount = $event && $event.target && $event.target.value;
+      // Possible bug: parseInt(0 || 6) will give 6
       amount = parseInt(amount || this.min);
       this.$emit('input', amount);
     }
   },
   computed: {
     visibleValue: function () {
-      return (this.value * this.multiplier).toFixed(this.toFixed);
+      let value = parseFloat(this.value);
+      return (value * this.multiplier).toFixed(this.toFixed);
     }
   }
 };
