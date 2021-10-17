@@ -119,30 +119,7 @@
         data: {
           currentlyInFocusApp: '',
           interval: null,
-          settings: {
-            version: null,
-            lastViewedSection: null,
-
-            alwaysOnTop: null,
-            systemTray: null,
-            closingApp: null,
-            visibleOnAllWorkspaces: null,
-            updateInterval: null,
-
-            fontFamily: '',
-            fontSize: null,
-            fontItalics: null,
-            fontWeight: null,
-            textColor: null,
-            textPosition: null,
-            textShadow: null,
-
-            backgroundImage: null,
-            backgroundHueRotate: null,
-            backgroundBrightness: null,
-            backgroundSaturation: null,
-            backgroundContrast: null
-          }
+          settings: {}
         },
         methods: {
           updateInterval: function () {
@@ -199,11 +176,8 @@
             }
           },
           settingsChanged: function (settings) {
-            const settingKeys = Object.keys(this.settings);
             Object.entries(settings).forEach(([key, value]) => {
-              if (settingKeys.includes(key)) {
-                this.settings[key] = settings[key];
-              }
+              this.$set(this.settings, key, value);
             });
 
             this.updateInterval();
