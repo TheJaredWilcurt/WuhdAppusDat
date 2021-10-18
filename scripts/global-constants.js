@@ -1,6 +1,11 @@
 const path = require('path');
 
+function GUID () {
+  return Date.now().toString(36) + Math.random().toString(36).substring(2);
+}
+
 const globalConstants = Object.freeze({
+  GUID,
   APP_TITLE: 'WuhdAppusDat',
   APP_VERSION: nw.App.manifest.version,
   DEFAULT_BACKGROUND_IMAGE: 'images/leaves.png',
@@ -30,48 +35,208 @@ const globalConstants = Object.freeze({
   TAB_NAME_BACKGROUND: 'Background',
   TAB_NAME_ALIASES: 'Aliases',
   TAB_NAME_ABOUT: 'About',
-  DEFAULT_APP_MAP: Object.freeze({
-    'acrord32': 'Adobe Acrobat Reader',
-    'afterfx': 'Adobe After Effects',
-    'calc': 'Calculator',
-    'charmap': 'Character Map',
-    'cmd': 'Command Prompt',
-    'code - insiders': 'Visual Studio Code - Insiders',
-    'dfrgui': 'Disk Defragmenter',
-    'dvdplay': 'DVD Player',
-    'excel': 'Microsoft Excel',
-    'fireworks': 'Adobe Fireworks',
-    'flash': 'Adobe Flash Professional',
-    'harmonypremium': 'Harmony Premium',
-    'iexplore': 'Internet Explorer',
-    'illustrator': 'Adobe Illustrator',
-    'indesign': 'Adobe InDesign',
-    'liberkeymenu': 'LiberKey',
-    'photo': 'Affinity Photo',
-    'photoshop': 'Adobe Photoshop',
-    'magnify': 'Magnifier',
-    'msiexec': 'Software Installation',
-    'mspaint': 'MS Paint',
-    'nw': 'NW.JS',
-    'nwjs': 'NW.JS',
-    'obs64': 'OBS Studio',
-    'perfmon': 'Windows Performance Monitor',
-    'powershell': 'Windows PowerShell',
-    'powerpnt': 'Microsoft PowerPoint',
-    'regedit': 'Windows Registry Editor',
-    'resmon': 'Windows Resource Monitor',
-    'soundrecorder': 'Sound Recorder',
-    'speedgrade': 'Adobe SpeedGrade',
-    'st3': 'Sublime Text',
-    'st4': 'Sublime Text',
-    'taskmgr': 'Windows Task Manager',
-    'vlc': 'VLC Media Player',
-    'vmplayer': 'VMWare Player',
-    'vsc': 'Visual Studio Code',
-    'winword': 'Microsoft Word',
-    'wuauclt': 'Windows Updates',
-    'wuhdappusdat': 'WuhdAppusDat'
-  })
+  DEFAULT_APP_MAP: Object.freeze([
+    Object.freeze({
+      id: GUID(),
+      file: 'acrord32',
+      alias: 'Adobe Acrobat Reader'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'afterfx',
+      alias: 'Adobe After Effects'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'calc',
+      alias: 'Calculator'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'charmap',
+      alias: 'Character Map'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'cmd',
+      alias: 'Command Prompt'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'code - insiders',
+      alias: 'Visual Studio Code - Insiders'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'dfrgui',
+      alias: 'Disk Defragmenter'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'dvdplay',
+      alias: 'DVD Player'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'excel',
+      alias: 'Microsoft Excel'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'fireworks',
+      alias: 'Adobe Fireworks'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'flash',
+      alias: 'Adobe Flash Professional'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'harmonypremium',
+      alias: 'Harmony Premium'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'iexplore',
+      alias: 'Internet Explorer'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'illustrator',
+      alias: 'Adobe Illustrator'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'indesign',
+      alias: 'Adobe InDesign'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'liberkeymenu',
+      alias: 'LiberKey'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'photo',
+      alias: 'Affinity Photo'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'photoshop',
+      alias: 'Adobe Photoshop'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'magnify',
+      alias: 'Magnifier'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'msiexec',
+      alias: 'Software Installation'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'mspaint',
+      alias: 'MS Paint'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'nw',
+      alias: 'NW.JS'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'nwjs',
+      alias: 'NW.JS'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'obs64',
+      alias: 'OBS Studio'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'perfmon',
+      alias: 'Windows Performance Monitor'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'powershell',
+      alias: 'Windows PowerShell'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'powerpnt',
+      alias: 'Microsoft PowerPoint'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'regedit',
+      alias: 'Windows Registry Editor'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'resmon',
+      alias: 'Windows Resource Monitor'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'soundrecorder',
+      alias: 'Sound Recorder'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'speedgrade',
+      alias: 'Adobe SpeedGrade'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'st3',
+      alias: 'Sublime Text'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'st4',
+      alias: 'Sublime Text'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'taskmgr',
+      alias: 'Windows Task Manager'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'vlc',
+      alias: 'VLC Media Player'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'vmplayer',
+      alias: 'VMWare Player'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'vsc',
+      alias: 'Visual Studio Code'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'winword',
+      alias: 'Microsoft Word'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'wuauclt',
+      alias: 'Windows Updates'
+    }),
+    Object.freeze({
+      id: GUID(),
+      file: 'wuhdappusdat',
+      alias: 'WuhdAppusDat'
+    })
+  ])
 });
 
 module.exports = globalConstants;

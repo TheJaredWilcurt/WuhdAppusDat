@@ -50,17 +50,17 @@
             backgroundSaturation: globalConstants.DEFAULT_BACKGROUND_SATURATION,
             backgroundContrast: globalConstants.DEFAULT_BACKGROUND_CONTRAST,
 
-            appMap: {
+            appMap: [
               ...globalConstants.DEFAULT_APP_MAP
-            }
+            ]
           }
         },
         mutations: {
-          mutateAppMap: function (state, { key, value }) {
-            state.settings.appMap[key] = value;
+          mutateAppMap: function (state, { index, key, value }) {
+            state.settings.appMap[index][key] = value;
           },
-          deleteAppFromAppMap: function (state, key) {
-            delete state.settings.appMap[key];
+          removeAppFromAppMap: function (state, index) {
+            state.settings.appMap.splice(index, 1);
           },
           mutateSetting: function (state, { setting, value }) {
             state.settings[setting] = value;

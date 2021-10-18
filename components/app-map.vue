@@ -2,25 +2,26 @@
   <div class="app-map-container">
     <p>If an application you run does not display a name you like, you can alias it here:</p>
     <div
-      v-for="(value, key) in appMap"
+      v-for="(app, appIndex) in appMap"
       class="app-map-item"
-      :key="'app' + key"
+      :key="'app' + app.id"
     >
       <div class="app-map-key-value-wrapper">
         <input
-          :value="key"
+          :value="app.file"
           class="app-map-key"
-          @click="setKey(key)"
+          @input="setKey($event, 'file', appIndex)"
         >
         <input
-          :value="value"
+          :value="app.alias"
           class="app-map-value"
+          @input="setKey($event, 'alias', appIndex)"
         >
       </div>
       <button
         class="app-map-remove"
         title="Remove"
-        @click="removeAppMap(key)"
+        @click="removeApp(appIndex)"
       >&times;</button>
     </div>
   </div>
@@ -28,11 +29,14 @@
 
 <script>
 module.exports = {
-  name: 'app-composition',
+  name: 'app-map',
   methods: {
-    setKey: function () {
+    setKey: function ($event, key, index) {
+      let value = $event.target.value;
+      this.$store.commit('mutateAppMap', { index, key, value });
     },
-    removeApp: function () {
+    removeApp: function (index) {
+      this.$store.commit('removeAppFromAppMap', index);
     }
   },
   computed: {
