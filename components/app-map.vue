@@ -3,20 +3,22 @@
     <p>If an application you run does not display a name you like, you can alias it here:</p>
     <div
       v-for="(value, key) in appMap"
-      class="pill-form"
+      class="app-map-item"
       :key="'app' + key"
     >
-      <input
-        :value="key"
-        class="pill-label"
-        @click="setKey(key)"
-      >
-      <input
-        :value="value"
-        class="pill-content last-pill-section"
-      >
+      <div class="app-map-key-value-wrapper">
+        <input
+          :value="key"
+          class="app-map-key"
+          @click="setKey(key)"
+        >
+        <input
+          :value="value"
+          class="app-map-value"
+        >
+      </div>
       <button
-        class="pill-end"
+        class="app-map-remove"
         title="Remove"
         @click="removeAppMap(key)"
       >&times;</button>
@@ -46,18 +48,50 @@ module.exports = {
   width: 100%;
   text-align: center;
 }
-.app-map-container .pill-form {
+.app-map-item {
+  display: inline-block;
   border-radius: 0px;
-  margin: 5px 48px 0px 0px;
+  margin: 5px 24px 0px 24px;
   padding: 0px;
+  font-size: 0px;
   box-shadow: none;
 }
-.app-map-container .pill-label,
-.app-map-container .pill-content {
-  box-shadow: 2px 2px 5px rgba(136, 119, 91, 0.53);
+.app-map-key-value-wrapper {
+  display: inline-block;
+  background: #FFF6FA;
+  border-radius: 100px;
+  box-shadow: 1px 1px 5px inset rgba(136, 119, 91, 0.31), 1px 1px 0px rgba(136, 119, 91, 0.31);
 }
-.app-map-container .pill-end {
+.app-map-key,
+.app-map-value {
+  background: transparent;
+  margin: 0px;
+  padding: 8px 16px;
+  color: #333;
+  font-size: 16px;
+}
+.app-map-key,
+.app-map-value,
+.app-map-remove {
+  border: 0px;
+}
+.app-map-key {
+  border-radius:  100px 0px 0px 100px;
+}
+.app-map-value {
+  border-radius:  0px 100px 100px 0px;
+  box-shadow:  0px 0px 57px inset rgba(255, 162, 0, 0.25);
+}
+.app-map-remove {
+  height: 32px;
+  background: #F27D7D;
+  border: 0px;
   border-radius: 50%;
-  margin: 0px 0px 0px 4px;
+  margin: 0px 0px 0px 7px;
+  font-size: 36px;
+  line-height: 0.6;
+  box-shadow: 2px 2px 2px rgba(136, 119, 91, 0.42);
+  cursor: pointer;
+  vertical-align: top;
 }
 </style>
