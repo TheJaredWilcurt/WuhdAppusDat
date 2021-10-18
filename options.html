@@ -24,6 +24,12 @@
 
       Vue.use(Vuex);
 
+      const findAppById = function (appMap, id) {
+        return appMap.findIndex(function (app) {
+          return app.id === id;
+        });
+      }
+
       const store = new Vuex.Store({
         state: {
           settings: {
@@ -56,11 +62,20 @@
           }
         },
         mutations: {
-          mutateAppMap: function (state, { index, key, value }) {
+          mutateAppMap: function (state, { id, key, value }) {
+            const index = findAppById(state.settings.appMap, id);
             state.settings.appMap[index][key] = value;
           },
-          removeAppFromAppMap: function (state, index) {
+          removeAppFromAppMap: function (state, id) {
+            const index = findAppById(state.settings.appMap, id);
             state.settings.appMap.splice(index, 1);
+          },
+          addAppToAppMap: function (state) {
+            state.settings.appMap.push({
+              id: globalConstants.GUID(),
+              file: '',
+              alias: ''
+            });
           },
           mutateSetting: function (state, { setting, value }) {
             state.settings[setting] = value;

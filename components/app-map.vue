@@ -1,47 +1,101 @@
 <template>
   <div class="app-map-container">
-    <p>If an application you run does not display a name you like, you can alias it here:</p>
-    <div
-      v-for="(app, appIndex) in appMap"
-      class="app-map-item"
-      :key="'app' + app.id"
-    >
-      <div class="app-map-key-value-wrapper">
-        <input
-          :value="app.file"
-          class="app-map-key"
-          @input="setKey($event, 'file', appIndex)"
-        >
-        <input
-          :value="app.alias"
-          class="app-map-value"
-          @input="setKey($event, 'alias', appIndex)"
-        >
+    <p>If an application you run does not display a name you like, you can alias it here.</p>
+
+    <drop-down
+      v-model="sortBy"
+      :options="sortByOptions"
+      label="Sort By"
+    ></drop-down>
+
+    <transition-group class="app-map-transition-group" tag="div">
+      <div
+        v-for="app in appMap"
+        class="app-map-item"
+        :key="'app' + app.id"
+      >
+        <div class="app-map-key-value-wrapper">
+          <input
+            :value="app.file"
+            class="app-map-key"
+            placeholder="calc"
+            @input="setKey($event, 'file', app.id)"
+          >
+          <input
+            :value="app.alias"
+            class="app-map-value"
+            placeholder="Calculator"
+            @input="setKey($event, 'alias', app.id)"
+          >
+        </div>
+        <button
+          class="app-map-remove"
+          title="Remove"
+          @click="removeApp(app.id)"
+        >&times;</button>
       </div>
-      <button
-        class="app-map-remove"
-        title="Remove"
-        @click="removeApp(appIndex)"
-      >&times;</button>
-    </div>
+
+      <div class="app-map-item add-another" :key="'add-another'">
+        <a href="#" @click.prevent="addAnother">
+          Add Another
+        </a>
+      </div>
+    </transition-group>
   </div>
 </template>
 
 <script>
 module.exports = {
   name: 'app-map',
+  components: {
+    'drop-down': httpVueLoader('components/form-fields/drop-down.vue')
+  },
+  data: function () {
+    return {
+      sortBy: 'none',
+      sortByOptions: [
+        {
+          lable: '',
+          value: 'none'
+        },
+        {
+          label: 'Name',
+          value: 'file'
+        },
+        {
+          label: 'Alias',
+          value: 'alias'
+        }
+      ]
+    };
+  },
   methods: {
-    setKey: function ($event, key, index) {
+    setKey: function ($event, key, id) {
       let value = $event.target.value;
-      this.$store.commit('mutateAppMap', { index, key, value });
+      this.$store.commit('mutateAppMap', { id, key, value });
     },
-    removeApp: function (index) {
-      this.$store.commit('removeAppFromAppMap', index);
+    removeApp: function (id) {
+      this.$store.commit('removeAppFromAppMap', id);
+    },
+    addAnother: function () {
+      this.$store.commit('addAppToAppMap');
     }
   },
   computed: {
     appMap: function () {
-      return this.$store.state.settings.appMap;
+      const appMap = this.$store.state.settings.appMap;
+      if (this.sortBy === 'none') {
+        return appMap;
+      }
+      return appMap.sort((a, b) => {
+        if (a[this.sortBy] === b[this.sortBy]) {
+          return 0;
+        }
+        if (a[this.sortBy] > b[this.sortBy]) {
+          return 1;
+        }
+        return -1;
+      });
     }
   }
 };
@@ -52,13 +106,28 @@ module.exports = {
   width: 100%;
   text-align: center;
 }
+.app-map-transition-group {
+  position: relative;
+  max-width: 489px;
+  margin: 0px auto;
+}
 .app-map-item {
-  display: inline-block;
+  display: block;
   border-radius: 0px;
-  margin: 5px 24px 0px 24px;
+  margin: 5px 0px 0px 0px;
   padding: 0px;
   font-size: 0px;
   box-shadow: none;
+  transition: 1s ease all;
+}
+.app-map-item.v-enter,
+.app-map-item.v-leave-to {
+  opacity: 0.0;
+  transform: translateY(30px);
+}
+.app-map-item.v-leave-active {
+  position: absolute;
+  left: 0px;
 }
 .app-map-key-value-wrapper {
   display: inline-block;
@@ -74,6 +143,10 @@ module.exports = {
   color: #333;
   font-size: 16px;
 }
+.app-map-key:focus,
+.app-map-value:focus {
+  outline: none;
+}
 .app-map-key,
 .app-map-value,
 .app-map-remove {
@@ -81,6 +154,12 @@ module.exports = {
 }
 .app-map-key {
   border-radius:  100px 0px 0px 100px;
+}
+.app-map-key::placeholder{
+  color: #3335;
+}
+.app-map-value::placeholder {
+  color: rgba(158, 107, 107, 0.33);
 }
 .app-map-value {
   border-radius:  0px 100px 100px 0px;
@@ -97,5 +176,14 @@ module.exports = {
   box-shadow: 2px 2px 2px rgba(136, 119, 91, 0.42);
   cursor: pointer;
   vertical-align: top;
+}
+.app-map-remove:hover,
+.app-map-remove:focus {
+  background: #C95454;
+  outline: none;
+}
+.add-another {
+  margin: 24px 0px;
+  font-size: 16px;
 }
 </style>
