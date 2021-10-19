@@ -10,9 +10,9 @@
 
     <transition-group class="app-map-transition-group" tag="div">
       <div
-        v-for="app in appMap"
+        v-for="app in appMap()"
         class="app-map-item"
-        :key="'app' + app.id"
+        :key="app.id"
       >
         <div class="app-map-key-value-wrapper">
           <input
@@ -70,20 +70,22 @@ module.exports = {
     };
   },
   methods: {
-    setKey: function ($event, key, id) {
+    setKey: async function ($event, key, id) {
       let value = $event.target.value;
-      this.$store.commit('mutateAppMap', { id, key, value });
+      await this.$store.dispatch('mutateAppMap', { id, key, value });
+      // this.$forceUpdate();
     },
-    removeApp: function (id) {
-      this.$store.commit('removeAppFromAppMap', id);
+    removeApp: async function (id) {
+      await this.$store.dispatch('removeAppFromAppMap', id);
+      // this.$forceUpdate();
     },
-    addAnother: function () {
-      this.$store.commit('addAppToAppMap');
-    }
-  },
-  computed: {
+    addAnother: async function () {
+      await this.$store.dispatch('addAppToAppMap');
+      // this.$forceUpdate();
+    },
     appMap: function () {
-      const appMap = this.$store.state.settings.appMap;
+      console.log('re-compute');
+      const appMap = this.$store.state.appMap;
       if (this.sortBy === 'none') {
         return appMap;
       }
