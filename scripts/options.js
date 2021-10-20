@@ -10,6 +10,15 @@ if (process.platform === 'darwin') {
 
 Vue.use(Vuex);
 
+function saveAndSend (state) {
+  const settings = {
+    ...state.settings,
+    version: window.nw.App.manifest.version
+  };
+  settingsHelpers.saveSettings(settings);
+  settingsHelpers.sendSettings(settings);
+}
+
 const store = new Vuex.Store({
   state: {
     settings: {
@@ -41,6 +50,7 @@ const store = new Vuex.Store({
   mutations: {
     mutateSetting: function (state, { setting, value }) {
       Vue.set(state.settings, setting, value);
+      saveAndSend(state);
     },
     loadSettings: function (state) {
       const settings = settingsHelpers.loadSettings() || {};
@@ -56,12 +66,7 @@ const store = new Vuex.Store({
   },
   actions: {
     saveAndSend: function (store) {
-      const settings = {
-        ...store.state.settings,
-        version: window.nw.App.manifest.version
-      };
-      settingsHelpers.saveSettings(settings);
-      settingsHelpers.sendSettings(settings);
+      saveAndSend(store.state);
     }
   }
 });
