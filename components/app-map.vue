@@ -8,34 +8,39 @@
       label="Sort By"
     ></drop-down>
 
-    <transition-group class="app-map-transition-group" tag="div">
+    <transition-group
+      class="app-map-transition-group"
+      tag="div"
+      :key="listKey"
+    >
       <div
-        v-for="app in appMap()"
+        v-for="app in sortedAppMap"
         class="app-map-item"
+        :data-key="app.id"
         :key="app.id"
       >
         <div class="app-map-key-value-wrapper">
           <input
-            :value="app.file"
+            v-model="app.file"
             class="app-map-key"
             placeholder="calc"
-            @input="setKey($event, 'file', app.id)"
+            @input="saveAndSend"
           >
           <input
-            :value="app.alias"
+            v-model="app.alias"
             class="app-map-value"
             placeholder="Calculator"
-            @input="setKey($event, 'alias', app.id)"
+            @input="saveAndSend"
           >
         </div>
         <button
           class="app-map-remove"
           title="Remove"
-          @click="removeApp(app.id)"
+          @click.prevent="removeApp(app.id)"
         >&times;</button>
       </div>
 
-      <div class="app-map-item add-another" :key="'add-another'">
+      <div class="app-map-item add-another" key="needed-for-animation">
         <a href="#" @click.prevent="addAnother">
           Add Another
         </a>
@@ -45,6 +50,8 @@
 </template>
 
 <script>
+const globalConstants = window.require('./scripts/global-constants.js');
+
 module.exports = {
   name: 'app-map',
   components: {
@@ -66,30 +73,59 @@ module.exports = {
           label: 'Alias',
           value: 'alias'
         }
-      ]
+      ],
+      appMap: [],
+      listKey: 0
     };
   },
   methods: {
-    setKey: async function ($event, key, id) {
+    findAppById: function (appMap, id) {
+      return appMap.findIndex(function (app) {
+        return app.id === id;
+      });
+    },
+    bumpKey: function () {
+      // this.listKey = this.listKey + 1;
+      this.$forceUpdate();
+    },
+    saveAndSend: function () {
+      const setting = 'appMap';
+      const value = this.appMap;
+      this.$store.commit('mutateSetting', { setting, value });
+      this.$store.dispatch('saveAndSend');
+    },
+    setKey: function ($event, key, id) {
       let value = $event.target.value;
-      await this.$store.dispatch('mutateAppMap', { id, key, value });
-      // this.$forceUpdate();
+      const index = this.findAppById(this.appMap, id);
+      this.$set(this.appMap[index], key, value);
+      this.saveAndSend();
     },
-    removeApp: async function (id) {
-      await this.$store.dispatch('removeAppFromAppMap', id);
-      // this.$forceUpdate();
+    removeApp: function (id) {
+      const index = this.findAppById(this.appMap, id);
+      this.$delete(this.appMap, index);
+      // this.appMap.splice(index, 1);
+      this.saveAndSend();
+      this.bumpKey();
     },
-    addAnother: async function () {
-      await this.$store.dispatch('addAppToAppMap');
-      // this.$forceUpdate();
-    },
-    appMap: function () {
-      console.log('re-compute');
-      const appMap = this.$store.state.appMap;
+    addAnother: function () {
+      const newApp = {
+        id: globalConstants.GUID(),
+        file: '',
+        alias: ''
+      };
+      const index = this.appMap.length;
+      this.$set(this.appMap, index, newApp);
+      this.$set(this.appMap[index], 'file', '');
+      this.saveAndSend();
+      this.bumpKey();
+    }
+  },
+  computed: {
+    sortedAppMap: function () {
       if (this.sortBy === 'none') {
-        return appMap;
+        return this.appMap;
       }
-      return appMap.sort((a, b) => {
+      return this.appMap.sort((a, b) => {
         if (a[this.sortBy] === b[this.sortBy]) {
           return 0;
         }
@@ -99,6 +135,9 @@ module.exports = {
         return -1;
       });
     }
+  },
+  created: function () {
+    this.appMap = this.$store.state.settings.appMap || [ ...globalConstants.DEFAULT_APP_MAP ];
   }
 };
 </script>

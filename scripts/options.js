@@ -10,17 +10,8 @@ if (process.platform === 'darwin') {
 
 Vue.use(Vuex);
 
-function findAppById (appMap, id) {
-  return appMap.findIndex(function (app) {
-    return app.id === id;
-  });
-}
-
 const store = new Vuex.Store({
   state: {
-    appMap: [
-      ...globalConstants.DEFAULT_APP_MAP
-    ],
     settings: {
       version: globalConstants.APP_VERSION,
       lastViewedSection: globalConstants.TAB_NAME_OPTIONS,
@@ -44,33 +35,15 @@ const store = new Vuex.Store({
       backgroundBrightness: globalConstants.DEFAULT_BACKGROUND_BRIGHTNESS,
       backgroundSaturation: globalConstants.DEFAULT_BACKGROUND_SATURATION,
       backgroundContrast: globalConstants.DEFAULT_BACKGROUND_CONTRAST,
+      appMap: []
     }
   },
   mutations: {
-    mutateAppMap: function (state, { id, key, value }) {
-      const index = findAppById(state.appMap, id);
-      Vue.set(state.appMap[index], key, value);
-    },
-    removeAppFromAppMap: function (state, id) {
-      const index = findAppById(state.appMap, id);
-      Vue.delete(state.appMap, index);
-    },
-    addAppToAppMap: function (state) {
-      const newApp = {
-        id: globalConstants.GUID(),
-        file: '',
-        alias: ''
-      };
-      Vue.set(state.appMap, state.appMap.length, newApp);
-    },
     mutateSetting: function (state, { setting, value }) {
       Vue.set(state.settings, setting, value);
     },
     loadSettings: function (state) {
       const settings = settingsHelpers.loadSettings() || {};
-
-      state.appMap = settings.appMap;
-      delete settings.appMap;
       delete settings.version;
 
       const settingKeys = Object.keys(state.settings);
@@ -85,28 +58,10 @@ const store = new Vuex.Store({
     saveAndSend: function (store) {
       const settings = {
         ...store.state.settings,
-        appMap: store.state.appMap,
         version: window.nw.App.manifest.version
       };
       settingsHelpers.saveSettings(settings);
       settingsHelpers.sendSettings(settings);
-      // Vue.nextTick();
-    },
-    mutateAppMap: function (store, payload) {
-      store.commit('mutateAppMap', payload);
-      store.dispatch('saveAndSend');
-    },
-    removeAppFromAppMap: function (store, payload) {
-      store.commit('removeAppFromAppMap', payload);
-      store.dispatch('saveAndSend');
-    },
-    addAppToAppMap: function (store, payload) {
-      store.commit('addAppToAppMap', payload);
-      store.dispatch('saveAndSend');
-    },
-    mutateSetting: function (store, payload) {
-      store.commit('mutateSetting', payload);
-      store.dispatch('saveAndSend');
     }
   }
 });
