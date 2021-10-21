@@ -132,6 +132,8 @@ module.exports = {
           this.$set(this.appMap, index, defaultApp);
         }
       });
+      this.saveAndSend();
+      this.$forceUpdate();
     }
   },
   computed: {
