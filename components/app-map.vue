@@ -101,17 +101,14 @@ module.exports = {
       this.$store.commit('mutateSetting', { setting, value });
       this.$store.dispatch('saveAndSend');
     },
-    setKey: function ($event, key, id) {
-      let value = $event.target.value;
-      const index = this.findAppById(id);
-      this.$set(this.appMap[index], key, value);
+    saveSendAndUpdate: function () {
       this.saveAndSend();
+      this.$forceUpdate();
     },
     removeApp: function (id) {
       const index = this.findAppById(id);
       this.$delete(this.appMap, index);
-      this.saveAndSend();
-      this.$forceUpdate();
+      this.saveSendAndUpdate();
     },
     addAnother: function () {
       const newApp = {
@@ -121,8 +118,7 @@ module.exports = {
       };
       const index = this.appMap.length;
       this.$set(this.appMap, index, newApp);
-      this.saveAndSend();
-      this.$forceUpdate();
+      this.saveSendAndUpdate();
     },
     loadDefaults: function () {
       const defaultApps = helpers.generateDefaultAppMap();
@@ -132,8 +128,7 @@ module.exports = {
           this.$set(this.appMap, index, defaultApp);
         }
       });
-      this.saveAndSend();
-      this.$forceUpdate();
+      this.saveSendAndUpdate();
     }
   },
   computed: {
