@@ -39,6 +39,16 @@ const store = new Vuex.Store({
       textPosition: globalConstants.DEFAULT_TEXT_POSITION,
       textShadow: globalConstants.DEFAULT_TEXT_SHADOW,
 
+      explainerMessage: globalConstants.DEFAULT_EXPLAINER_MESSAGE,
+      explainerFontFamily: globalConstants.DEFAULT_EXPLAINER_FONT_FAMILY,
+      explainerFontItalics: globalConstants.DEFAULT_EXPLAINER_FONT_ITALICS,
+      explainerFontSize: globalConstants.DEFAULT_EXPLAINER_FONT_SIZE,
+      explainerFontWeight: globalConstants.DEFAULT_EXPLAINER_FONT_WEIGHT,
+      explainerTextColor: globalConstants.DEFAULT_EXPLAINER_TEXT_COLOR,
+      explainerTextShadow: globalConstants.DEFAULT_EXPLAINER_TEXT_SHADOW,
+      explainerTop: globalConstants.DEFAULT_EXPLAINER_TOP,
+      explainerLeft: globalConstants.DEFAULT_EXPLAINER_LEFT,
+
       backgroundImage: globalConstants.DEFAULT_BACKGROUND_IMAGE,
       backgroundHueRotate: globalConstants.DEFAULT_BACKGROUND_HUE_ROTATE,
       backgroundBrightness: globalConstants.DEFAULT_BACKGROUND_BRIGHTNESS,

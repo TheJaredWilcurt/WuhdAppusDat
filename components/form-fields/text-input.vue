@@ -8,6 +8,7 @@
     <input
       :id="forId(label)"
       :value="value"
+      :placeholder="placeholder"
       class="pill-content"
       type="text"
       @input="emitInput($event)"
@@ -33,6 +34,10 @@ module.exports = {
     label: {
       type: String,
       required: true
+    },
+    placeholder: {
+      type: String,
+      default: undefined
     },
     defaultValue: {
       type: String,

@@ -20,7 +20,6 @@ window.App = new Vue({
     'main-nav': httpVueLoader('components/main-nav.vue')
   },
   data: {
-    explainerText: 'Currently in focus:',
     currentlyInFocusApp: '',
     interval: null,
     settings: {}
@@ -193,7 +192,27 @@ window.App = new Vue({
       ].join(';');
     },
     explainerStyles: function () {
+      let fontItalics = 'normal';
+      if (this.settings.explainerFontItalics) {
+        fontItalics = 'italic';
+      }
+
+      let textShadow = 'none';
+      if (this.settings.explainerTextShadow === 'white') {
+        textShadow = '1px 1px 7px #FFF, 1px 1px 14px #FFF';
+      } else if (this.settings.explainerTextShadow === 'black') {
+        textShadow = '1px 1px 7px #000, 1px 1px 14px #000';
+      }
+
       return [
+        'top:' + this.settings.explainerTop + 'px',
+        'left:' + this.settings.explainerLeft + 'px',
+        'color:' + this.settings.explainerTextColor,
+        'font-family:' + this.settings.explainerFontFamily,
+        'font-size:' + this.settings.explainerFontSize + 'px',
+        'font-style:' + fontItalics,
+        'font-weight:' + (this.settings.explainerFontWeight * 100),
+        'text-shadow:' + textShadow
       ].join(';');
     }
   },

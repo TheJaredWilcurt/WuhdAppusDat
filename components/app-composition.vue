@@ -18,6 +18,7 @@
 
       <app-options v-show="lastViewedSection === TAB_NAME_OPTIONS"></app-options>
       <text-options v-show="lastViewedSection === TAB_NAME_TEXT"></text-options>
+      <explainer-options v-show="lastViewedSection === TAB_NAME_MESSAGE"></explainer-options>
       <background-options v-show="lastViewedSection === TAB_NAME_BACKGROUND"></background-options>
       <app-map v-show="lastViewedSection === TAB_NAME_ALIASES"></app-map>
       <about-app v-show="lastViewedSection === TAB_NAME_ABOUT"></about-app>
@@ -44,6 +45,7 @@ module.exports = {
     'menu-bar': httpVueLoader('components/menu-bar.vue'),
     'app-options': httpVueLoader('components/app-options.vue'),
     'text-options': httpVueLoader('components/text-options.vue'),
+    'explainer-options': httpVueLoader('components/explainer-options.vue'),
     'background-options': httpVueLoader('components/background-options.vue'),
     'app-map': httpVueLoader('components/app-map.vue'),
     'about-app': httpVueLoader('components/about-app.vue')
