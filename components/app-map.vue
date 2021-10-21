@@ -151,6 +151,7 @@ module.exports = {
     this.appMap = this.$store.state.settings.appMap;
     if (!settingsExist()) {
       this.appMap = helpers.generateDefaultAppMap();
+      this.saveSendAndUpdate();
     }
   }
 };
