@@ -190,6 +190,30 @@ window.App = new Vue({
         'font-weight:' + (this.settings.fontWeight * 100),
         'text-shadow:' + textShadow
       ].join(';');
+    },
+    explainerStyles: function () {
+      let fontItalics = 'normal';
+      if (this.settings.explainerFontItalics) {
+        fontItalics = 'italic';
+      }
+
+      let textShadow = 'none';
+      if (this.settings.explainerTextShadow === 'white') {
+        textShadow = '0px 0px 3px #FFF, 0px 0px 7px #FFF, 0px 0px 14px #FFF';
+      } else if (this.settings.explainerTextShadow === 'black') {
+        textShadow = '0px 0px 3px #000, 0px 0px 7px #000, 0px 0px 14px #000';
+      }
+
+      return [
+        'top:' + this.settings.explainerTop + 'px',
+        'left:' + this.settings.explainerLeft + 'px',
+        'color:' + this.settings.explainerTextColor,
+        'font-family:' + this.settings.explainerFontFamily,
+        'font-size:' + this.settings.explainerFontSize + 'px',
+        'font-style:' + fontItalics,
+        'font-weight:' + (this.settings.explainerFontWeight * 100),
+        'text-shadow:' + textShadow
+      ].join(';');
     }
   },
   created: function () {

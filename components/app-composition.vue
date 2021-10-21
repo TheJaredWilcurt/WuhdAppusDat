@@ -18,6 +18,7 @@
 
       <app-options v-show="lastViewedSection === TAB_NAME_OPTIONS"></app-options>
       <text-options v-show="lastViewedSection === TAB_NAME_TEXT"></text-options>
+      <explainer-options v-show="lastViewedSection === TAB_NAME_MESSAGE"></explainer-options>
       <background-options v-show="lastViewedSection === TAB_NAME_BACKGROUND"></background-options>
       <app-map v-show="lastViewedSection === TAB_NAME_ALIASES"></app-map>
       <about-app v-show="lastViewedSection === TAB_NAME_ABOUT"></about-app>
@@ -30,6 +31,7 @@ const { mapSettings } = window.require('./scripts/computeds.js');
 const {
   TAB_NAME_OPTIONS,
   TAB_NAME_TEXT,
+  TAB_NAME_MESSAGE,
   TAB_NAME_BACKGROUND,
   TAB_NAME_ALIASES,
   TAB_NAME_ABOUT
@@ -43,6 +45,7 @@ module.exports = {
     'menu-bar': httpVueLoader('components/menu-bar.vue'),
     'app-options': httpVueLoader('components/app-options.vue'),
     'text-options': httpVueLoader('components/text-options.vue'),
+    'explainer-options': httpVueLoader('components/explainer-options.vue'),
     'background-options': httpVueLoader('components/background-options.vue'),
     'app-map': httpVueLoader('components/app-map.vue'),
     'about-app': httpVueLoader('components/about-app.vue')
@@ -51,6 +54,7 @@ module.exports = {
     return {
       TAB_NAME_OPTIONS,
       TAB_NAME_TEXT,
+      TAB_NAME_MESSAGE,
       TAB_NAME_BACKGROUND,
       TAB_NAME_ALIASES,
       TAB_NAME_ABOUT,
@@ -59,6 +63,7 @@ module.exports = {
       tabs: [
         TAB_NAME_OPTIONS,
         TAB_NAME_TEXT,
+        TAB_NAME_MESSAGE,
         TAB_NAME_BACKGROUND,
         TAB_NAME_ALIASES,
         TAB_NAME_ABOUT

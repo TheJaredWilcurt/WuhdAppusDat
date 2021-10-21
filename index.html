@@ -21,6 +21,11 @@
       .app-name {
         font-family: Petrona, georgia;
         text-transform: capitalize;
+        z-index: 10;
+      }
+      .explainer-text {
+        position: absolute;
+        z-index: 1;
       }
       .container {
         position: absolute;
@@ -87,6 +92,9 @@
 
       <div class="container" :style="backgroundStyles"></div>
       <div class="container">
+        <h2 class="explainer-text" :style="explainerStyles">
+          {{ settings && settings.explainerMessage }}
+        </h2>
         <h1 class="app-name" :style="textStyles">
           {{ currentlyInFocusApp }}
         </h1>
