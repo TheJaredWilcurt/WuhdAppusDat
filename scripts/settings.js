@@ -2,10 +2,14 @@ const fs = require('fs');
 
 const { SETTINGS_LOCATION } = require('./global-constants.js');
 
+function settingsExist () {
+  return fs.existsSync(SETTINGS_LOCATION);
+}
+
 // Load from disk
 function loadSettings () {
   const settings = {};
-  if (!fs.existsSync(SETTINGS_LOCATION)) {
+  if (!settingsExist()) {
     return settings;
   }
   try {
@@ -62,5 +66,6 @@ module.exports = {
   getSettings,
   loadSettings,
   saveSettings,
-  sendSettings
+  sendSettings,
+  settingsExist
 };

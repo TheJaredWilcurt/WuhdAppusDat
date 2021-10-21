@@ -19,6 +19,7 @@
       <app-options v-show="lastViewedSection === TAB_NAME_OPTIONS"></app-options>
       <text-options v-show="lastViewedSection === TAB_NAME_TEXT"></text-options>
       <background-options v-show="lastViewedSection === TAB_NAME_BACKGROUND"></background-options>
+      <app-map v-show="lastViewedSection === TAB_NAME_ALIASES"></app-map>
       <about-app v-show="lastViewedSection === TAB_NAME_ABOUT"></about-app>
     </div>
   </div>
@@ -30,6 +31,7 @@ const {
   TAB_NAME_OPTIONS,
   TAB_NAME_TEXT,
   TAB_NAME_BACKGROUND,
+  TAB_NAME_ALIASES,
   TAB_NAME_ABOUT
 } = window.require('./scripts/global-constants.js');
 
@@ -42,6 +44,7 @@ module.exports = {
     'app-options': httpVueLoader('components/app-options.vue'),
     'text-options': httpVueLoader('components/text-options.vue'),
     'background-options': httpVueLoader('components/background-options.vue'),
+    'app-map': httpVueLoader('components/app-map.vue'),
     'about-app': httpVueLoader('components/about-app.vue')
   },
   data: function () {
@@ -49,6 +52,7 @@ module.exports = {
       TAB_NAME_OPTIONS,
       TAB_NAME_TEXT,
       TAB_NAME_BACKGROUND,
+      TAB_NAME_ALIASES,
       TAB_NAME_ABOUT,
 
       isMaximized: false,
@@ -56,6 +60,7 @@ module.exports = {
         TAB_NAME_OPTIONS,
         TAB_NAME_TEXT,
         TAB_NAME_BACKGROUND,
+        TAB_NAME_ALIASES,
         TAB_NAME_ABOUT
       ]
     };
@@ -93,7 +98,7 @@ module.exports = {
   display: inline-block;
   padding: 0px;
   color: salmon;
-  font-size: 28px;
+  font-size: 23px;
   font-weight: bold;
   text-decoration: none;
   cursor: pointer;
