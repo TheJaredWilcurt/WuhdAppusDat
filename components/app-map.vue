@@ -1,14 +1,21 @@
 <template>
   <div class="app-map-container">
     <p>If an application you run does not display a name you like, you can alias it here.</p>
-
-    <drop-down
-      v-model="sortBy"
-      :options="sortByOptions"
-      label="Sort By"
-    ></drop-down>
+    <p>Showing {{ appMap.length }} app alias{{ appMap.length === 1 ? '' : 'es' }}.</p>
 
     <transition-group class="app-map-transition-group" tag="div">
+      <div
+        v-if="appMap.length > 1"
+        class="app-map-item app-map-sorter"
+        key="sorter"
+      >
+        <drop-down
+          v-model="sortBy"
+          :options="sortByOptions"
+          label="Sort By"
+        ></drop-down>
+      </div>
+
       <div
         v-for="app in sortedAppMap"
         class="app-map-item"
@@ -40,12 +47,22 @@
           Add Another
         </a>
       </div>
+
+      <div
+        class="app-map-item add-another"
+        key="needed-also-needed-for-animation"
+      >
+        <a href="#" @click.prevent="loadDefaults">
+          Load defaults
+        </a>
+      </div>
     </transition-group>
   </div>
 </template>
 
 <script>
-const globalConstants = window.require('./scripts/global-constants.js');
+const helpers = window.require('./scripts/helpers.js');
+const { settingsExist } = window.require('./scripts/settings.js');
 
 module.exports = {
   name: 'app-map',
@@ -98,7 +115,7 @@ module.exports = {
     },
     addAnother: function () {
       const newApp = {
-        id: globalConstants.GUID(),
+        id: helpers.generateUniqueId(),
         file: '',
         alias: ''
       };
@@ -106,6 +123,15 @@ module.exports = {
       this.$set(this.appMap, index, newApp);
       this.saveAndSend();
       this.$forceUpdate();
+    },
+    loadDefaults: function () {
+      const defaultApps = helpers.generateDefaultAppMap();
+      defaultApps.forEach((defaultApp) => {
+        if (this.findAppById(defaultApp.id) === -1) {
+          const index = this.appMap.length;
+          this.$set(this.appMap, index, defaultApp);
+        }
+      });
     }
   },
   computed: {
@@ -125,7 +151,10 @@ module.exports = {
     }
   },
   created: function () {
-    this.appMap = this.$store.state.settings.appMap || [ ...globalConstants.DEFAULT_APP_MAP ];
+    this.appMap = this.$store.state.settings.appMap;
+    if (!settingsExist()) {
+      this.appMap = helpers.generateDefaultAppMap();
+    }
   }
 };
 </script>
@@ -157,6 +186,12 @@ module.exports = {
 .app-map-item.v-leave-active {
   position: absolute;
   left: 0px;
+}
+.app-map-sorter {
+  width:  489px;
+  max-width: 489px;
+  font-size: 16px;
+  text-align: center;
 }
 .app-map-file-alias-wrapper {
   display: inline-block;
