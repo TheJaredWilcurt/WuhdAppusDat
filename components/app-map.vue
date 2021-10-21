@@ -8,27 +8,22 @@
       label="Sort By"
     ></drop-down>
 
-    <transition-group
-      class="app-map-transition-group"
-      tag="div"
-      :key="listKey"
-    >
+    <transition-group class="app-map-transition-group" tag="div">
       <div
         v-for="app in sortedAppMap"
         class="app-map-item"
-        :data-key="app.id"
         :key="app.id"
       >
-        <div class="app-map-key-value-wrapper">
+        <div class="app-map-file-alias-wrapper">
           <input
             v-model="app.file"
-            class="app-map-key"
+            class="app-map-file"
             placeholder="calc"
             @input="saveAndSend"
           >
           <input
             v-model="app.alias"
-            class="app-map-value"
+            class="app-map-alias"
             placeholder="Calculator"
             @input="saveAndSend"
           >
@@ -74,19 +69,14 @@ module.exports = {
           value: 'alias'
         }
       ],
-      appMap: [],
-      listKey: 0
+      appMap: []
     };
   },
   methods: {
-    findAppById: function (appMap, id) {
-      return appMap.findIndex(function (app) {
+    findAppById: function (id) {
+      return this.appMap.findIndex(function (app) {
         return app.id === id;
       });
-    },
-    bumpKey: function () {
-      // this.listKey = this.listKey + 1;
-      this.$forceUpdate();
     },
     saveAndSend: function () {
       const setting = 'appMap';
@@ -96,16 +86,15 @@ module.exports = {
     },
     setKey: function ($event, key, id) {
       let value = $event.target.value;
-      const index = this.findAppById(this.appMap, id);
+      const index = this.findAppById(id);
       this.$set(this.appMap[index], key, value);
       this.saveAndSend();
     },
     removeApp: function (id) {
-      const index = this.findAppById(this.appMap, id);
+      const index = this.findAppById(id);
       this.$delete(this.appMap, index);
-      // this.appMap.splice(index, 1);
       this.saveAndSend();
-      this.bumpKey();
+      this.$forceUpdate();
     },
     addAnother: function () {
       const newApp = {
@@ -115,9 +104,8 @@ module.exports = {
       };
       const index = this.appMap.length;
       this.$set(this.appMap, index, newApp);
-      this.$set(this.appMap[index], 'file', '');
       this.saveAndSend();
-      this.bumpKey();
+      this.$forceUpdate();
     }
   },
   computed: {
@@ -170,39 +158,39 @@ module.exports = {
   position: absolute;
   left: 0px;
 }
-.app-map-key-value-wrapper {
+.app-map-file-alias-wrapper {
   display: inline-block;
   background: #FFF6FA;
   border-radius: 100px;
   box-shadow: 1px 1px 5px inset rgba(136, 119, 91, 0.31), 1px 1px 0px rgba(136, 119, 91, 0.31);
 }
-.app-map-key,
-.app-map-value {
+.app-map-file,
+.app-map-alias {
   background: transparent;
   margin: 0px;
   padding: 8px 16px;
   color: #333;
   font-size: 16px;
 }
-.app-map-key:focus,
-.app-map-value:focus {
+.app-map-file:focus,
+.app-map-alias:focus {
   outline: none;
 }
-.app-map-key,
-.app-map-value,
+.app-map-file,
+.app-map-alias,
 .app-map-remove {
   border: 0px;
 }
-.app-map-key {
+.app-map-file {
   border-radius:  100px 0px 0px 100px;
 }
-.app-map-key::placeholder{
+.app-map-file::placeholder{
   color: #3335;
 }
-.app-map-value::placeholder {
+.app-map-alias::placeholder {
   color: rgba(158, 107, 107, 0.33);
 }
-.app-map-value {
+.app-map-alias {
   border-radius:  0px 100px 100px 0px;
   box-shadow:  0px 0px 57px inset rgba(255, 162, 0, 0.25);
 }

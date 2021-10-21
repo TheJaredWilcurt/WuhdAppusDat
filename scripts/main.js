@@ -102,7 +102,7 @@ window.App = new Vue({
       const appList = this.settings && this.settings.appMap;
       if (appList) {
         appList.forEach(function (app) {
-          appMap[app.file] = app.alias;
+          appMap[app.file.toLowerCase()] = app.alias;
         });
       }
       return appMap;
