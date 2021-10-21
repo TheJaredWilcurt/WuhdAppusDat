@@ -30,6 +30,7 @@ const { mapSettings } = window.require('./scripts/computeds.js');
 const {
   TAB_NAME_OPTIONS,
   TAB_NAME_TEXT,
+  TAB_NAME_MESSAGE,
   TAB_NAME_BACKGROUND,
   TAB_NAME_ALIASES,
   TAB_NAME_ABOUT
@@ -51,6 +52,7 @@ module.exports = {
     return {
       TAB_NAME_OPTIONS,
       TAB_NAME_TEXT,
+      TAB_NAME_MESSAGE,
       TAB_NAME_BACKGROUND,
       TAB_NAME_ALIASES,
       TAB_NAME_ABOUT,
@@ -59,6 +61,7 @@ module.exports = {
       tabs: [
         TAB_NAME_OPTIONS,
         TAB_NAME_TEXT,
+        TAB_NAME_MESSAGE,
         TAB_NAME_BACKGROUND,
         TAB_NAME_ALIASES,
         TAB_NAME_ABOUT

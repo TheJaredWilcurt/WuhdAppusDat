@@ -21,6 +21,17 @@
       .app-name {
         font-family: Petrona, georgia;
         text-transform: capitalize;
+        z-index: 10;
+      }
+      .explainer-text {
+        position: absolute;
+        top: 15px;
+        left: 145px;
+        color: #FF0;
+        font-family: Petrona, georgia;
+        font-size: 16px;
+        text-shadow: rgb(0, 0, 0) 1px 1px 11px, rgb(0, 0, 0) 1px 1px 18px;
+        z-index: 1;
       }
       .container {
         position: absolute;
@@ -87,6 +98,9 @@
 
       <div class="container" :style="backgroundStyles"></div>
       <div class="container">
+        <h2 class="explainer-text" :style="explainerStyles">
+          {{ explainerText }}
+        </h2>
         <h1 class="app-name" :style="textStyles">
           {{ currentlyInFocusApp }}
         </h1>

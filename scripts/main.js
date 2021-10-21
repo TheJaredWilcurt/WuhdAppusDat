@@ -20,6 +20,7 @@ window.App = new Vue({
     'main-nav': httpVueLoader('components/main-nav.vue')
   },
   data: {
+    explainerText: 'Currently in focus:',
     currentlyInFocusApp: '',
     interval: null,
     settings: {}
@@ -189,6 +190,10 @@ window.App = new Vue({
         'font-style:' + fontItalics,
         'font-weight:' + (this.settings.fontWeight * 100),
         'text-shadow:' + textShadow
+      ].join(';');
+    },
+    explainerStyles: function () {
+      return [
       ].join(';');
     }
   },

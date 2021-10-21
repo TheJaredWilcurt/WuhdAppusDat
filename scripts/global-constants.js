@@ -28,6 +28,7 @@ const globalConstants = Object.freeze({
   TAB_NAME_OPTIONS: 'Options',
   TAB_NAME_TEXT: 'Text',
   TAB_NAME_BACKGROUND: 'Background',
+  TAB_NAME_MESSAGE: 'Message',
   TAB_NAME_ALIASES: 'Aliases',
   TAB_NAME_ABOUT: 'About'
 });
