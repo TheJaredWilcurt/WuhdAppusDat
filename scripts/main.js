@@ -199,9 +199,9 @@ window.App = new Vue({
 
       let textShadow = 'none';
       if (this.settings.explainerTextShadow === 'white') {
-        textShadow = '1px 1px 7px #FFF, 1px 1px 14px #FFF';
+        textShadow = '0px 0px 3px #FFF, 0px 0px 7px #FFF, 0px 0px 14px #FFF';
       } else if (this.settings.explainerTextShadow === 'black') {
-        textShadow = '1px 1px 7px #000, 1px 1px 14px #000';
+        textShadow = '0px 0px 3px #000, 0px 0px 7px #000, 0px 0px 14px #000';
       }
 
       return [
