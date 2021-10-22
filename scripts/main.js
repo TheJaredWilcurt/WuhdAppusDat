@@ -40,7 +40,10 @@ window.App = new Vue({
       }).join(' ');
     },
     storeInTextFile: function (fileName) {
-      if (this.settings.outputFile) {
+      if (
+        this.settings.outputFile &&
+        fs.existsSync(this.settings.outputFile)
+      ) {
         fileName = this.capitalizeEachWord(fileName);
         const outputFile = path.join(this.settings.outputFile, OUTPUT_FILE_NAME);
         fs.writeFileSync(outputFile, fileName);
