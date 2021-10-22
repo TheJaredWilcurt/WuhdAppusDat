@@ -150,6 +150,11 @@ function generateDefaultAppMap () {
       alias: 'Windows Resource Monitor'
     },
     {
+      id: 'shellexperiencehost',
+      file: 'shellexperiencehost',
+      alias: 'Explorer'
+    },
+    {
       id: 'soundrecorder',
       file: 'soundrecorder',
       alias: 'Sound Recorder'
