@@ -30,6 +30,7 @@ const store = new Vuex.Store({
       closingApp: globalConstants.DEFAULT_CLOSING_APP,
       visibleOnAllWorkspaces: globalConstants.DEFAULT_VISIBLE_ON_ALL_WORKSPACES,
       updateInterval: globalConstants.DEFAULT_INTERVAL,
+      outputFile: null,
 
       fontFamily: globalConstants.DEFAULT_FONT_FAMILY,
       fontSize: globalConstants.DEFAULT_FONT_SIZE,

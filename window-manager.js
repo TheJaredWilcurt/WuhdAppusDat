@@ -15,7 +15,7 @@ const optionsWindowOptions = {
   frame: false,
   transparent: true,
   width: 596,
-  height: 448,
+  height: 493,
   min_width: 595,
   min_height: 200,
   show: false

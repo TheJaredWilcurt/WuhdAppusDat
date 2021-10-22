@@ -3,6 +3,7 @@ const path = require('path');
 const globalConstants = Object.freeze({
   APP_TITLE: 'WuhdAppusDat',
   APP_VERSION: nw.App.manifest.version,
+  OUTPUT_FILE_NAME: 'WuhdAppusDat.txt',
   DEFAULT_BACKGROUND_IMAGE: 'images/leaves.png',
   DEFAULT_BACKGROUND_BRIGHTNESS: 6.66,
   DEFAULT_BACKGROUND_CONTRAST: 33.33,

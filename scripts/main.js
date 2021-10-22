@@ -1,6 +1,7 @@
 
 Vue.config.devtools = true;
 
+const fs = window.require('fs');
 const path = window.require('path');
 const settingsHelpers = window.require('./scripts/settings.js');
 const {
@@ -9,6 +10,7 @@ const {
   MAX_BRIGHTNESS,
   MAX_CONTRAST,
   MAX_SATURATION,
+  OUTPUT_FILE_NAME,
   SATURATION_UPPER_MULTIPLIER
 } = require('./scripts/global-constants.js');
 
@@ -32,6 +34,21 @@ window.App = new Vue({
       const amount = (this.settings.updateInterval || DEFAULT_INTERVAL) * 1000;
       this.interval = setInterval(this.setAppName, amount);
     },
+    capitalizeEachWord: function (phrase) {
+      return phrase.split(' ').map(function (word) {
+        return word[0].toUpperCase() + word.slice(1);
+      }).join(' ');
+    },
+    storeInTextFile: function (fileName) {
+      if (
+        this.settings.outputFile &&
+        fs.existsSync(this.settings.outputFile)
+      ) {
+        fileName = this.capitalizeEachWord(fileName);
+        const outputFile = path.join(this.settings.outputFile, OUTPUT_FILE_NAME);
+        fs.writeFileSync(outputFile, fileName);
+      }
+    },
     appNameCleanUp: function (fileName) {
       fileName = fileName.split('_').join(' ');
 
@@ -52,6 +69,7 @@ window.App = new Vue({
       }
       fileName = this.appNameCleanUp(fileName);
       this.currentlyInFocusApp = fileName;
+      this.storeInTextFile(fileName);
     },
     setWindowsAppName: function () {
       const getActiveProcessName = window.require('windows-active-process').getActiveProcessName;
@@ -69,6 +87,7 @@ window.App = new Vue({
       fileName = fileName.join('');
       fileName = this.appNameCleanUp(fileName);
       this.currentlyInFocusApp = fileName;
+      this.storeInTextFile(fileName);
     },
     setAppName: function () {
       if (window.process.platform === 'win32') {
