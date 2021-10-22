@@ -16,6 +16,11 @@
       label="System Tray"
     ></check-box>
 
+    <folder-picker
+      v-model="outputFile"
+      label="Output to file"
+    ></folder-picker>
+
     <drop-down
       v-model="closingApp"
       :options="closingAppOptions"
@@ -35,11 +40,15 @@
 
     <p>The "Update Interval" controls how often (in seconds) we check to see what application currently has focus. Faster speeds may not work as well on very low end devices, most people won't notice though.</p>
     <p>Changes to system tray take effect on next launch.</p>
+    <p>{{ APP_TITLE }} is also capable of outputting the current application in focus to a plain text file. You can even minimize the entire app to your tray and just use it for that.</p>
   </div>
 </template>
 
 <script>
-const { DEFAULT_INTERVAL } = window.require('./scripts/global-constants.js');
+const {
+  APP_TITLE,
+  DEFAULT_INTERVAL
+} = window.require('./scripts/global-constants.js');
 const { mapSettings } = window.require('./scripts/computeds.js');
 const canSetVisibleOnAllWorkspaces = window.nw.Window.get().canSetVisibleOnAllWorkspaces();
 
@@ -48,10 +57,12 @@ module.exports = {
   components: {
     'check-box': httpVueLoader('components/form-fields/check-box.vue'),
     'drop-down': httpVueLoader('components/form-fields/drop-down.vue'),
+    'folder-picker': httpVueLoader('components/form-fields/folder-picker.vue'),
     'range-slider': httpVueLoader('components/form-fields/range-slider.vue')
   },
   data: function () {
     return {
+      APP_TITLE,
       DEFAULT_INTERVAL,
 
       canSetVisibleOnAllWorkspaces,
@@ -82,6 +93,7 @@ module.exports = {
     ...mapSettings([
       'alwaysOnTop',
       'closingApp',
+      'outputFile',
       'updateInterval',
       'visibleOnAllWorkspaces'
     ])
