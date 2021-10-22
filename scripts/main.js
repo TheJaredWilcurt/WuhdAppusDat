@@ -10,6 +10,7 @@ const {
   MAX_BRIGHTNESS,
   MAX_CONTRAST,
   MAX_SATURATION,
+  OUTPUT_FILE_NAME,
   SATURATION_UPPER_MULTIPLIER
 } = require('./scripts/global-constants.js');
 
@@ -41,7 +42,7 @@ window.App = new Vue({
     storeInTextFile: function (fileName) {
       if (this.settings.outputFile) {
         fileName = this.capitalizeEachWord(fileName);
-        const outputFile = path.join(this.settings.outputFile, APP_TITLE + '.txt');
+        const outputFile = path.join(this.settings.outputFile, OUTPUT_FILE_NAME);
         fs.writeFileSync(outputFile, fileName);
       }
     },

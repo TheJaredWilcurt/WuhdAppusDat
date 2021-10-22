@@ -25,7 +25,7 @@ const path = window.require('path');
 
 const openFolderExplorer = window.require('nw-programmatic-folder-select');
 
-const { APP_TITLE } = window.require('./scripts/global-constants.js');
+const { OUTPUT_FILE_NAME } = window.require('./scripts/global-constants.js');
 const methods = window.require('./scripts/methods.js');
 
 module.exports = {
@@ -61,7 +61,7 @@ module.exports = {
       if (!this.value) {
         return '';
       }
-      return path.join(this.value, APP_TITLE + '.txt');
+      return path.join(this.value, OUTPUT_FILE_NAME);
     }
   }
 };
