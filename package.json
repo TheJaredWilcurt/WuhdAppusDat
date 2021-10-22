@@ -1,6 +1,6 @@
 {
   "name": "wuhdappusdat",
-  "version": "2.0.0-beta",
+  "version": "2.0.0",
   "description": "Shows currently focused program",
   "main": "window-manager.js",
   "scripts": {
