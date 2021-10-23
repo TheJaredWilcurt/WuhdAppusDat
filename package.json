@@ -4,13 +4,10 @@
   "description": "Shows currently focused program",
   "main": "window-manager.js",
   "scripts": {
-    "start": "nw .",
+    "start": "node node_modules/npm-free-server/dist/server.js",
     "lint": "eslint --ext .js,.vue --config=.eslintrc.js window-manager.js scripts",
-    "fix": "eslint --ext .js,.vue --fix --config=.eslintrc.js window-manager.js scripts",
-    "postinstall": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.33.4 --arch=x64",
-    "post-install": "cd node_modules && cd windows-active-process && nw-gyp rebuild --target=0.33.4 --arch=x64"
+    "fix": "eslint --ext .js,.vue --fix --config=.eslintrc.js window-manager.js scripts"
   },
-  "chromium-args": "--load-extension='./node_modules/nw-vue-devtools-prebuilt/extension'",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TheJaredWilcurt/wuhdappusdat.git"
@@ -21,18 +18,6 @@
     "url": "https://github.com/TheJaredWilcurt/wuhdappusdat/issues"
   },
   "homepage": "https://github.com/TheJaredWilcurt/wuhdappusdat#readme",
-  "ManifestComments": [
-    "Node.js 13 was the last version to officially support Windows 7",
-    "NW.js 0.45.3 was the last version to support Node (uses v13.13.0)",
-    "NW.js 0.39.2 was the last known-good version compatible with NW-GYP (required for deps)",
-    "NW.js 0.34.0 - 0.48.0 has a tray icon bug",
-    "So we have to use NW 0.33.4, the last Win 7 node compatible version without the bug that supports NW-GYP",
-    "0.33.4 ships with Node 10.11.0",
-    "Global Node version must be v10.11.0",
-    "windows-active-process does a native build based on OS/Arch/Node version, so you need to run these commands",
-    "npm install -g windows-build-tools",
-    "npm install -g nw-gyp"
-  ],
   "devDependencies": {
     "@babel/eslint-parser": "^7.15.7",
     "babel-eslint": "^10.1.0",
@@ -40,12 +25,6 @@
     "eslint-config-tjw-base": "^1.0.0",
     "eslint-config-tjw-vue": "^2.0.2",
     "eslint-plugin-vue": "^7.19.1",
-    "nw": "0.33.4-sdk",
-    "nw-vue-devtools-prebuilt": "0.0.10"
-  },
-  "dependencies": {
-    "active-win": "^6.2.0",
-    "nw-programmatic-folder-select": "^1.0.5",
-    "windows-active-process": "^1.1.1"
+    "npm-free-server": "^1.1.0"
   }
 }

@@ -8,8 +8,17 @@ html,
 body {
   width: 100%;
   height: 100%;
+  background-image: linear-gradient(#FFFAF1, #FA8072);
   border: 0px;
   margin: 0px;
   padding: 0px;
   font-family: Petrona, Georgia;
 }
+
+.logo {
+  display: block;
+  width: 230px;
+  max-width: 100%;
+  margin:  0px auto;
+}
+
