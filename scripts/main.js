@@ -1,7 +1,7 @@
 Vue.config.devtools = true;
 
 /* eslint-disable-next-line no-unused-vars */
-const downloadButtons = new Vue({
+window.downloadButtons = new Vue({
   el: '#button-container',
   data: function () {
     return {

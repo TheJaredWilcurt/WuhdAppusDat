@@ -17,7 +17,7 @@
           class="logo"
         >
         <div>
-          <h1>
+          <h1 class="header-title">
             WuhdAppusDat
             <span class="header-subtitle">(for streamers)</span>
           </h1>
@@ -25,46 +25,56 @@
         </div>
       </div>
 
-      <div class="row">
-        <div
-          id="button-container"
-          class="button-container"
-        >
-          <h1 class="downloads-title">Downloads</h1>
-          <a
-            v-text="'Windows'"
-            :href="releases['Windows']"
-            target="_blank"
-            class="download-button"
-          ></a>
-          <a
-            v-text="'Linux'"
-            :href="releases['Linux']"
-            target="_blank"
-            class="download-button"
-          ></a>
-          <a
-            v-text="'OSX'"
-            :href="releases['OSX']"
-            target="_blank"
-            class="download-button"
-          ></a>
+      <section>
+        <div class="row">
+          <div
+            id="button-container"
+            class="button-container"
+          >
+            <h1 class="section-title">Downloads</h1>
+            <a
+              v-text="'Windows'"
+              :href="releases['Windows']"
+              target="_blank"
+              class="download-button"
+            ></a>
+            <a
+              v-text="'Linux'"
+              :href="releases['Linux']"
+              target="_blank"
+              class="download-button"
+            ></a>
+            <a
+              v-text="'OSX'"
+              :href="releases['OSX']"
+              target="_blank"
+              class="download-button"
+            ></a>
+            <a
+              v-text="'Screenshots'"
+              href="https://user-images.githubusercontent.com/4629794/138389978-3e6ac9f9-7829-4e71-8ac5-7cca39dd59dc.png"
+              target="_blank"
+            ></a>
+          </div>
+          <div class="grow">
+            <iframe
+              class="youtube"
+              src="https://www.youtube-nocookie.com/embed/NpEaa2P7qZI"
+              title="YouTube
+              video
+              player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
-        <div class="grow">
-          <iframe
-            class="youtube"
-            src="https://www.youtube-nocookie.com/embed/NpEaa2P7qZI"
-            title="YouTube
-            video
-            player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
-        </div>
-      </div>
+      </section>
 
-      <div id="app"></div>
+      <section>
+        <h1 class="section-title">Releases</h1>
+        <div id="app"></div>
+      </section>
     </div>
 
     <script src="scripts/vue.min.js"></script>
