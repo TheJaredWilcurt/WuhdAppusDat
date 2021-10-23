@@ -149,6 +149,13 @@ section {
   color: #000;
 }
 
+html.win .download-button-win,
+html.linux .download-button-lin,
+html.mac .download-button-osx {
+  border: 2px solid #F7D5A9C2;
+  box-shadow: 0px 0px 3px 1px #FF1C00;
+}
+
 
 /* VIDEO  */
 

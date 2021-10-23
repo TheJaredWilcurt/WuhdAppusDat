@@ -38,19 +38,20 @@
               v-text="'Windows'"
               :href="releases['Windows']"
               target="_blank"
-              class="download-button"
+              class="download-button download-button-win"
             ></a>
             <a
               v-text="'Linux'"
               :href="releases['Linux']"
               target="_blank"
-              class="download-button"
+              class="download-button download-button-lin"
             ></a>
             <a
+              v-show="false"
               v-text="'OSX'"
               :href="releases['OSX']"
               target="_blank"
-              class="download-button"
+              class="download-button download-button-osx"
             ></a>
             <a
               v-text="'Screenshots'"
@@ -74,6 +75,7 @@
       </section>
 
       <section>
+        <h1 class="section-title">Details</h1>
         <div class="row">
           <div class="third">
             <h2>Completely Customizable</h2>
@@ -91,7 +93,7 @@
       </section>
 
       <section>
-        <h1 class="section-title">Releases</h1>
+        <h1 class="section-title">All Releases</h1>
         <div id="app"></div>
       </section>
     </div>
@@ -100,11 +102,6 @@
     <script src="scripts/http-vue-loader.min.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/crossbrowser.min.js"></script>
-    <!--
-      using petrona
-      700
-      900
-    -->
-    <link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
   </body>
 </html>
