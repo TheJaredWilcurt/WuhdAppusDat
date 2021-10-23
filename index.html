@@ -8,14 +8,43 @@
     <link rel="stylesheet" href="styles/style.css">
   </head>
   <body>
-    <img
-      src="icon/WuhdAppusDat-Icon.png"
-      alt="Big orange W for the logo"
-      title="WuhdAppusDat"
-      class="logo"
-    >
+    <div class="wrapper">
+      <div class="row">
+        <img
+          src="icon/WuhdAppusDat-Icon.png"
+          alt="Big orange W for the logo"
+          title="WuhdAppusDat"
+          class="logo"
+        >
+        <div>
+          <h1>WuhdAppusDat</h1>
+          <h2>Desktop app for streamers to show what program you're in</h2>
+        </div>
+      </div>
 
-    <div id="app"></div>
+      <div class="row">
+        <div id="button-container" class="button-container">
+          <h1 class="downloads-title">Downloads</h1>
+          <a :href="releases['Windows']" taraget="_blank" class="download-button">Windows</a>
+          <a :href="releases['Linux']" taraget="_blank" class="download-button">Linux</a>
+          <a :href="releases['OSX']" taraget="_blank" class="download-button">OSX</a>
+        </div>
+        <div class="grow">
+          <iframe
+            class="youtube"
+            src="https://www.youtube-nocookie.com/embed/NpEaa2P7qZI"
+            title="YouTube
+            video
+            player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+
+      <div id="app"></div>
+    </div>
 
     <script src="scripts/vue.min.js"></script>
     <script src="scripts/http-vue-loader.min.js"></script>

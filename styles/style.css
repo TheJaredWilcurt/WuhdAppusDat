@@ -12,13 +12,62 @@ body {
   border: 0px;
   margin: 0px;
   padding: 0px;
+  color: #111;
   font-family: Petrona, Georgia;
+  font-weight: 700;
+}
+
+.wrapper {
+  max-width: 1080px;
+  margin: 0px auto;
+  background: #FFF8;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.grow {
+  flex-grow: 1;
 }
 
 .logo {
-  display: block;
   width: 230px;
   max-width: 100%;
-  margin:  0px auto;
 }
 
+.button-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 380px;
+}
+
+.downloads-title {
+  display: block;
+  text-align: center;
+}
+
+.download-button {
+  display: block;
+  min-width: 206px;
+  background: #F27D7D;
+  border: 0px;
+  border-radius: 100px;
+  margin: 10px auto;
+  padding: 10px;
+  color: #000;
+  font-size: 21px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.download-button:hover {
+  background: #F79494;
+}
+
+.youtube {
+  width: 100%;
+  height: 393px;
+}
