@@ -179,7 +179,7 @@ html.mac .download-button-osx {
 /* RELEASES-TABLE COMPONENT */
 
 .release-separator {
-  border-top: 1px solid #F00;
+  border-top: 1px solid salmon;
 }
 .first-asset td {
   padding-top: 14px;
