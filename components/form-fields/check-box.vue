@@ -3,14 +3,14 @@
     <label
       v-html="displayLabel(label)"
       class="pill-label"
-      :for="forId(label)"
+      :for="forId(label, id)"
     ></label>
     <span
       class="pill-content last-pill-section"
       @click="$emit('input', !value)"
     >
       <input
-        :id="forId(label)"
+        :id="forId(label, id)"
         :checked="value"
         type="checkbox"
         @click.stop
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+const computed = window.require('./scripts/form-field-computeds.js');
 const methods = window.require('./scripts/methods.js');
 
 module.exports = {
@@ -35,7 +36,8 @@ module.exports = {
       required: true
     }
   },
-  methods
+  methods,
+  computed
 };
 </script>
 

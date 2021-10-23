@@ -3,11 +3,11 @@
     <label
       v-html="displayLabel(label)"
       class="pill-label"
-      :for="forId(label)"
+      :for="forId(label, id)"
     ></label>
     <span class="pill-content">
       <input
-        :id="forId(label)"
+        :id="forId(label, id)"
         :value="value"
         type="range"
         :min="min"
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+const computed = window.require('./scripts/form-field-computeds.js');
 const methods = window.require('./scripts/methods.js');
 
 module.exports = {
@@ -71,6 +72,7 @@ module.exports = {
     }
   },
   computed: {
+    ...computed,
     visibleValue: function () {
       let value = parseFloat(this.value);
       return (value * this.multiplier).toFixed(this.toFixed);
