@@ -1,3 +1,7 @@
+
+
+/* BASE  */
+
 *,
 *:before,
 *:after {
@@ -28,13 +32,16 @@ table {
   border-spacing: unset;
   border-collapse: collapse;
   margin: 50px auto;
+  font-size: 18px;
 }
 thead {
   background: salmon;
   color: papayawhip;
+  font-size: 21px;
 }
 th {
   border: 0px;
+  padding:  15px 10px 10px 10px;
 }
 td {
   border: 0px;
@@ -44,20 +51,14 @@ section {
   margin-bottom: 100px;
 }
 
-.header-title {
-  color: #821212;
-}
-.header-subtitle {
-  font-size: 70%;
-  font-style: italic;
-  font-weight: 400;
-}
+
+/* LAYOUT  */
 
 .wrapper {
   max-width: 1080px;
   background: #FFF8;
   margin: 0px auto;
-  padding: 0px 0px 50px 0px;
+  padding: 40px 0px 50px 0px;
 }
 
 .row {
@@ -71,23 +72,50 @@ section {
   flex-grow: 1;
 }
 
-.logo {
-  width: 230px;
-  max-width: 100%;
-}
 
-.button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 380px;
-}
+/* UTILITY  */
 
 .section-title {
   display: block;
   color: #553311;
   font-weight: 900;
   text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+
+/* HEADER  */
+
+.header-title {
+  color: #821212;
+}
+
+.header-subtitle {
+  font-size: 70%;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.logo {
+  width: 230px;
+  max-width: 100%;
+}
+
+
+/* DOWNLOADS  */
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 380px;
 }
 
 .download-button {
@@ -109,6 +137,9 @@ section {
   color: #000;
 }
 
+
+/* VIDEO  */
+
 .youtube {
   width: calc(100% - 16px);
   height: 393px;
@@ -116,4 +147,23 @@ section {
   border-radius: 17px;
   margin: 0px 10px 0px 0px;
   box-shadow: 4px 4px 4px #0007;
+}
+
+
+/* RELEASES-TABLE COMPONENT */
+
+.release-separator {
+  border-top: 1px solid #F00;
+}
+.first-asset td {
+  padding-top: 14px;
+}
+.last-asset td {
+  padding-bottom: 14px;
+}
+
+/* OS-ICON COMPONENT  */
+
+.os-icon {
+  max-width: 24px;
 }
