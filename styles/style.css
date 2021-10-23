@@ -68,8 +68,20 @@ section {
   justify-content: center;
 }
 
+.third {
+  width: 33.33333%;
+  text-align: center;
+  background: #FFFFFF91;
+  background-image: linear-gradient(#FFEFD570, #FA80724F);
+  border-radius: 43px;
+  margin: 0px 14px 22px;
+  padding: 0px 10px 11px;
+  box-shadow: 2px 2px 2px #FA807247;
+}
+
 .grow {
   flex-grow: 1;
+  width:  100%;
 }
 
 
@@ -150,6 +162,13 @@ section {
 }
 
 
+/* VALUE PROPOSITION  */
+
+.third h2 {
+  margin-bottom: -8px;
+}
+
+
 /* RELEASES-TABLE COMPONENT */
 
 .release-separator {
@@ -162,8 +181,21 @@ section {
   padding-bottom: 14px;
 }
 
+
 /* OS-ICON COMPONENT  */
 
 .os-icon {
   max-width: 24px;
+}
+
+
+/* MEDIA QUERIES  */
+
+@media (max-width: 909px) {
+  .row {
+    flex-direction: column;
+  }
+  .youtube {
+    margin: 20px 8px 0px 8px;
+  }
 }
