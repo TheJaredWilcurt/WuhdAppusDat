@@ -3,9 +3,9 @@ const methods = {
     label = label.split(' ').join('&nbsp;');
     return label + ':';
   },
-  forId: function (label) {
+  forId: function (label, id) {
     label = label.toLowerCase().split(' ').join('-');
-    return label + '-input';
+    return label + '-input' + '-' + id;
   }
 };
 

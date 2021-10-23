@@ -16,12 +16,12 @@
         >{{ tab }}</a>
       </nav>
 
-      <app-options v-show="lastViewedSection === TAB_NAME_OPTIONS"></app-options>
-      <text-options v-show="lastViewedSection === TAB_NAME_TEXT"></text-options>
-      <explainer-options v-show="lastViewedSection === TAB_NAME_MESSAGE"></explainer-options>
-      <background-options v-show="lastViewedSection === TAB_NAME_BACKGROUND"></background-options>
-      <app-map v-show="lastViewedSection === TAB_NAME_ALIASES"></app-map>
-      <about-app v-show="lastViewedSection === TAB_NAME_ABOUT"></about-app>
+      <app-options v-show="isCurrentTab(TAB_NAME_OPTIONS)"></app-options>
+      <text-options v-show="isCurrentTab(TAB_NAME_TEXT)"></text-options>
+      <explainer-options v-show="isCurrentTab(TAB_NAME_MESSAGE)"></explainer-options>
+      <background-options v-show="isCurrentTab(TAB_NAME_BACKGROUND)"></background-options>
+      <app-map v-show="isCurrentTab(TAB_NAME_ALIASES)"></app-map>
+      <about-app v-show="isCurrentTab(TAB_NAME_ABOUT)"></about-app>
     </div>
   </div>
 </template>
@@ -69,6 +69,11 @@ module.exports = {
         TAB_NAME_ABOUT
       ]
     };
+  },
+  methods: {
+    isCurrentTab: function (tabName) {
+      return this.lastViewedSection === tabName;
+    }
   },
   computed: {
     ...mapSettings([
