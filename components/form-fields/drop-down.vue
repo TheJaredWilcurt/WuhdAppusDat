@@ -3,10 +3,10 @@
     <label
       v-html="displayLabel(label)"
       class="pill-label"
-      :for="forId(label)"
+      :for="forId(label, id)"
     ></label>
     <select
-      :id="forId(label)"
+      :id="forId(label, id)"
       :value="value"
       :disabled="disabled"
       class="pill-content last-pill-section"
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+const computed = window.require('./scripts/form-field-computeds.js');
 const methods = window.require('./scripts/methods.js');
 
 module.exports = {
@@ -64,6 +65,7 @@ module.exports = {
     emitInput: function ($event) {
       this.$emit('input', $event.target.value);
     }
-  }
+  },
+  computed
 };
 </script>

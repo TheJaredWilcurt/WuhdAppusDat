@@ -3,11 +3,11 @@
     <label
       v-html="displayLabel(label)"
       class="pill-label"
-      :for="forId(label)"
+      :for="forId(label, id)"
     ></label>
     <label class="pill-content">
       <input
-        :id="forId(label)"
+        :id="forId(label, id)"
         type="file"
         class="hidden"
         @input="emitInput($event)"
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+const computed = window.require('./scripts/form-field-computeds.js');
 const methods = window.require('./scripts/methods.js');
 
 module.exports = {
@@ -53,6 +54,7 @@ module.exports = {
       file = file || this.defaultValue;
       this.$emit('input', file);
     }
-  }
+  },
+  computed
 };
 </script>
