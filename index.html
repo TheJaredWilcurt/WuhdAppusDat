@@ -17,17 +17,38 @@
           class="logo"
         >
         <div>
-          <h1>WuhdAppusDat</h1>
-          <h2>Desktop app for streamers to show what program you're in</h2>
+          <h1>
+            WuhdAppusDat
+            <span class="header-subtitle">(for streamers)</span>
+          </h1>
+          <h2>Shows your chat what program you're using</h2>
         </div>
       </div>
 
       <div class="row">
-        <div id="button-container" class="button-container">
+        <div
+          id="button-container"
+          class="button-container"
+        >
           <h1 class="downloads-title">Downloads</h1>
-          <a :href="releases['Windows']" taraget="_blank" class="download-button">Windows</a>
-          <a :href="releases['Linux']" taraget="_blank" class="download-button">Linux</a>
-          <a :href="releases['OSX']" taraget="_blank" class="download-button">OSX</a>
+          <a
+            v-text="'Windows'"
+            :href="releases['Windows']"
+            target="_blank"
+            class="download-button"
+          ></a>
+          <a
+            v-text="'Linux'"
+            :href="releases['Linux']"
+            target="_blank"
+            class="download-button"
+          ></a>
+          <a
+            v-text="'OSX'"
+            :href="releases['OSX']"
+            target="_blank"
+            class="download-button"
+          ></a>
         </div>
         <div class="grow">
           <iframe
@@ -49,6 +70,11 @@
     <script src="scripts/vue.min.js"></script>
     <script src="scripts/http-vue-loader.min.js"></script>
     <script src="scripts/main.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Petrona:wght@700&display=swap" rel="stylesheet">
+    <!--
+      using petrona
+      700
+      900
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
   </body>
 </html>

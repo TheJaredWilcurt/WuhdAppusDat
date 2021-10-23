@@ -13,8 +13,14 @@ body {
   margin: 0px;
   padding: 0px;
   color: #111;
-  font-family: Petrona, Georgia;
+  font-family: Petrona, Georgia, serif;
   font-weight: 700;
+}
+
+.header-subtitle {
+  font-size: 70%;
+  font-style: italic;
+  font-weight: 400;
 }
 
 .wrapper {
@@ -27,6 +33,7 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 }
 
 .grow {
@@ -47,6 +54,7 @@ body {
 .downloads-title {
   display: block;
   text-align: center;
+  font-weight: 900;
 }
 
 .download-button {
