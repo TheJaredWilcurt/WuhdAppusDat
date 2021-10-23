@@ -95,6 +95,11 @@ The `windows-active-process` and `active-win` dependencies require a native modu
    * run `npm install -g windows-build-tools`
    * You may need to run `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser` in Powershell
    * You may need to install Visual Studio Community Edition
+1. On Linux
+   * `sudo apt update`
+   * `sudo apt install python2-minimal
+   * `sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
+   * `sudo apt-get install build-essential`
 1. `npm install -g nw-gyp`
 1. Download or clone the repo
 1. `npm install`
