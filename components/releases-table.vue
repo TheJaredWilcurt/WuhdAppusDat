@@ -20,7 +20,7 @@
           }"
           :key="'release' + releaseIndex + 'asset' + assetIndex"
         >
-          <td>{{ release.tag_name }}</td>
+          <td class="center">{{ release.tag_name }}</td>
           <td><a
             v-text="asset.name"
             :href="asset.browser_download_url"
