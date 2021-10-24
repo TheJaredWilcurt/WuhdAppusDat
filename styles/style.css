@@ -43,16 +43,16 @@ th {
   padding:  15px 10px 10px 10px;
 }
 th:first-of-type {
-  border: 30px 0px 0px 0px;
+  border-radius: 30px 0px 0px 0px;
 }
 th:last-of-type {
-  border: 0px 30px 0px 0px;
+  border-radius: 0px 30px 0px 0px;
 }
 tbody tr:last-of-type td:first-of-type {
-  border: 0px 0px 0px 30px;
+  border-radius: 0px 0px 0px 30px;
 }
 tbody tr:last-of-type td:last-of-type {
-  border: 0px 0px 30px 0px;
+  border-radius: 0px 0px 30px 0px;
 }
 td {
   background: #FFFFFF54;
