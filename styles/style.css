@@ -27,6 +27,20 @@ a:hover {
   color: salmon;
 }
 
+li {
+  font-weight: 500;
+}
+
+code {
+  display: inline-block;
+  background: #DD7569;
+  border: 1px solid #CE4536;
+  border-radius: 50px;
+  margin: 5px 0px 3px 0px;
+  padding: 2px 8px 1px 8px;
+  color: papayawhip;
+}
+
 table {
   width: calc(100% - 40px);
   border-collapse: collapse;
@@ -176,6 +190,8 @@ html.mac .download-button-osx {
 .youtube {
   width: calc(100% - 16px);
   height: 393px;
+  background: #333;
+  background-image: radial-gradient(#333, #000);
   border: 2px solid #000;
   border-radius: 17px;
   margin: 0px 10px 0px 0px;

@@ -89,6 +89,63 @@
       </section>
 
       <section>
+        <h1 class="section-title">Install Instructions</h1>
+        <ul>
+          <li>
+            <strong>Windows</strong>
+            <ul>
+              <li>Download the Installer and run it</li>
+              <li>It will default to installing to Program files, but you can set the folder anywhere (the app is portable)</li>
+              <li>After the install completes, it should pop open the app automatically</li>
+              <li>There will also be a shortcut in your start menu</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Linux</strong>
+            <ul>
+              <li>Download the zip file and unzip it to any directoy you like</li>
+              <li>In your terminal, <code>cd</code> into it and run <code>./WuhdAppusDat</code> to run the program</li>
+              <li>If it asks for you to create a keychain, you can do so or ignore it, I have no idea why it asks that, Linux is weird.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>OSX</strong>
+            <ul>
+              <li>You may need to allow running a program from the internet.</li>
+              <li>You will need to allow WuhdAppusDat to have access to "Accessibility Features" (this is how it can see the title of the currently focused window).</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1 class="section-title">Upgrading from Beta</h1>
+        <ul>
+          <li>Before using v2.0.0+ you'll need to delete the old cache file.</li>
+          <li>Close WuhdAppusDat (if running)</li>
+          <li>
+            Delete the app cache folder
+            <ul>
+              <li><strong>Windows:</strong> <code>C:\Users\&lt;YOUR USER NAME&gt;\AppData\Local\wuhdappusdat</code></li>
+              <li><strong>Linux:</strong> <code>~/.config/WuhdAppusDat</code></li>
+              <li><strong>OSX:</strong> <code>~/Library/Application Support/WuhdAppusDat/Default</code></li>
+            </ul>
+          </li>
+          <li>You should only have to do this once</li>
+          <li>Open WuhdAppusDat and adjust settings</li>
+        </ul>
+      </section>
+
+      <section>
+        <h1 class="section-title">OS Support</h1>
+        <ul>
+          <li>Windows 7+ (64-Bit only)</li>
+          <li>OSX 10.6+ (64-Bit only)</li>
+          <li>Most Debian systems (Ubuntu 12+, Zorin, etc.) (64-Bit only)</li>
+        </ul>
+      </section>
+
+      <section>
         <h1 class="section-title">All Releases</h1>
         <div id="app"></div>
       </section>
@@ -98,6 +155,6 @@
     <script src="scripts/http-vue-loader.min.js"></script>
     <script src="scripts/main.js"></script>
     <script src="scripts/crossbrowser.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,500;0,700;0,900;1,400&display=swap" rel="stylesheet">
   </body>
 </html>
