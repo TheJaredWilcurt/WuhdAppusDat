@@ -65,7 +65,7 @@
             class="logo"
           >
           <div>
-            <h1 class="header-title">
+            <h1 class="header-title" id="top">
               WuhdAppusDat
               <span class="header-subtitle">(for streamers)</span>
             </h1>
@@ -80,7 +80,7 @@
             id="button-container"
             class="button-container"
           >
-            <h1 class="section-title">Downloads</h1>
+            <h1 id="downloads" class="section-title">Downloads</h1>
             <a
               v-text="'Windows'"
               :href="releases['Windows']"
@@ -118,7 +118,7 @@
       </section>
 
       <section>
-        <h1 class="section-title">Details</h1>
+        <h1 id="details" class="section-title">Details</h1>
         <div class="row">
           <div class="third">
             <h2>Completely Customizable</h2>
@@ -136,7 +136,7 @@
       </section>
 
       <section>
-        <h1 class="section-title">Install Instructions</h1>
+        <h1 id="install" class="section-title">Install Instructions</h1>
         <ul>
           <li>
             <strong>Windows</strong>
@@ -166,7 +166,7 @@
       </section>
 
       <section>
-        <h1 class="section-title">Upgrading from Beta</h1>
+        <h1 id="beta" class="section-title">Upgrading from Beta</h1>
         <ul>
           <li>Before using v2.0.0+ you'll need to delete the old cache file.</li>
           <li>Close WuhdAppusDat (if running)</li>
@@ -184,7 +184,7 @@
       </section>
 
       <section>
-        <h1 class="section-title">OS Support</h1>
+        <h1 id="os-support" class="section-title">OS Support</h1>
         <ul>
           <li>Windows 7+ (64-Bit only)</li>
           <li>OSX 10.6+ (64-Bit only)</li>
@@ -193,7 +193,7 @@
       </section>
 
       <section>
-        <h1 class="section-title">All Releases</h1>
+        <h1 id="releases" class="section-title">All Releases</h1>
         <div id="app"></div>
       </section>
     </div>
