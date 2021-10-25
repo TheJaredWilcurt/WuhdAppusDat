@@ -210,6 +210,42 @@ html.mac .download-button-osx {
 }
 
 
+/* OS-PROGRESS-BARS */
+
+.progress-bar-container {
+  display: flex;
+  width: calc(100% - 64px);
+  margin: 0px auto;
+}
+.progress-bar {
+  flex-grow: 0;
+  height: 10px;
+  min-width: 10px;
+  background-image: linear-gradient(#FFFFFF47, #0000004F);
+}
+.progress-bar-win {
+  background-color: #531;
+  border-radius: 10px 0px 0px 10px;
+}
+.progress-bar-lin {
+  background-color: papayawhip;
+}
+.progress-bar-osx {
+  background-color: #DD7569;
+  border-radius: 0px 10px 10px 0px;
+}
+.legend-container {
+  display: flex;
+  margin: 16px 32px 0px 32px;
+}
+.legend {
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  margin: 0px 25px 0px 6px;
+}
+
+
 /* TECH COLOPHON */
 
 .tech-logo {
@@ -225,6 +261,9 @@ html.mac .download-button-osx {
   color: #553311;
   font-weight: 900;
   text-align: center;
+}
+.section-subtitle {
+  margin: 0px 32px 10px;
 }
 
 .center {

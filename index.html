@@ -158,6 +158,7 @@
           <li>
             <strong>OSX</strong>
             <ul>
+              <li>Download and unzip the file. You'll probably want to put it in your Applications folder.</li>
               <li>You may need to allow running a program from the internet.</li>
               <li>You will need to allow WuhdAppusDat to have access to "Accessibility Features" (this is how it can see the title of the currently focused window).</li>
             </ul>
@@ -194,7 +195,39 @@
 
       <section>
         <h1 id="releases" class="section-title">All Releases</h1>
-        <div id="app"></div>
+
+        <div id="releases-table"></div>
+
+        <div id="os-progress-bars">
+          <h2 class="section-subtitle">Total Downloads per OS:</h2>
+
+          <div class="progress-bar-container">
+            <div
+              class="progress-bar progress-bar-win"
+              :title="totals.win + ' Windows downloads'"
+              :style="'flex-grow: ' + totals.win"
+            ></div>
+            <div
+              class="progress-bar progress-bar-lin"
+              :title="totals.lin + ' Linux downloads'"
+              :style="'flex-grow: ' + totals.lin"
+            ></div>
+            <div
+              class="progress-bar progress-bar-osx"
+              :title="totals.osx + ' OSX downloads'"
+              :style="'flex-grow: ' + totals.osx"
+            ></div>
+          </div>
+
+          <legend class="legend-container">
+            Windows ({{ totals.win }})
+            <div class="progress-bar progress-bar-win legend"></div>
+            Linux ({{ totals.lin }})
+            <div class="progress-bar progress-bar-lin legend"></div>
+            OSX ({{ totals.osx }})
+            <div class="progress-bar progress-bar-osx legend"></div>
+          </legend>
+        </div>
       </section>
 
       <section>

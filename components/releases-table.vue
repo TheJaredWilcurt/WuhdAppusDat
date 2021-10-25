@@ -81,6 +81,7 @@ module.exports = {
         })
         .then((data) => {
           this.releases = data;
+          window.osProgressBars.releases = data;
           data?.[0]?.assets?.forEach(function (asset) {
             if (asset.name.startsWith('LIN')) {
               window.downloadButtons.releases['Linux'] = asset?.browser_download_url;
