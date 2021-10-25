@@ -13,21 +13,22 @@ Free, open source, desktop app for streamers that lets their audience know what 
 * * *
 
 
-## LIVE DEMO
-
-* [Twitch Clip](https://www.youtube.com/watch?v=z6R2sItBGS8) - Look at the bottom to see WuhdAppusDat reveal the currently focused application. (**Note:** the styling is completely customizable)
-
-> "Fantastic, this is exactly what I needed" - Adam Phillips (chluaid), animator of "Bitey of Brackenwood", Twitch Streamer
-
-
-* * *
-
-
 <h1 align="center">==== DOWNLOADS AVAILABLE ====</h1>
 
 Downloads are available at the website:
 
 * https://TheJaredWilcurt.com/WuhdAppusDat
+
+
+* * *
+
+
+## LIVE DEMO
+
+* [Walk through of the app and features](https://youtu.be/rJyyCoRDhMg)
+* [Twitch Clip](https://www.youtube.com/watch?v=z6R2sItBGS8) - Look at the bottom to see WuhdAppusDat reveal the currently focused application. (**Note:** the styling is completely customizable)
+
+> "Fantastic, this is exactly what I needed" - Adam Phillips (chluaid), animator of "Bitey of Brackenwood", Twitch Streamer
 
 
 * * *
