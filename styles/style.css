@@ -99,35 +99,11 @@ section {
 .third {
   width: 33.33333%;
   text-align: center;
-  background: #FFFFFF91;
-  background-image: linear-gradient(#FFEFD570, #FA80724F);
-  border-radius: 43px;
-  margin: 0px 14px 22px;
-  padding: 0px 10px 11px;
-  box-shadow: 2px 2px 2px #FA807247;
 }
 
 .grow {
   flex-grow: 1;
   width:  100%;
-}
-
-
-/* UTILITY  */
-
-.section-title {
-  display: block;
-  color: #553311;
-  font-weight: 900;
-  text-align: center;
-}
-
-.center {
-  text-align: center;
-}
-
-.right {
-  text-align: right;
 }
 
 
@@ -201,7 +177,15 @@ html.mac .download-button-osx {
 
 /* VALUE PROPOSITION  */
 
-.third h2 {
+.value-prop {
+  background: #FFFFFF91;
+  background-image: linear-gradient(#FFEFD570, #FA80724F);
+  border-radius: 43px;
+  margin: 0px 14px 22px;
+  padding: 0px 10px 11px;
+  box-shadow: 2px 2px 2px #FA807247;
+}
+.value-prop h2 {
   margin-bottom: -8px;
 }
 
@@ -223,6 +207,40 @@ html.mac .download-button-osx {
 
 .os-icon {
   max-width: 24px;
+}
+
+
+/* TECH COLOPHON */
+
+.tech-logo {
+  width:  150px;
+  max-width: 100%;
+}
+
+
+/* UTILITY  */
+
+.section-title {
+  display: block;
+  color: #553311;
+  font-weight: 900;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.pt-30 {
+  padding-top:  30px;
+}
+
+.font-500 {
+  font-weight: 500;
 }
 
 
