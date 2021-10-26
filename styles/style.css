@@ -226,6 +226,7 @@ html.mac .download-button-osx {
 .progress-bar-win {
   background-color: #531;
   border-radius: 10px 0px 0px 10px;
+  color: papayawhip;
 }
 .progress-bar-lin {
   background-color: papayawhip;
@@ -234,15 +235,18 @@ html.mac .download-button-osx {
   background-color: #DD7569;
   border-radius: 0px 10px 10px 0px;
 }
+
 .legend-container {
   display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 16px 32px 0px 32px;
 }
 .legend {
-  width: 15px;
-  height: 15px;
-  border-radius: 100%;
-  margin: 0px 25px 0px 6px;
+  height: auto;
+  border-radius: 100px;
+  margin: -3px 25px 0px 6px;
+  padding: 3px 9px;
 }
 
 
