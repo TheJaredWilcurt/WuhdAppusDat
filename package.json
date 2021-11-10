@@ -31,7 +31,8 @@
     "Global Node version must be v10.11.0",
     "windows-active-process does a native build based on OS/Arch/Node version, so you need to run these commands",
     "npm install -g windows-build-tools",
-    "npm install -g nw-gyp"
+    "npm install -g nw-gyp",
+    "Pinned ps-list to 7.2.0 because 8+ require Node 12+"
   ],
   "devDependencies": {
     "@babel/eslint-parser": "^7.15.7",
@@ -46,6 +47,7 @@
   "dependencies": {
     "active-win": "^6.2.0",
     "nw-programmatic-folder-select": "^1.0.5",
+    "ps-list": "7.2.0",
     "windows-active-process": "^1.1.1"
   }
 }

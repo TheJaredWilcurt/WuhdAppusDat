@@ -3,6 +3,22 @@
     <p>If an application you run does not display a name you like, you can alias it here.</p>
     <p>Showing {{ appMap.length }} app alias{{ appMap.length === 1 ? '' : 'es' }}.</p>
 
+    <button @click="getRunningProcesses">DO IT!</button>
+    <ul>
+      <li
+        v-for="(name, nameIndex) in runningProcesses"
+        :key="'name' + nameIndex"
+      >
+        {{ name }}
+      </li>
+    </ul>
+    <type-ahead
+      v-model="thingy"
+      :options="runningProcesses"
+      label="Thingy"
+    ></type-ahead>
+    THINGY: {{ thingy }}
+
     <transition-group class="app-map-transition-group" tag="div">
       <div
         v-if="appMap.length > 1"
@@ -61,13 +77,17 @@
 </template>
 
 <script>
+const path = window.require('path');
+const psList = window.require('ps-list');
+
 const helpers = window.require('./scripts/helpers.js');
 const { settingsExist } = window.require('./scripts/settings.js');
 
 module.exports = {
   name: 'app-map',
   components: {
-    'drop-down': httpVueLoader('components/form-fields/drop-down.vue')
+    'drop-down': httpVueLoader('components/form-fields/drop-down.vue'),
+    'type-ahead': httpVueLoader('components/form-fields/type-ahead.vue')
   },
   data: function () {
     return {
@@ -86,10 +106,35 @@ module.exports = {
           value: 'alias'
         }
       ],
-      appMap: []
+      appMap: [],
+      runningProcesses: [],
+      thingy: ''
     };
   },
   methods: {
+    getRunningProcesses: async function () {
+      let list = await psList({ all: true });
+      list = list
+        .filter(function (item) {
+          return item.name.endsWith('.exe');
+        })
+        .map(function (item) {
+          return path.parse(item.name).name;
+        });
+      list = Array.from(new Set(list));
+      list = list.sort(function compare (a, b) {
+        if (a.toLowerCase() < b.toLowerCase()) {
+          return -1;
+        }
+        if (a.toLowerCase() > b.toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      });
+
+      this.runningProcesses = list;
+    },
+
     findAppById: function (id) {
       return this.appMap.findIndex(function (app) {
         return app.id === id;
