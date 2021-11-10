@@ -74,6 +74,7 @@ window.App = new Vue({
     setWindowsAppName: function () {
       const getActiveProcessName = window.require('windows-active-process').getActiveProcessName;
       let filePath = getActiveProcessName();
+      filePath = 'C:\\Program Files\\SpeedTree\\SpeedTree UE4 Subscription v8.4.2\\win64\\SpeedTree Modeler UE4 Subscription.exe';
       if (!filePath || typeof(filePath) !== 'string') {
         filePath = '';
       }
