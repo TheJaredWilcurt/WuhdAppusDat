@@ -50,8 +50,6 @@ window.App = new Vue({
       }
     },
     appNameCleanUp: function (fileName) {
-      fileName = fileName.split('_').join(' ');
-
       if (fileName === atob('ZWxlY3Ryb24=')) {
         fileName = atob('RWxlY3Ryb20gKFVzaW5nIDk4JSBvZiBhdmFpbGFibGUgbWVtb3J5KQ==');
       } else {
@@ -74,19 +72,16 @@ window.App = new Vue({
     setWindowsAppName: function () {
       const getActiveProcessName = window.require('windows-active-process').getActiveProcessName;
       let filePath = getActiveProcessName();
-      filePath = 'C:\\Program Files\\SpeedTree\\SpeedTree UE4 Subscription v8.4.2\\win64\\SpeedTree Modeler UE4 Subscription.exe';
+
+      // C:\Program Files\SpeedTree\SpeedTree UE4 Subscription v8.4.2\win64\SpeedTree Modeler UE4 Subscription.exe
+
       if (!filePath || typeof(filePath) !== 'string') {
         filePath = '';
       }
-      let splitPath = filePath.split(path.sep);
-      let fileName = splitPath[splitPath.length - 1];
-      fileName = fileName.split('.');
 
-      if (fileName.length > 1) {
-        fileName.pop();
-      }
-      fileName = fileName.join('');
+      let fileName = path.parse(filePath).name;
       fileName = this.appNameCleanUp(fileName);
+
       this.currentlyInFocusApp = fileName;
       this.storeInTextFile(fileName);
     },
