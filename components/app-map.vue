@@ -115,7 +115,7 @@ module.exports = {
           return path.parse(item.name).name;
         })
         .filter((item) => {
-          return !this.allAliasedFileNames.includes(item);
+          return !this.allAliasedFileNames.includes(item.toLowerCase());
         });
       list = Array.from(new Set(list));
       list = list.sort(function compare (a, b) {
