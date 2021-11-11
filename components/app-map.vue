@@ -25,8 +25,10 @@
           <input
             v-model="app.file"
             class="app-map-file"
+            list="running-proceses"
             placeholder="calc"
             @input="saveAndSend"
+            @focus="getRunningProcesses"
           >
           <input
             v-model="app.alias"
@@ -57,10 +59,21 @@
         </a>
       </div>
     </transition-group>
+
+    <datalist id="running-proceses">
+      <option
+        v-for="runningProcess in runningProcesses"
+        :value="runningProcess"
+        :key="runningProcess"
+      ></option>
+    </datalist>
   </div>
 </template>
 
 <script>
+const path = window.require('path');
+const psList = window.require('ps-list');
+
 const helpers = window.require('./scripts/helpers.js');
 const { settingsExist } = window.require('./scripts/settings.js');
 
@@ -86,10 +99,38 @@ module.exports = {
           value: 'alias'
         }
       ],
-      appMap: []
+      appMap: [],
+      fielFieldFocused: false,
+      runningProcesses: []
     };
   },
   methods: {
+    getRunningProcesses: async function () {
+      let list = await psList({ all: true });
+      list = list
+        .filter(function (item) {
+          return item.name.endsWith('.exe');
+        })
+        .map(function (item) {
+          return path.parse(item.name).name;
+        })
+        .filter((item) => {
+          return !this.allAliasedFileNames.includes(item.toLowerCase());
+        });
+      list = Array.from(new Set(list));
+      list = list.sort(function compare (a, b) {
+        if (a.toLowerCase() < b.toLowerCase()) {
+          return -1;
+        }
+        if (a.toLowerCase() > b.toLowerCase()) {
+          return 1;
+        }
+        return 0;
+      });
+
+      this.runningProcesses = list;
+    },
+
     findAppById: function (id) {
       return this.appMap.findIndex(function (app) {
         return app.id === id;
@@ -145,6 +186,11 @@ module.exports = {
         }
         return -1;
       });
+    },
+    allAliasedFileNames: function () {
+      return this.sortedAppMap.map(function (app) {
+        return app.file.toLowerCase();
+      });
     }
   },
   created: function () {
@@ -153,6 +199,7 @@ module.exports = {
       this.appMap = helpers.generateDefaultAppMap();
       this.saveSendAndUpdate();
     }
+    this.getRunningProcesses();
   }
 };
 </script>
