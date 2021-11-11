@@ -3,22 +3,6 @@
     <p>If an application you run does not display a name you like, you can alias it here.</p>
     <p>Showing {{ appMap.length }} app alias{{ appMap.length === 1 ? '' : 'es' }}.</p>
 
-    <button @click="getRunningProcesses">DO IT!</button>
-    <ul>
-      <li
-        v-for="(name, nameIndex) in runningProcesses"
-        :key="'name' + nameIndex"
-      >
-        {{ name }}
-      </li>
-    </ul>
-    <type-ahead
-      v-model="thingy"
-      :options="runningProcesses"
-      label="Thingy"
-    ></type-ahead>
-    THINGY: {{ thingy }}
-
     <transition-group class="app-map-transition-group" tag="div">
       <div
         v-if="appMap.length > 1"
@@ -41,8 +25,10 @@
           <input
             v-model="app.file"
             class="app-map-file"
+            list="running-proceses"
             placeholder="calc"
             @input="saveAndSend"
+            @focus="getRunningProcesses"
           >
           <input
             v-model="app.alias"
@@ -73,6 +59,14 @@
         </a>
       </div>
     </transition-group>
+
+    <datalist id="running-proceses">
+      <option
+        v-for="runningProcess in runningProcesses"
+        :value="runningProcess"
+        :key="runningProcess"
+      ></option>
+    </datalist>
   </div>
 </template>
 
@@ -86,8 +80,7 @@ const { settingsExist } = window.require('./scripts/settings.js');
 module.exports = {
   name: 'app-map',
   components: {
-    'drop-down': httpVueLoader('components/form-fields/drop-down.vue'),
-    'type-ahead': httpVueLoader('components/form-fields/type-ahead.vue')
+    'drop-down': httpVueLoader('components/form-fields/drop-down.vue')
   },
   data: function () {
     return {
@@ -107,8 +100,8 @@ module.exports = {
         }
       ],
       appMap: [],
-      runningProcesses: [],
-      thingy: ''
+      fielFieldFocused: false,
+      runningProcesses: []
     };
   },
   methods: {
@@ -120,6 +113,9 @@ module.exports = {
         })
         .map(function (item) {
           return path.parse(item.name).name;
+        })
+        .filter((item) => {
+          return !this.allAliasedFileNames.includes(item);
         });
       list = Array.from(new Set(list));
       list = list.sort(function compare (a, b) {
@@ -190,6 +186,11 @@ module.exports = {
         }
         return -1;
       });
+    },
+    allAliasedFileNames: function () {
+      return this.sortedAppMap.map(function (app) {
+        return app.file.toLowerCase();
+      });
     }
   },
   created: function () {
@@ -198,6 +199,7 @@ module.exports = {
       this.appMap = helpers.generateDefaultAppMap();
       this.saveSendAndUpdate();
     }
+    this.getRunningProcesses();
   }
 };
 </script>

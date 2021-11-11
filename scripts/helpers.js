@@ -165,13 +165,8 @@ function generateDefaultAppMap () {
       alias: 'Adobe SpeedGrade'
     },
     {
-      id: 'st3',
-      file: 'st3',
-      alias: 'Sublime Text'
-    },
-    {
-      id: 'st4',
-      file: 'st4',
+      id: 'sublime_text',
+      file: 'sublime_text',
       alias: 'Sublime Text'
     },
     {
