@@ -100,7 +100,6 @@ module.exports = {
         }
       ],
       appMap: [],
-      fielFieldFocused: false,
       runningProcesses: []
     };
   },
