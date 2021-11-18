@@ -105,6 +105,7 @@ module.exports = {
   },
   methods: {
     getRunningProcesses: async function () {
+      const allAliasedFileNames = this.allAliasedFileNames();
       let list = await psList({ all: true });
       list = list
         .filter(function (item) {
@@ -114,7 +115,7 @@ module.exports = {
           return path.parse(item.name).name;
         })
         .filter((item) => {
-          return !this.allAliasedFileNames.includes(item.toLowerCase());
+          return !allAliasedFileNames.includes(item.toLowerCase());
         });
       list = Array.from(new Set(list));
       list = list.sort(function compare (a, b) {
@@ -169,6 +170,11 @@ module.exports = {
         }
       });
       this.saveSendAndUpdate();
+    },
+    allAliasedFileNames: function () {
+      return this.sortedAppMap.map(function (app) {
+        return app.file.toLowerCase();
+      });
     }
   },
   computed: {
@@ -184,11 +190,6 @@ module.exports = {
           return 1;
         }
         return -1;
-      });
-    },
-    allAliasedFileNames: function () {
-      return this.sortedAppMap.map(function (app) {
-        return app.file.toLowerCase();
       });
     }
   },
