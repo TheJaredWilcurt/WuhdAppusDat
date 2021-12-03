@@ -1,5 +1,5 @@
 <template>
-  <div class="pill-form-container">
+  <div class="pill-form-container center">
     <image-button
       v-model="backgroundImage"
       label="Leaves"
@@ -34,6 +34,16 @@
       v-model="backgroundImage"
       label="Background image"
     ></image-picker>
+
+    <check-box
+      v-model="backgroundFlipHorizontal"
+      label="Flip Horizontal"
+    ></check-box>
+
+    <check-box
+      v-model="backgroundFlipVertical"
+      label="Flip Vertical"
+    ></check-box>
 
     <range-slider
       v-model="backgroundHueRotate"
@@ -77,6 +87,7 @@ const { mapSettings } = window.require('./scripts/computeds.js');
 module.exports = {
   name: 'background-options',
   components: {
+    'check-box': httpVueLoader('components/form-fields/check-box.vue'),
     'image-button': httpVueLoader('components/form-fields/image-button.vue'),
     'image-picker': httpVueLoader('components/form-fields/image-picker.vue'),
     'range-slider': httpVueLoader('components/form-fields/range-slider.vue')
@@ -96,7 +107,9 @@ module.exports = {
       'backgroundContrast',
       'backgroundHueRotate',
       'backgroundImage',
-      'backgroundSaturation'
+      'backgroundSaturation',
+      'backgroundFlipHorizontal',
+      'backgroundFlipVertical'
     ])
   }
 };

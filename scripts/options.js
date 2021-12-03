@@ -55,6 +55,8 @@ const store = new Vuex.Store({
       backgroundBrightness: globalConstants.DEFAULT_BACKGROUND_BRIGHTNESS,
       backgroundSaturation: globalConstants.DEFAULT_BACKGROUND_SATURATION,
       backgroundContrast: globalConstants.DEFAULT_BACKGROUND_CONTRAST,
+      backgroundFlipHorizontal: globalConstants.DEFAULT_BACKGROUND_FLIP_HORIZONTAL,
+      backgroundFlipVertical: globalConstants.DEFAULT_BACKGROUND_FLIP_VERTICAL,
       appMap: []
     }
   },

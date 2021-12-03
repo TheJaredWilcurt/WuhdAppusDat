@@ -177,9 +177,25 @@ window.App = new Vue({
         saturation
       ].filter(Boolean).join(' ');
 
+      let rotateX = 0;
+      let rotateY = 0;
+
+      if (this.settings.backgroundFlipHorizontal) {
+        rotateX = 180;
+      }
+      if (this.settings.backgroundFlipVertical) {
+        rotateY = 180;
+      }
+
+      let transforms = [
+        'rotateX(' + rotateX + 'deg)',
+        'rotateY(' + rotateY + 'deg)'
+      ].join(' ');
+
       return [
         'background-image:' + backgroundImage,
-        'filter:' + filters || 'none'
+        'filter:' + filters || 'none',
+        'transform:' + transforms
       ].join(';');
     },
     textStyles: function () {
