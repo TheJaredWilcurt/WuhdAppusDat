@@ -28,7 +28,7 @@
     "NW.js 0.34.0 - 0.48.0 has a tray icon bug",
     "So we have to use NW 0.33.4, the last Win 7 node compatible version without the bug that supports NW-GYP",
     "0.33.4 ships with Node 10.11.0",
-    "Global Node version must be v10.11.0",
+    "GLOBAL NODE VERSION MUST BE V10.11.0",
     "windows-active-process does a native build based on OS/Arch/Node version, so you need to run these commands",
     "npm install -g windows-build-tools",
     "npm install -g nw-gyp",

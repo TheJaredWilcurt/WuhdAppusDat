@@ -62,4 +62,14 @@ module.exports = {
   background-image: url('../../images/bubbles.png');
   background-size: 345px;
 }
+.pill-button-edge-bar {
+  background-image: url('../../images/edge-bar.png');
+  background-size: 161px;
+  background-position: 3px 0px;
+}
+.pill-button-rounded-bar {
+  background-image: url('../../images/rounded-bar.png');
+  background-size: 161px;
+  background-position: 3px 0px;
+}
 </style>

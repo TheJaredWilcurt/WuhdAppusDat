@@ -1,10 +1,5 @@
 <template>
   <div class="pill-form-container">
-    <image-picker
-      v-model="backgroundImage"
-      label="Background image"
-    ></image-picker>
-
     <image-button
       v-model="backgroundImage"
       label="Leaves"
@@ -22,6 +17,23 @@
       label="Pink Bubbles"
       image="images/bubbles.png"
     ></image-button>
+
+    <image-button
+      v-model="backgroundImage"
+      label="Edge Bar"
+      image="images/edge-bar.png"
+    ></image-button>
+
+    <image-button
+      v-model="backgroundImage"
+      label="Rounded Bar"
+      image="images/rounded-bar.png"
+    ></image-button>
+
+    <image-picker
+      v-model="backgroundImage"
+      label="Background image"
+    ></image-picker>
 
     <range-slider
       v-model="backgroundHueRotate"

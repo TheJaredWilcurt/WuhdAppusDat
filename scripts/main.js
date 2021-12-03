@@ -125,7 +125,9 @@ window.App = new Vue({
         'images/none.png',
         'images/leaves.png',
         'images/spikes.png',
-        'images/bubbles.png'
+        'images/bubbles.png',
+        'images/edge-bar.png',
+        'images/rounded-bar.png'
       ];
 
       if (
